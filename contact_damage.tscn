@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://btsedlcryfn2r"]
+
+[ext_resource type="Script" path="res://Scripts/contact_damage.gd" id="1_7vvvr"]
+
+[node name="ContactDamage" type="ShapeCast2D"]
+show_behind_parent = true
+top_level = true
+enabled = false
+exclude_parent = false
+script = ExtResource("1_7vvvr")
