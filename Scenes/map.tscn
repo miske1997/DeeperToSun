@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://4imh3icqbwol"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/map.gd" id="1_18e5r"]
+[ext_resource type="Script" path="res://Scripts/Modules/map_generator.gd" id="2_ahtpe"]
+[ext_resource type="Script" path="res://Scripts/Modules/room_builder.gd" id="3_cme82"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_18e5r")
+
+[node name="MapGenerator" type="Node" parent="."]
+script = ExtResource("2_ahtpe")
+
+[node name="RoomBuilder" type="Node" parent="."]
+script = ExtResource("3_cme82")

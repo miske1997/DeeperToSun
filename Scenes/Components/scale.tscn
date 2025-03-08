@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgi301i33mjmq"]
+
+[sub_resource type="GDScript" id="GDScript_ws3qh"]
+resource_name = "ScaleOverTime"
+script/source = "extends Node
+
+
+
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="Scale" type="Node"]
+script = SubResource("GDScript_ws3qh")

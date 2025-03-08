@@ -17,7 +17,17 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Events="*res://Scripts/Globals/Events.gd"
+LevelTransition="*res://Scripts/Globals/LevelTransition.gd"
 Console="*res://addons/console/console.gd"
+AchivementDetector="*res://Scripts/Globals/AchivementDetector.gd"
+DealDamage="*res://Scripts/Globals/DealDamage.gd"
+DropManager="*res://Scripts/Globals/DropManager.gd"
+EffectsSystem="*res://Scripts/Globals/EffectsSystem.gd"
+Players="*res://Scripts/Globals/Players.gd"
+SoundSystem="*res://Scripts/Globals/SoundSystem.gd"
+StatWriter="*res://Scripts/Globals/StatWriter.gd"
+ProjectileEmitter="*res://Scripts/Globals/ProjectileEmitter.gd"
 
 [display]
 

@@ -1,5 +1,4 @@
-#class_name Player
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 var player_direction: Vector2
 var push_force = 1
@@ -28,5 +27,4 @@ func process_movement():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
-			
 			

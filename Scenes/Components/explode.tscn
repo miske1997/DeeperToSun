@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2ntnwb0v4tbn"]
+
+[sub_resource type="GDScript" id="GDScript_unry7"]
+resource_name = "Explode"
+script/source = "extends Node
+
+
+func Explode(arg):
+	pass
+"
+
+[node name="Explode" type="Node"]
+script = SubResource("GDScript_unry7")

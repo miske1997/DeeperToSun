@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="1_2alax"]
 [ext_resource type="PackedScene" uid="uid://d3g1ffr68sjhg" path="res://Scenes/Components/projectile.tscn" id="2_kg1qt"]
-[ext_resource type="Script" path="res://Scripts/Resources/projectile_config.gd" id="3_di73r"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/projectile_config.gd" id="3_di73r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w4jtc"]
 
@@ -11,11 +11,13 @@ radius = 10.198
 
 [sub_resource type="Resource" id="Resource_3aivb"]
 script = ExtResource("3_di73r")
-direction = Vector2(1, 0)
 speed = 10.0
 drag = 0.0
 range = 0.0
 acceleration = 0.0
+duration = 0.0
+stagger = 0.0
+health = 0.0
 
 [node name="EnemyBase" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_w4jtc")

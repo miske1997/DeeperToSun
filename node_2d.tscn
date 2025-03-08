@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://7jepkb88rt56"]
+[gd_scene load_steps=4 format=3 uid="uid://7jepkb88rt56"]
 
 [ext_resource type="PackedScene" uid="uid://b51ouytvbh0v2" path="res://Scenes/player.tscn" id="1_2w8hd"]
 [ext_resource type="PackedScene" uid="uid://de26tsfixmvdi" path="res://enemy_base.tscn" id="2_n51mt"]
+[ext_resource type="PackedScene" uid="uid://dsc1yhb8y715d" path="res://Scenes/bullet.tscn" id="4_lvj8a"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,3 +11,6 @@ position = Vector2(376, 238)
 
 [node name="EnemyBase" parent="." instance=ExtResource("2_n51mt")]
 position = Vector2(316, 205)
+
+[node name="Bullet" parent="." instance=ExtResource("4_lvj8a")]
+position = Vector2(310, 240)

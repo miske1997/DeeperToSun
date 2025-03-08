@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SpawnRoom" load_steps=6 format=3 uid="uid://dyrlxa7wk3w2p"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_room.gd" id="1_1pkcf"]
+[ext_resource type="Script" path="res://Scripts/Resources/wave_config.gd" id="2_dnrjl"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="3_s4tsv"]
+[ext_resource type="Resource" uid="uid://2vsvtqg6i6kc" path="res://Data/Configs/Enemy/eg_config.tres" id="4_uwxdh"]
+
+[sub_resource type="Resource" id="Resource_3fefk"]
+script = ExtResource("2_dnrjl")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(193, 106), Vector2(300, 106), Vector2(193, 300), Vector2(300, 300)])
+randomSpawn = false
+enemies = Array[ExtResource("3_s4tsv")]([ExtResource("4_uwxdh"), ExtResource("4_uwxdh"), ExtResource("4_uwxdh"), ExtResource("4_uwxdh")])
+
+[resource]
+script = ExtResource("1_1pkcf")
+waves = Array[ExtResource("2_dnrjl")]([SubResource("Resource_3fefk")])
+waveTimeout = 50.0
+roomType = "Spawn"

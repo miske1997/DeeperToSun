@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b51ouytvbh0v2"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_3w1x0"]
+[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="2_vm1l7"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://Scenes/Components/contact_detect.tscn" id="3_2pvbj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pfgvt"]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
+script = ExtResource("1_3w1x0")
+
+[node name="ContactDamage" parent="." instance=ExtResource("3_2pvbj")]
+exclude_parent = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pfgvt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, 9.53674e-07)
+scale = Vector2(0.160156, 0.160156)
+texture = ExtResource("2_vm1l7")

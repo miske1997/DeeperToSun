@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsc1yhb8y715d"]
+
+[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="1_t0t0p"]
+[ext_resource type="PackedScene" uid="uid://d3g1ffr68sjhg" path="res://Scenes/Components/projectile.tscn" id="2_pyak1"]
+[ext_resource type="PackedScene" uid="uid://d2ntnwb0v4tbn" path="res://Scenes/Components/explode.tscn" id="3_ns3rg"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://Scenes/Components/contact_detect.tscn" id="4_hg3ii"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g6mqb"]
+radius = 10.198
+
+[node name="Bullet" type="RigidBody2D"]
+scale = Vector2(0.478363, 0.478363)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-9.53674e-07, 9.53674e-07)
+scale = Vector2(0.160156, 0.160156)
+texture = ExtResource("1_t0t0p")
+
+[node name="Projectile" parent="." instance=ExtResource("2_pyak1")]
+
+[node name="Explode" parent="." instance=ExtResource("3_ns3rg")]
+
+[node name="ContactDetect" parent="." instance=ExtResource("4_hg3ii")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g6mqb")
+
+[connection signal="hit" from="ContactDetect" to="Explode" method="Explode"]

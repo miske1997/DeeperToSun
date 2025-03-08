@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://tu8vyh2aqc0u"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/room.gd" id="1_3m351"]
+[ext_resource type="Script" path="res://Scripts/Modules/spawner.gd" id="2_qi222"]
+[ext_resource type="Resource" uid="uid://dyrlxa7wk3w2p" path="res://Data/Configs/Room/eg_room.tres" id="2_x3p66"]
+[ext_resource type="Script" path="res://Scripts/Modules/enemy_builder.gd" id="3_ot5rb"]
+[ext_resource type="PackedScene" uid="uid://7kt263aosrai" path="res://Prefabs/Enemies/eg_enemy.tscn" id="7_0q2ms"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_3m351")
+roomConfig = ExtResource("2_x3p66")
+
+[node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("enemyFolder")]
+script = ExtResource("2_qi222")
+enemyFolder = NodePath("../Enemies")
+
+[node name="EnemyBuilder" type="Node" parent="Spawner"]
+script = ExtResource("3_ot5rb")
+
+[node name="Bg" type="Sprite2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="." instance=ExtResource("7_0q2ms")]
+position = Vector2(193, 106)
