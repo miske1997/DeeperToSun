@@ -1,22 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://b51ouytvbh0v2"]
+[gd_scene load_steps=11 format=3 uid="uid://b51ouytvbh0v2"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_3w1x0"]
-[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="2_vm1l7"]
+[ext_resource type="Script" path="res://Scripts/Systems/player.gd" id="1_e11nl"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/player_config.gd" id="2_i7qi1"]
 [ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="3_2pvbj"]
+[ext_resource type="Texture2D" uid="uid://caavgbts730dq" path="res://Assets/Characters/Archer.png" id="3_ibrl0"]
+[ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_gmcms"]
+[ext_resource type="Script" path="res://Scripts/Controllers/Player/ArcherController.gd" id="4_wxxyx"]
+[ext_resource type="Script" path="res://Scripts/Modules/player_health.gd" id="6_u61t3"]
+[ext_resource type="PackedScene" uid="uid://bdd0af3gev72y" path="res://Prefabs/Weapons/Bow.tscn" id="8_txwfd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pfgvt"]
+[sub_resource type="Resource" id="Resource_1orvv"]
+script = ExtResource("2_i7qi1")
+movementSpeed = 10.0
+knockback = 10.0
+health = 6
+armor = 0
+character = "Archer"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8p5f3"]
+radius = 4.0
+height = 22.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(2, 2)
+collision_mask = 5
 motion_mode = 1
-script = ExtResource("1_3w1x0")
+script = ExtResource("1_e11nl")
+playerConfig = SubResource("Resource_1orvv")
 
 [node name="ContactDamage" parent="." instance=ExtResource("3_2pvbj")]
 exclude_parent = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_pfgvt")
+top_level = true
+shape = SubResource("CapsuleShape2D_8p5f3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-9.53674e-07, 9.53674e-07)
+material = ExtResource("4_gmcms")
+use_parent_material = true
+position = Vector2(-9.53674e-07, 1.07288e-06)
 scale = Vector2(0.160156, 0.160156)
-texture = ExtResource("2_vm1l7")
+texture = ExtResource("3_ibrl0")
+
+[node name="Controller" type="Node" parent="."]
+script = ExtResource("4_wxxyx")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("6_u61t3")
+
+[node name="Bow" parent="." instance=ExtResource("8_txwfd")]

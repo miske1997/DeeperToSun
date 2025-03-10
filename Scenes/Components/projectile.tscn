@@ -1,6 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3g1ffr68sjhg"]
+[gd_scene load_steps=9 format=3 uid="uid://d3g1ffr68sjhg"]
 
 [ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_1t1vp"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="2_8jlnx"]
+[ext_resource type="Texture2D" uid="uid://bibmk1lxwijvr" path="res://Assets/Projectiles/GunProjectile.png" id="2_llkms"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="3_ortb1"]
+[ext_resource type="PackedScene" uid="uid://ccxm81vcu6ypp" path="res://Scenes/Components/damage_on_hit.tscn" id="5_0n4fg"]
+[ext_resource type="PackedScene" uid="uid://be2ojvblv0xlu" path="res://Scenes/Components/wall_detect.tscn" id="6_wb4yq"]
 
-[node name="Projectile" type="Node"]
+[sub_resource type="Resource" id="Resource_5qq4v"]
+script = ExtResource("2_8jlnx")
+direction = Vector2(1, 0)
+speed = 10.0
+drag = 0.0
+range = 0.0
+acceleration = 0.0
+duration = 0.0
+health = 0.0
+frendly = false
+spriteName = "bullet"
+size = Vector2(1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_64jyc"]
+radius = 4.67039
+
+[node name="Projectile" type="Node2D"]
 script = ExtResource("1_1t1vp")
+projectileConfig = SubResource("Resource_5qq4v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+texture = ExtResource("2_llkms")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-0.5, 0.25)
+shape = SubResource("CircleShape2D_64jyc")
+
+[node name="ContactDetect" parent="." instance=ExtResource("3_ortb1")]
+exclude_parent = true
+collision_mask = 7
+
+[node name="DamageOnHit" parent="." instance=ExtResource("5_0n4fg")]
+
+[node name="WallDetect" parent="." instance=ExtResource("6_wb4yq")]

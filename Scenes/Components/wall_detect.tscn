@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://be2ojvblv0xlu"]
+
+[sub_resource type="GDScript" id="GDScript_a8rln"]
+resource_name = "WallDetect"
+script/source = "extends Node
+
+@onready var parent = get_parent()
+@onready var contactDetect: ContactDetect = get_parent().get_node(\"ContactDetect\")
+
+func _ready() -> void:
+	contactDetect.hit.connect(on_contact)
+
+func on_contact(hit):
+	if not hit.get_collision_layer() == 4:
+		return
+	parent.queue_free()
+"
+
+[node name="WallDetect" type="Node"]
+script = SubResource("GDScript_a8rln")

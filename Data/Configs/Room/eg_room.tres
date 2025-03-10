@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_3fefk"]
 script = ExtResource("2_dnrjl")
 waveType = ""
-spawnLocations = Array[Vector2]([Vector2(193, 106), Vector2(300, 106), Vector2(193, 300), Vector2(300, 300)])
+spawnLocations = Array[Vector2]([Vector2(376, 157), Vector2(626, 157), Vector2(626, 385), Vector2(355, 385)])
 randomSpawn = false
 enemies = Array[ExtResource("3_s4tsv")]([ExtResource("4_uwxdh"), ExtResource("4_uwxdh"), ExtResource("4_uwxdh"), ExtResource("4_uwxdh")])
 

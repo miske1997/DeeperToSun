@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://cq73xddgmv5lh"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/Weapons/shamanStaff.gd" id="1_480sh"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_7cdbt"]
+[ext_resource type="Texture2D" uid="uid://dkurtlduuolti" path="res://Assets/Weapons/ShamanStaff.png" id="2_8xflh"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="3_28f37"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="4_5lxhb"]
+
+[sub_resource type="Resource" id="Resource_p6r2n"]
+script = ExtResource("2_7cdbt")
+damage = 1.0
+stagger = 0.1
+
+[sub_resource type="Resource" id="Resource_yi52c"]
+script = ExtResource("3_28f37")
+direction = Vector2(0, 0)
+speed = 200.0
+drag = 0.0
+range = 250.0
+acceleration = 0.0
+duration = 10.0
+health = 0.0
+frendly = true
+spriteName = "yellowBall"
+size = Vector2(1, 1)
+
+[sub_resource type="Resource" id="Resource_rc82c"]
+script = ExtResource("4_5lxhb")
+projectileConfig = SubResource("Resource_yi52c")
+amount = 1
+attackSpeed = 1.0
+damageData = SubResource("Resource_p6r2n")
+
+[node name="ShamanStaff" type="Node2D" groups=["Weapon"]]
+scale = Vector2(0.125715, 0.125715)
+script = ExtResource("1_480sh")
+weaponConfig = SubResource("Resource_rc82c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15.9088, 0)
+rotation = 1.5708
+scale = Vector2(1.92664, 1.92664)
+texture = ExtResource("2_8xflh")
+
+[node name="SpawnPos" type="Node2D" parent="Sprite2D"]
+position = Vector2(0, -24.7722)
+
+[node name="Timer" type="Timer" parent="."]

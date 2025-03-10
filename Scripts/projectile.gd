@@ -1,12 +1,29 @@
-extends Node
+class_name Projectile extends Node2D
 
-@export var projectileProps: ProjectileProps
+@export var projectileConfig: ProjectileConfig
+@export var damageData: DamageData
 
-var body: RigidBody2D
+var projectileOwner
+var prevLoaction: Vector2
+var distanceTraveled := 0.0
+var lifeTime = 0.0
 
-func _ready() -> void:
-	body = get_parent()
 
 func _physics_process(delta: float) -> void:
-	body.linear_velocity = projectileProps.direction.normalized() * projectileProps.speed
+	prevLoaction = position
+	position += projectileConfig.direction.normalized() * projectileConfig.speed * delta
+	distanceTraveled += (position - prevLoaction).length()
+	projectileConfig.speed += projectileConfig.acceleration * delta
+	projectileConfig.speed -= projectileConfig.drag * delta
+	projectileConfig.speed = max(0, projectileConfig.speed)
+	check_range_reached()
+	check_life_time(delta)
 	
+func check_range_reached():
+	if distanceTraveled >= projectileConfig.range:
+		queue_free()
+	
+func check_life_time(delta: float):
+	lifeTime += delta
+	if lifeTime >= projectileConfig.duration:
+		queue_free()

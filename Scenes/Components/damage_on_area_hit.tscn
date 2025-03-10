@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmfpr7n1yiiee"]
+
+[sub_resource type="GDScript" id="GDScript_0bla2"]
+resource_name = "DamageOnAreaHit"
+script/source = "extends Node
+
+
+var area:Area2D
+var hitBodies = []
+
+func _ready() -> void:
+	area = get_parent().get_node(\"Hilt/Area2D\")
+
+func _physics_process(delta: float) -> void:
+	var overlapint = area.get_overlapping_bodies()
+	if overlapint.size() < 1:
+		return
+	
+	for body in overlapint:
+		if is_body_hit(body):
+			continue
+		if get_parent().weaponConfig.frendly and body.is_in_group(\"Player\"):
+			continue
+		if not get_parent().weaponConfig.frendly and body.is_in_group(\"Enemy\"):
+			continue
+		hitBodies.push_back(body.get_instance_id())
+		DealDamage.deal_damage(get_parent().weaponConfig.damageData, body)
+
+func is_body_hit(body: Node) -> bool:
+	for hit in hitBodies:
+		if body.get_instance_id() == hit:
+			return true
+	return false
+"
+
+[node name="DamageOnAreaHit" type="Node"]
+script = SubResource("GDScript_0bla2")

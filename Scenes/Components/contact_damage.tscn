@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8thni28ootba"]
+
+[sub_resource type="GDScript" id="GDScript_ii1xy"]
+resource_name = "ContactDamage"
+script/source = "extends Node
+
+@onready var parent = get_parent()
+@onready var contactDetect: ContactDetect = get_parent().get_node(\"ContactDetect\")
+
+func _ready() -> void:
+	contactDetect.hit.connect(on_contact)
+
+func on_contact(hit):
+	if not Utills.object_has_signal(hit, \"takeDamage\"):
+		return
+	DealDamage.deal_damage(parent.damageData, hit)
+	
+"
+
+[node name="ContactDamage" type="Node"]
+script = SubResource("GDScript_ii1xy")

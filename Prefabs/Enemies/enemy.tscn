@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bprrlmiynmmg6"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/enemy.gd" id="1_lewwx"]
+[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/ai_controller.gd" id="2_ym71f"]
+[ext_resource type="Script" path="res://Scripts/Modules/enemy_health.gd" id="3_pc08g"]
+[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="4_qflg0"]
+[ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_r2sqt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4m5i"]
+radius = 10.198
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_mask = 5
+script = ExtResource("1_lewwx")
+
+[node name="AIController" type="Node" parent="."]
+script = ExtResource("2_ym71f")
+
+[node name="EnemyHealth" type="Node" parent="."]
+script = ExtResource("3_pc08g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u4m5i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.2484, 0.2484, 0.2484, 1)
+material = ExtResource("4_r2sqt")
+use_parent_material = true
+position = Vector2(-9.53674e-07, 9.53674e-07)
+scale = Vector2(0.160156, 0.160156)
+texture = ExtResource("4_qflg0")

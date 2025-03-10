@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccxm81vcu6ypp"]
+
+[sub_resource type="GDScript" id="GDScript_tccyw"]
+resource_name = "DamageOnHit"
+script/source = "extends Node
+
+@onready var parent:Projectile = get_parent()
+@onready var contactDetect: ContactDetect = get_parent().get_node(\"ContactDetect\")
+
+func _ready() -> void:
+	contactDetect.hit.connect(on_contact)
+
+func on_contact(hit: Node):
+	if not Utills.object_has_signal(hit, \"takeDamage\"):
+		return
+	if parent.projectileConfig.frendly and hit.is_in_group(\"Player\"):
+		return
+	if not parent.projectileConfig.frendly and hit.is_in_group(\"Enemy\"):
+		return
+	DealDamage.deal_damage(parent.damageData, hit)
+	parent.queue_free()
+"
+
+[node name="DamageOnHit" type="Node"]
+script = SubResource("GDScript_tccyw")

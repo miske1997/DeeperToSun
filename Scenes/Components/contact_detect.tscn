@@ -7,4 +7,5 @@ show_behind_parent = true
 top_level = true
 enabled = false
 exclude_parent = false
+target_position = Vector2(0, 0)
 script = ExtResource("1_pcl7i")

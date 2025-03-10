@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="1_t0t0p"]
 [ext_resource type="PackedScene" uid="uid://d3g1ffr68sjhg" path="res://Scenes/Components/projectile.tscn" id="2_pyak1"]
 [ext_resource type="PackedScene" uid="uid://d2ntnwb0v4tbn" path="res://Scenes/Components/explode.tscn" id="3_ns3rg"]
-[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://Scenes/Components/contact_detect.tscn" id="4_hg3ii"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="4_hg3ii"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g6mqb"]
 radius = 10.198

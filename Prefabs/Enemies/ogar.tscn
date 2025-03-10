@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://oopslrkimatw"]
+
+[ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_51ovx"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_18f1r"]
+[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/ogar.gd" id="3_kdcmv"]
+[ext_resource type="Texture2D" uid="uid://oudqxh86q2op" path="res://Assets/Enemies/Ogar.png" id="4_lfb1a"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="6_2ooef"]
+[ext_resource type="PackedScene" uid="uid://lkg7iabuaqtd" path="res://Prefabs/Weapons/Club.tscn" id="6_o1fit"]
+
+[sub_resource type="Resource" id="Resource_jyct3"]
+script = ExtResource("2_18f1r")
+damage = 1.0
+stagger = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yu1ih"]
+radius = 3.52221
+
+[node name="Enemy" instance=ExtResource("1_51ovx")]
+scale = Vector2(3.76994, 3.76994)
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+damageData = SubResource("Resource_jyct3")
+
+[node name="AIController" parent="." index="0"]
+script = ExtResource("3_kdcmv")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -2.56161)
+shape = SubResource("CircleShape2D_yu1ih")
+
+[node name="Club" parent="." index="3" instance=ExtResource("6_o1fit")]
+position = Vector2(0, -2.56161)
+scale = Vector2(0.125715, 0.125715)
+
+[node name="Sprite2D" parent="." index="4"]
+modulate = Color(1, 1, 1, 1)
+z_index = 20
+position = Vector2(-9.53674e-07, -5)
+texture = ExtResource("4_lfb1a")
+
+[node name="ContactDetect" parent="." index="5" instance=ExtResource("6_2ooef")]

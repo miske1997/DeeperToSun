@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BasicProjectile" load_steps=2 format=3 uid="uid://b431g5v5qt13y"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="1_4xqlb"]
+
+[resource]
+script = ExtResource("1_4xqlb")
+direction = Vector2(0, 0)
+speed = 300.0
+drag = 0.0
+range = 300.0
+acceleration = 0.0
+duration = 10.0
+health = 0.0
+frendly = true
+spriteName = "arrow"
+size = Vector2(0.7, 0.7)

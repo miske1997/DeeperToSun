@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://lkg7iabuaqtd"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/Weapons/club.gd" id="1_h6gk2"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_hbm5i"]
+[ext_resource type="Texture2D" uid="uid://e40aixjvnmxs" path="res://Assets/Weapons/OgarClub.png" id="2_pmqxg"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="3_20355"]
+[ext_resource type="PackedScene" uid="uid://cmfpr7n1yiiee" path="res://Scenes/Components/damage_on_area_hit.tscn" id="5_4j80y"]
+
+[sub_resource type="Resource" id="Resource_uld44"]
+script = ExtResource("2_hbm5i")
+damage = 2.0
+stagger = 0.1
+
+[sub_resource type="Resource" id="Resource_xlggc"]
+script = ExtResource("3_20355")
+stagger = 1.0
+frendly = false
+attackSpeed = 0.2
+damageData = SubResource("Resource_uld44")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3vpf"]
+size = Vector2(35.3698, 61.8601)
+
+[node name="Club" type="Node2D" groups=["Weapon"]]
+scale = Vector2(0.125715, 0.125715)
+script = ExtResource("1_h6gk2")
+weaponConfig = SubResource("Resource_xlggc")
+
+[node name="Hilt" type="Node2D" parent="."]
+position = Vector2(39.7725, 0)
+rotation = -0.698132
+scale = Vector2(1.07058, 1.07058)
+
+[node name="Sprite2D" type="Sprite2D" parent="Hilt"]
+z_index = 20
+position = Vector2(1.33512, -49.8245)
+rotation = 1.5708
+scale = Vector2(1.92664, 1.92664)
+texture = ExtResource("2_pmqxg")
+
+[node name="Area2D" type="Area2D" parent="Hilt"]
+position = Vector2(1.33512, -49.8245)
+collision_layer = 8
+collision_mask = 3
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hilt/Area2D"]
+position = Vector2(-7.62939e-06, -16.797)
+shape = SubResource("RectangleShape2D_b3vpf")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="DamageOnAreaHit" parent="." groups=["Enemy"] instance=ExtResource("5_4j80y")]
+process_mode = 4
