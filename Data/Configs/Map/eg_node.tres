@@ -1,17 +1,11 @@
-[gd_resource type="Resource" script_class="NodeConfig" load_steps=6 format=3 uid="uid://iyd2i6rdwckl"]
+[gd_resource type="Resource" script_class="NodeConfig" load_steps=4 format=3 uid="uid://iyd2i6rdwckl"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_node.gd" id="1_87wyo"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_roll.gd" id="2_o83u1"]
-[ext_resource type="Resource" uid="uid://cqxb7tm7a32t4" path="res://Data/Configs/Room/RoomConfig.tres" id="3_jrie2"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/node_config.gd" id="4_opwxk"]
-
-[sub_resource type="Resource" id="Resource_wenwn"]
-script = ExtResource("2_o83u1")
-roomConfig = ExtResource("3_jrie2")
-roll = Vector2(0, 1000)
 
 [resource]
 script = ExtResource("4_opwxk")
 posibleNeighbors = Array[ExtResource("1_87wyo")]([])
 mandatoryNeighbors = Array[ExtResource("1_87wyo")]([])
-posibleRooms = Array[ExtResource("2_o83u1")]([SubResource("Resource_wenwn")])
+posibleRooms = Array[ExtResource("2_o83u1")]([])

@@ -2,6 +2,8 @@ extends Node
 
 
 @export var mapData: MapData
+@export var walk := false
+@export var startPan := true
 
 @onready var mapGenerator = $MapGenerator
 @onready var roomBuilder = $RoomBuilder
@@ -16,7 +18,7 @@ func _ready() -> void:
 	draw_map()
 	
 func draw_map():
-	GameData.saveData = ResourceLoader.load("user://Saves/" + GameData.slotInUse + ".tres")
+	#GameData.saveData = ResourceLoader.load("user://Saves/" + GameData.slotInUse + ".tres")
 	if GameData.saveData:
 		mapData = GameData.saveData.mapData
 		GameData.mapData = mapData
@@ -37,15 +39,21 @@ func spawn_player(position: Vector2):
 	player.scale *= 0.7
 	player.position = position
 	add_child(player)
+	
 	camera.position = Vector2(camera.position.x, get_tree().get_first_node_in_group("BossRoom").position.y)
 	await  get_tree().create_timer(0.6).timeout
-	focus_on_player(3)
+	if startPan:
+		focus_on_player(3)
+	else:
+		focus_on_player(0)
+	
 
 func move_player_request(newPosition: MapNode):
 	if not is_node_connected_to(playerMapNode, newPosition):
 		return
 	await move_player(playerMapNode, newPosition)
-	LevelTransition.LoadRoom(newPosition, camera)
+	if not walk:
+		LevelTransition.LoadRoom(newPosition, camera)
 	#self.visible = false
 
 func move_player(playerPosition: MapNode, newPosition: MapNode):

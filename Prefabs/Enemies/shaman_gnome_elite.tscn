@@ -1,0 +1,80 @@
+[gd_scene load_steps=17 format=3 uid="uid://bq0c2umpj1hoh"]
+
+[ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_wivsd"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_xqkxv"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="3_prkv4"]
+[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/shaman_gnome.gd" id="4_wgmkl"]
+[ext_resource type="Texture2D" uid="uid://c0jx7m465co7w" path="res://Assets/Enemies/GnomeShaman.png" id="5_2cwoi"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="6_jakgu"]
+[ext_resource type="PackedScene" uid="uid://c8thni28ootba" path="res://Scenes/Components/contact_damage.tscn" id="7_ddrke"]
+[ext_resource type="PackedScene" uid="uid://cq73xddgmv5lh" path="res://Prefabs/Weapons/ShamanStaff.tscn" id="8_ght81"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="9_4xrrw"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="10_nxiql"]
+
+[sub_resource type="Resource" id="Resource_yuyay"]
+script = ExtResource("2_xqkxv")
+movementSpeed = 200.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = "shaman_gnome"
+
+[sub_resource type="Resource" id="Resource_jyct3"]
+script = ExtResource("3_prkv4")
+damage = 1.0
+stagger = 0.1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ui3vm"]
+radius = 3.25112
+height = 9.6009
+
+[sub_resource type="Resource" id="Resource_kegch"]
+script = ExtResource("3_prkv4")
+damage = 1.0
+stagger = 0.1
+
+[sub_resource type="Resource" id="Resource_dnrsy"]
+script = ExtResource("9_4xrrw")
+direction = Vector2(0, 0)
+speed = 100.0
+drag = 0.0
+range = 250.0
+acceleration = 0.0
+duration = 10.0
+health = 0.0
+frendly = false
+spriteName = "yellowBall"
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="Resource" id="Resource_egvd0"]
+script = ExtResource("10_nxiql")
+projectileConfig = SubResource("Resource_dnrsy")
+amount = 1
+attackSpeed = 1.0
+damageData = SubResource("Resource_kegch")
+
+[node name="ShamanGnome" instance=ExtResource("1_wivsd")]
+scale = Vector2(2.52306, 2.52306)
+collision_layer = 2
+collision_mask = 2
+enemyConfig = SubResource("Resource_yuyay")
+damageData = SubResource("Resource_jyct3")
+
+[node name="AIController" parent="." index="0"]
+script = ExtResource("4_wgmkl")
+
+[node name="CollisionShape2D" parent="." index="2"]
+scale = Vector2(0.81904, 1)
+shape = SubResource("CapsuleShape2D_ui3vm")
+
+[node name="Sprite2D" parent="." index="3"]
+modulate = Color(1, 1, 1, 1)
+texture = ExtResource("5_2cwoi")
+
+[node name="ContactDetect" parent="." index="4" instance=ExtResource("6_jakgu")]
+
+[node name="DamageOnHit" parent="." index="5" instance=ExtResource("7_ddrke")]
+
+[node name="ShamanStaff" parent="." index="6" instance=ExtResource("8_ght81")]
+position = Vector2(4.76837e-07, 0)
+weaponConfig = SubResource("Resource_egvd0")

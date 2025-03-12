@@ -13,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_yuyay"]
 script = ExtResource("2_byx7o")
-movementSpeed = 10.0
+movementSpeed = 200.0
 knockback = 10.0
 health = 6
 armor = 0
@@ -44,7 +44,7 @@ duration = 10.0
 health = 0.0
 frendly = false
 spriteName = "yellowBall"
-size = Vector2(0.4, 0.4)
+size = Vector2(5, 5)
 
 [sub_resource type="Resource" id="Resource_egvd0"]
 script = ExtResource("10_p4txu")

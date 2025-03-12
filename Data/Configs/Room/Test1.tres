@@ -1,0 +1,130 @@
+[gd_resource type="Resource" script_class="SpawnRoom" load_steps=19 format=3 uid="uid://c1eejhhro3e4x"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_room.gd" id="1_0ds14"]
+[ext_resource type="Script" path="res://Scripts/Resources/wave_config.gd" id="2_mhjrg"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="3_vuwet"]
+
+[sub_resource type="Resource" id="Resource_q50c2"]
+script = ExtResource("3_vuwet")
+movementSpeed = 150.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = "warrior_gnome"
+
+[sub_resource type="Resource" id="Resource_d5i75"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.512563, 0.192211)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_tavm4"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.752513, 0.302764)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_8tapi"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.853015, 0.567839)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_vnrq8"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.773869, 0.816583)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_6fd3a"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.507538, 0.910804)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_rdp4j"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.227387, 0.812814)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_irxss"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.148241, 0.548995)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_2248g"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.25, 0.290201)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_q50c2")])
+waveTimeout = 15.0
+
+[sub_resource type="Resource" id="Resource_6x6j5"]
+script = ExtResource("3_vuwet")
+movementSpeed = 290.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = "runner_gnome"
+
+[sub_resource type="Resource" id="Resource_btkh1"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.0452261, 0.0653266), Vector2(0.942211, 0.958543)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_6x6j5"), SubResource("Resource_6x6j5")])
+waveTimeout = 10.0
+
+[sub_resource type="Resource" id="Resource_juovl"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.953518, 0.0603015), Vector2(0.0439699, 0.962312)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_6x6j5"), SubResource("Resource_6x6j5")])
+waveTimeout = 10.0
+
+[sub_resource type="Resource" id="Resource_rjtql"]
+script = ExtResource("3_vuwet")
+movementSpeed = 170.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = "ogar"
+
+[sub_resource type="Resource" id="Resource_yuyay"]
+script = ExtResource("3_vuwet")
+movementSpeed = 200.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = "shaman_gnome"
+
+[sub_resource type="Resource" id="Resource_q50v4"]
+script = ExtResource("2_mhjrg")
+waveType = ""
+spawnLocations = Array[Vector2]([Vector2(0.482412, 0.518844), Vector2(0.889447, 0.714824), Vector2(0.0615578, 0.336683)])
+randomSpawn = false
+enemies = Array[ExtResource("3_vuwet")]([SubResource("Resource_rjtql"), SubResource("Resource_yuyay"), SubResource("Resource_yuyay")])
+waveTimeout = 10.0
+
+[resource]
+script = ExtResource("1_0ds14")
+waves = Array[ExtResource("2_mhjrg")]([SubResource("Resource_d5i75"), SubResource("Resource_tavm4"), SubResource("Resource_8tapi"), SubResource("Resource_vnrq8"), SubResource("Resource_6fd3a"), SubResource("Resource_rdp4j"), SubResource("Resource_irxss"), SubResource("Resource_2248g"), SubResource("Resource_btkh1"), SubResource("Resource_juovl"), SubResource("Resource_q50v4")])
+roomType = 0

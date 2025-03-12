@@ -5,7 +5,6 @@ resource_name = "RoomSerializer"
 script/source = "extends Node
 
 @export var roomType: Enums.RoomType = Enums.RoomType.SPAWN
-@export var waveTimeout := 10.0
 @export var configName := \"RoomConfig\"
 
 var saveFolder = \"res://Data/Configs/Room/\"

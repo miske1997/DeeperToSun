@@ -16,7 +16,7 @@ func set_weapon_look_target(target: Vector2):
 	weapon.lookAtTaret = target
 	
 func hit_target_chack(target:Node2D):
-	if (target.position - enemy.position).length() < 150:
+	if (target.position - enemy.position).length() < 600:
 		weapon.activate.emit()
 
 func move_to_target(player: Node2D):

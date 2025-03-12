@@ -1,11 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbov1aforaspi"]
+[gd_scene load_steps=11 format=3 uid="uid://bbov1aforaspi"]
 
 [ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_ufl4a"]
 [ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_gme7i"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_xi02p"]
 [ext_resource type="Script" path="res://Scripts/Modules/AIControllers/warior_gnome.gd" id="3_uxvce"]
 [ext_resource type="Texture2D" uid="uid://cly5ovjm88pqx" path="res://Assets/Enemies/GnomeWarior.png" id="3_whgg6"]
 [ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="4_6okkg"]
 [ext_resource type="PackedScene" uid="uid://chhqff6v6c07v" path="res://Prefabs/Weapons/Dagger.tscn" id="7_gdk2m"]
+
+[sub_resource type="Resource" id="Resource_q50c2"]
+script = ExtResource("2_xi02p")
+movementSpeed = 150.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = "warrior_gnome"
 
 [sub_resource type="Resource" id="Resource_jyct3"]
 script = ExtResource("2_gme7i")
@@ -20,6 +29,7 @@ height = 9.6009
 scale = Vector2(2.67615, 2.67615)
 collision_layer = 2
 collision_mask = 2
+enemyConfig = SubResource("Resource_q50c2")
 damageData = SubResource("Resource_jyct3")
 
 [node name="Dagger" parent="." index="0" instance=ExtResource("7_gdk2m")]
