@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_yuyay"]
 script = ExtResource("3_sarrw")
-movementSpeed = 10.0
+movementSpeed = 230.0
 knockback = 10.0
 health = 6
 armor = 0
@@ -22,7 +22,7 @@ waveTimeout = 10.0
 
 [sub_resource type="Resource" id="Resource_6x6j5"]
 script = ExtResource("3_sarrw")
-movementSpeed = 10.0
+movementSpeed = 290.0
 knockback = 10.0
 health = 6
 armor = 0
@@ -30,7 +30,7 @@ enemyName = "runner_gnome"
 
 [sub_resource type="Resource" id="Resource_rjtql"]
 script = ExtResource("3_sarrw")
-movementSpeed = 10.0
+movementSpeed = 200.0
 knockback = 10.0
 health = 6
 armor = 0

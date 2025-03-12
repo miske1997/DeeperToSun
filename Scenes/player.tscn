@@ -42,7 +42,7 @@ position = Vector2(-9.53674e-07, 1.07288e-06)
 scale = Vector2(0.160156, 0.160156)
 texture = ExtResource("3_ibrl0")
 
-[node name="Controller" type="Node" parent="."]
+[node name="Controller" type="Node2D" parent="."]
 script = ExtResource("4_wxxyx")
 
 [node name="Health" type="Node" parent="."]

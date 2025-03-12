@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var player_direction: Vector2
 var push_force = 1
@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	activate_weapon()
 
 func set_weapon_look_target():
-	weapon.lookAtTaret = get_viewport().get_mouse_position()
+	weapon.lookAtTaret = get_global_mouse_position()
 
 func activate_weapon():
 	if Input.is_action_pressed("Click"):

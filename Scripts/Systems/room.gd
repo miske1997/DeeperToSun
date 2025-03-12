@@ -19,8 +19,8 @@ func _ready() -> void:
 	set_room_bg()
 	spawn_player()
 	#wait
-	#spawn_enemies(roomConfig.waves[waveCount])
-	room_compleated()
+	spawn_enemies(roomConfig.waves[waveCount])
+	#room_compleated()
 
 func _process(delta: float) -> void:
 	if enemyFolder.get_children().size() == 0:
@@ -38,6 +38,8 @@ func on_wave_timeout():
 		wave_compleated()
 
 func room_compleated():
+	if not mapNode:
+		return
 	var step = (roomEnd.x - roomStart.x) / (mapNode.get_neighbours().size() + 1.0)
 	var i := 1
 	for neighbourRoom: MapNode in mapNode.get_neighbours():

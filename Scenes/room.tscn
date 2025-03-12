@@ -202,22 +202,22 @@ void fragment(){
 	COLOR.a = 1.0;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0m5iw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rcw8j"]
 shader = SubResource("Shader_h37th")
 shader_parameter/resolution = Vector2(960, 540)
-shader_parameter/scan_line_amount = 0.428
-shader_parameter/warp_amount = 0.1
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.26
 shader_parameter/noise_amount = 0.0
 shader_parameter/interference_amount = 0.0
 shader_parameter/grille_amount = 0.1
-shader_parameter/grille_size = 1.0
-shader_parameter/vignette_amount = 0.6
-shader_parameter/vignette_intensity = 1.0
-shader_parameter/aberation_amount = 0.0
+shader_parameter/grille_size = 1.708
+shader_parameter/vignette_amount = 2.0
+shader_parameter/vignette_intensity = 0.285
+shader_parameter/aberation_amount = 0.104
 shader_parameter/roll_line_amount = 0.0
 shader_parameter/roll_speed = 8.0
 shader_parameter/scan_line_strength = -6.261
-shader_parameter/pixel_strength = -2.0
+shader_parameter/pixel_strength = -4.0
 
 [node name="Room" type="Node2D" groups=["Room"]]
 script = ExtResource("1_3m351")
@@ -229,8 +229,10 @@ position = Vector2(970, 545)
 
 [node name="HealthUI" parent="." instance=ExtResource("3_6gwo6")]
 z_index = 50
-offset_top = 1080.0
-offset_bottom = 1080.0
+offset_left = -1.0
+offset_top = 996.0
+offset_right = -1.0
+offset_bottom = 996.0
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("enemyFolder")]
 script = ExtResource("2_qi222")
@@ -276,13 +278,6 @@ shape = SubResource("RectangleShape2D_eogpp")
 position = Vector2(1007, 595)
 scale = Vector2(2.97134, 2.97134)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-z_index = 500
-material = SubResource("ShaderMaterial_0m5iw")
-offset_right = 1927.0
-offset_bottom = 1086.0
-
 [node name="RoomStart" type="Node2D" parent="."]
 position = Vector2(592, 162)
 
@@ -308,3 +303,10 @@ position = Vector2(786, 731)
 
 [node name="Enemy4" parent="RoomSerializer/WaveSerializer2" instance=ExtResource("12_c4eb8")]
 position = Vector2(1246, 805)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 500
+material = SubResource("ShaderMaterial_rcw8j")
+offset_left = 4.0
+offset_right = 1931.0
+offset_bottom = 1086.0

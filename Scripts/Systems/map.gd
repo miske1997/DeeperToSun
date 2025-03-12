@@ -16,14 +16,19 @@ func _ready() -> void:
 	draw_map()
 	
 func draw_map():
+	GameData.saveData = ResourceLoader.load("user://Saves/" + GameData.slotInUse + ".tres")
+	if GameData.saveData:
+		mapData = GameData.saveData.mapData
+		GameData.mapData = mapData
 	if mapData:
 		mapGenerator.GenerateMapFromData(mapData)
-		#spawn_player(mapData.playerPosition)
+		playerMapNode = get_node(mapData.playerMapNode)
+		spawn_player(mapData.playerPosition)
 	else:
 		mapGenerator.GenerateMapFromNodes(mapNodes)
 		spawn_player($PlayerSpawn.position)
+		playerMapNode = get_tree().get_first_node_in_group("StartRoom")
 	
-	playerMapNode = get_tree().get_first_node_in_group("StartRoom")
 	playerOffset = player.position - playerMapNode.position
 	
 func spawn_player(position: Vector2):

@@ -12,6 +12,7 @@ config_version=5
 
 config/name="DeeperToSun"
 run/main_scene="res://node_2d.tscn"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -29,11 +30,13 @@ SoundSystem="*res://Scripts/Globals/SoundSystem.gd"
 StatWriter="*res://Scripts/Globals/StatWriter.gd"
 ProjectileEmitter="*res://Scripts/Globals/ProjectileEmitter.gd"
 Utills="*res://Scripts/Globals/Utills.gd"
+GameData="*res://Scripts/Globals/GameData.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 

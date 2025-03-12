@@ -13,7 +13,7 @@ func deal_damage(damageData: DamageData, target):
 		damage_player(damageData, target)
 
 func damage_player(damageData: DamageData, enemy):
-	#enemy.takeDamage.emit(damageData.damage)
+	enemy.takeDamage.emit(damageData.damage)
 	pass
 	
 

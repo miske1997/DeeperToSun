@@ -6,3 +6,4 @@ class_name PlayerData extends Resource
 @export var stats: Dictionary = {}
 @export var name: String = "Dan"
 @export var gold: int = 0
+var health: int
