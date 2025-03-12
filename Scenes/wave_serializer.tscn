@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://blqml5o5saasv"]
+
+[sub_resource type="GDScript" id="GDScript_i44vd"]
+resource_name = "SpawnSerializer"
+script/source = "extends Node2D
+
+@export var randomSpawns := false
+@export var waveTimeout: float = 10.0
+
+func get_wave_config():
+	
+	var waveConfig := WaveConfig.new()
+	waveConfig.randomSpawn = randomSpawns
+	waveConfig.waveTimeout = waveTimeout
+	waveConfig.enemies = []
+	waveConfig.spawnLocations = []
+	for enemy: EnemyBase in get_children():
+		if not enemy.is_in_group(\"Enemy\"):
+			continue
+		waveConfig.enemies.push_back(enemy.enemyConfig)
+		if not randomSpawns:
+			waveConfig.spawnLocations.push_back(convert_position(enemy.position))
+		
+	return waveConfig
+
+func convert_position(enemyPosition):
+	var roomStart: Vector2 = get_tree().get_first_node_in_group(\"Room\").get_node(\"RoomStart\").position
+	var roomEnd: Vector2 = get_tree().get_first_node_in_group(\"Room\").get_node(\"RoomEnd\").position
+	
+	var roomSize:Vector2 = roomEnd - roomStart
+	enemyPosition -= roomStart
+	return Vector2(enemyPosition.x / roomSize.x, enemyPosition.y / roomSize.y)
+"
+
+[node name="WaveSerializer" type="Node2D" groups=["WaveSerializer"]]
+script = SubResource("GDScript_i44vd")

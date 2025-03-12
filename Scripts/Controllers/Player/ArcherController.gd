@@ -37,7 +37,7 @@ func get_input():
 		player_direction += Vector2.RIGHT
 
 func process_movement():
-	player.velocity = player_direction.normalized() * 500
+	player.velocity = player_direction.normalized() * player.playerConfig.movementSpeed
 	player.move_and_slide()
 	
 	for i in player.get_slide_collision_count():

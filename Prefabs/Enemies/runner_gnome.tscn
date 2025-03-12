@@ -1,10 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://7kt263aosrai"]
+[gd_scene load_steps=10 format=3 uid="uid://7kt263aosrai"]
 
 [ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_s5whv"]
 [ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_d3pou"]
 [ext_resource type="Texture2D" uid="uid://c1rpo7r6s7mp1" path="res://Assets/Enemies/Gnome.png" id="2_dj80s"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_k3i0x"]
 [ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="3_wf408"]
 [ext_resource type="PackedScene" uid="uid://c8thni28ootba" path="res://Scenes/Components/contact_damage.tscn" id="4_mefcr"]
+
+[sub_resource type="Resource" id="Resource_6x6j5"]
+script = ExtResource("2_k3i0x")
+movementSpeed = 10.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = "runner_gnome"
 
 [sub_resource type="Resource" id="Resource_jyct3"]
 script = ExtResource("2_d3pou")
@@ -15,10 +24,11 @@ stagger = 0.1
 radius = 3.25112
 height = 9.6009
 
-[node name="Enemy" instance=ExtResource("1_s5whv")]
+[node name="RunnerGnome" instance=ExtResource("1_s5whv")]
 scale = Vector2(1.53793, 1.53793)
 collision_layer = 2
 collision_mask = 2
+enemyConfig = SubResource("Resource_6x6j5")
 damageData = SubResource("Resource_jyct3")
 
 [node name="CollisionShape2D" parent="." index="2"]

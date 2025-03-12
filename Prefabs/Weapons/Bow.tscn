@@ -15,7 +15,7 @@ stagger = 0.1
 script = ExtResource("2_60qsg")
 projectileConfig = ExtResource("3_0um30")
 amount = 1
-attackSpeed = 0.5
+attackSpeed = 0.1
 damageData = SubResource("Resource_jr06y")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ko1dr"]

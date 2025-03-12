@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://7uefqtjc5fu3"]
+
+[sub_resource type="GDScript" id="GDScript_ftaut"]
+resource_name = "RoomSerializer"
+script/source = "extends Node
+
+@export var roomType: Enums.RoomType = Enums.RoomType.SPAWN
+@export var waveTimeout := 10.0
+@export var configName := \"RoomConfig\"
+
+var saveFolder = \"res://Data/Configs/Room/\"
+var room
+func _ready():
+	if process_mode == PROCESS_MODE_DISABLED:
+		queue_free()
+		return
+		
+	if not get_parent() or not get_parent().is_in_group(\"Room\"):
+		return
+	room = get_parent()
+	match roomType:
+		Enums.RoomType.SPAWN: export_spawn_room()
+		#Enums.RoomType.TRAP: export_spawn_room()
+		#Enums.RoomType.SHOP: export_spawn_room()
+		#Enums.RoomType.THRONE: export_spawn_room()
+		#Enums.RoomType.BOSS: export_spawn_room()
+
+func export_spawn_room():
+	var roomConfig := SpawnRoom.new()
+	roomConfig.roomType = roomType
+	roomConfig.waveTimeout = waveTimeout
+	roomConfig.waves = []
+	for waveSerializer in get_tree().get_nodes_in_group(\"WaveSerializer\"):
+		roomConfig.waves.push_back(waveSerializer.get_wave_config())
+		
+	ResourceSaver.save(roomConfig, saveFolder + configName + \".tres\")
+ 
+"
+
+[node name="RoomSerializer" type="Node"]
+script = SubResource("GDScript_ftaut")

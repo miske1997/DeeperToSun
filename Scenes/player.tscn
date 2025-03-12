@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_1orvv"]
 script = ExtResource("2_i7qi1")
-movementSpeed = 10.0
+movementSpeed = 300.0
 knockback = 10.0
 health = 6
 armor = 0

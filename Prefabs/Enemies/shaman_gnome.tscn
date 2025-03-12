@@ -17,7 +17,7 @@ movementSpeed = 10.0
 knockback = 10.0
 health = 6
 armor = 0
-enemyName = "Shaman"
+enemyName = "shaman_gnome"
 
 [sub_resource type="Resource" id="Resource_jyct3"]
 script = ExtResource("2_i33mo")
@@ -53,7 +53,7 @@ amount = 1
 attackSpeed = 1.0
 damageData = SubResource("Resource_kegch")
 
-[node name="Enemy" instance=ExtResource("1_8ohry")]
+[node name="ShamanGnome" instance=ExtResource("1_8ohry")]
 scale = Vector2(2.52306, 2.52306)
 collision_layer = 2
 collision_mask = 2

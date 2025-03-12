@@ -1,14 +1,410 @@
-[gd_scene load_steps=4 format=3 uid="uid://4imh3icqbwol"]
+[gd_scene load_steps=36 format=3 uid="uid://4imh3icqbwol"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/map.gd" id="1_18e5r"]
-[ext_resource type="Script" path="res://Scripts/Modules/map_generator.gd" id="2_ahtpe"]
+[ext_resource type="Script" path="res://Scripts/Modules/map/map_generator.gd" id="2_ahtpe"]
+[ext_resource type="Texture2D" uid="uid://cfaho37ytd2bb" path="res://Assets/Dekoracije/Trava1.png" id="2_gj6on"]
+[ext_resource type="Texture2D" uid="uid://c47pur88gjxk7" path="res://Assets/Dekoracije/Drvo.png" id="3_60dcc"]
 [ext_resource type="Script" path="res://Scripts/Modules/room_builder.gd" id="3_cme82"]
+[ext_resource type="Texture2D" uid="uid://ctib6o47rq4yd" path="res://Assets/Dekoracije/ZbunManji.png" id="4_438ul"]
+[ext_resource type="PackedScene" uid="uid://cd8ad1x5bogrw" path="res://Scenes/room_node.tscn" id="4_lt21t"]
+[ext_resource type="Texture2D" uid="uid://wfoukn0hefc0" path="res://Assets/Dekoracije/ZbunMini.png" id="5_arixr"]
+[ext_resource type="Resource" uid="uid://iyd2i6rdwckl" path="res://Data/Configs/Map/eg_node.tres" id="5_cvud7"]
+[ext_resource type="Texture2D" uid="uid://bgtidphi6njj1" path="res://Assets/Dekoracije/ZbunVeci.png" id="6_cn32p"]
+[ext_resource type="Script" path="res://Scripts/Resources/Map/room_node.gd" id="6_t1ym5"]
+[ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_room.gd" id="7_2lg0a"]
+[ext_resource type="Script" path="res://Scripts/Resources/wave_config.gd" id="8_j6a2s"]
+[ext_resource type="Script" path="res://Scripts/Resources/Map/room_roll.gd" id="14_gwiuj"]
+[ext_resource type="Resource" uid="uid://dyrlxa7wk3w2p" path="res://Data/Configs/Room/eg_room.tres" id="15_ryh1v"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/item_config.gd" id="16_wqb86"]
+[ext_resource type="Script" path="res://Scripts/Resources/Room/shop_room.gd" id="17_5ah0i"]
+[ext_resource type="Script" path="res://Scripts/Resources/Map/node_config.gd" id="18_qh2hr"]
 
-[node name="Map" type="Node2D"]
+[sub_resource type="GDScript" id="GDScript_0cppu"]
+resource_name = "NodeSelect"
+script/source = "extends Node2D
+
+
+@onready var map := get_parent()
+@onready var camera := get_parent().get_node(\"Camera2D\")
+@onready var raycast := $RayCast2D
+
+func _process(delta: float) -> void:
+	raycast.global_position = get_global_mouse_position()
+	if Input.is_action_just_pressed(\"Click\"):
+		detect_node()
+		
+func detect_node():
+	var node = raycast.get_collider()
+	if not node :
+		return
+	print(node)
+	map.move_player_request(node)
+
+func RayCast(mask):
+	var mousepos = get_viewport().get_mouse_position()
+
+	var origin = mousepos
+	var end = origin + camera.project_ray_normal(mousepos) * 2000
+	var query = PhysicsRayQueryParameters3D.create(origin, end, mask)
+	query.collide_with_areas = true
+	var result = get_world_2d().direct_space_state.intersect_ray(query)
+	
+	return result
+"
+
+[sub_resource type="Shader" id="Shader_sfb3s"]
+code = "shader_type canvas_item;
+
+uniform float circle_size : hint_range(0,1) = 0.5f;
+
+void fragment(){
+	if (distance(vec2(0.5,0.5), UV) < circle_size){
+		COLOR.a = 0.0f;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dj1rr"]
+shader = SubResource("Shader_sfb3s")
+shader_parameter/circle_size = 1.0
+
+[sub_resource type="Resource" id="Resource_35dk1"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../RoomNode2"), NodePath("../RoomNode3")])
+
+[sub_resource type="Resource" id="Resource_80uub"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../RoomNode5")])
+
+[sub_resource type="Resource" id="Resource_k7cvn"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../RoomNode4")])
+
+[sub_resource type="Resource" id="Resource_156bb"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../RoomNode6"), NodePath("../RoomNode7")])
+
+[sub_resource type="Resource" id="Resource_dhepf"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../BossRoom")])
+
+[sub_resource type="Resource" id="Resource_eaasp"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../BossRoom")])
+
+[sub_resource type="Resource" id="Resource_ej4il"]
+script = ExtResource("7_2lg0a")
+waves = Array[ExtResource("8_j6a2s")]([])
+roomType = 4
+
+[sub_resource type="Resource" id="Resource_uvwjf"]
+script = ExtResource("6_t1ym5")
+roomConfig = SubResource("Resource_ej4il")
+adjacentNodes = Array[NodePath]([])
+
+[sub_resource type="Resource" id="Resource_0haf3"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../RoomNode6"), NodePath("../RoomNode8")])
+
+[sub_resource type="Resource" id="Resource_adius"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../BossRoom")])
+
+[sub_resource type="Resource" id="Resource_8bwpa"]
+script = ExtResource("14_gwiuj")
+roomConfig = ExtResource("15_ryh1v")
+roll = Vector2(0, 500)
+
+[sub_resource type="Resource" id="Resource_jpmfp"]
+script = ExtResource("17_5ah0i")
+items = Array[ExtResource("16_wqb86")]([])
+roomType = 3
+
+[sub_resource type="Resource" id="Resource_cj5nq"]
+script = ExtResource("14_gwiuj")
+roomConfig = SubResource("Resource_jpmfp")
+roll = Vector2(501, 1000)
+
+[sub_resource type="Resource" id="Resource_4mb6s"]
+script = ExtResource("18_qh2hr")
+posibleNeighbors = Array[ExtResource("6_t1ym5")]([])
+mandatoryNeighbors = Array[ExtResource("6_t1ym5")]([])
+posibleRooms = Array[ExtResource("14_gwiuj")]([SubResource("Resource_8bwpa"), SubResource("Resource_cj5nq")])
+
+[node name="Map" type="Node2D" groups=["Map"]]
+position = Vector2(-6064, 16)
 script = ExtResource("1_18e5r")
+
+[node name="Decoration" type="Node2D" parent="."]
+z_index = -20
+
+[node name="ColorRect" type="ColorRect" parent="Decoration"]
+offset_left = -312.0
+offset_top = -720.0
+offset_right = 2234.0
+offset_bottom = 1552.0
+color = Color(0.270588, 0.552941, 0.0705882, 1)
+metadata/_edit_lock_ = true
+
+[node name="Trava1" type="Sprite2D" parent="Decoration"]
+position = Vector2(304, 491)
+scale = Vector2(0.328571, 0.328571)
+texture = ExtResource("2_gj6on")
+
+[node name="Trava2" type="Sprite2D" parent="Decoration"]
+position = Vector2(255, 500)
+scale = Vector2(0.328571, 0.328571)
+texture = ExtResource("2_gj6on")
+
+[node name="Trava3" type="Sprite2D" parent="Decoration"]
+position = Vector2(307, 538)
+scale = Vector2(0.328571, 0.328571)
+texture = ExtResource("2_gj6on")
+
+[node name="Trava4" type="Sprite2D" parent="Decoration"]
+position = Vector2(359, 504)
+scale = Vector2(0.328571, 0.328571)
+texture = ExtResource("2_gj6on")
+
+[node name="Trava5" type="Sprite2D" parent="Decoration"]
+position = Vector2(363, 547)
+scale = Vector2(0.328571, 0.328571)
+texture = ExtResource("2_gj6on")
+
+[node name="Drvo2" type="Sprite2D" parent="Decoration"]
+position = Vector2(76, 341)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo3" type="Sprite2D" parent="Decoration"]
+position = Vector2(90, 237)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo4" type="Sprite2D" parent="Decoration"]
+position = Vector2(198, 354)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo9" type="Sprite2D" parent="Decoration"]
+position = Vector2(464.25, -169)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo10" type="Sprite2D" parent="Decoration"]
+position = Vector2(478.25, -273)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo11" type="Sprite2D" parent="Decoration"]
+position = Vector2(586.25, -156)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo12" type="Sprite2D" parent="Decoration"]
+position = Vector2(568, -291)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo13" type="Sprite2D" parent="Decoration"]
+position = Vector2(660, -230)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo14" type="Sprite2D" parent="Decoration"]
+position = Vector2(647, -344)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo6" type="Sprite2D" parent="Decoration"]
+position = Vector2(445, 801)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo7" type="Sprite2D" parent="Decoration"]
+position = Vector2(396, 846)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo8" type="Sprite2D" parent="Decoration"]
+position = Vector2(504.375, 858)
+scale = Vector2(0.372222, 0.372222)
+texture = ExtResource("3_60dcc")
+
+[node name="Drvo5" type="Sprite2D" parent="Decoration"]
+position = Vector2(752, 141)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_60dcc")
+
+[node name="ZbunManji" type="Sprite2D" parent="Decoration"]
+position = Vector2(1454, 479)
+scale = Vector2(0.253846, 0.253846)
+texture = ExtResource("4_438ul")
+
+[node name="ZbunManji3" type="Sprite2D" parent="Decoration"]
+position = Vector2(1508, 434)
+scale = Vector2(0.253846, 0.253846)
+texture = ExtResource("4_438ul")
+
+[node name="ZbunManji4" type="Sprite2D" parent="Decoration"]
+position = Vector2(1423, 391)
+scale = Vector2(0.253846, 0.253846)
+texture = ExtResource("4_438ul")
+
+[node name="ZbunMini2" type="Sprite2D" parent="Decoration"]
+position = Vector2(1440, 830)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunMini3" type="Sprite2D" parent="Decoration"]
+position = Vector2(1424, 536)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunMini4" type="Sprite2D" parent="Decoration"]
+position = Vector2(1527, 475)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunMini5" type="Sprite2D" parent="Decoration"]
+position = Vector2(1428, 439)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunMini6" type="Sprite2D" parent="Decoration"]
+position = Vector2(1489, 385)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunManji5" type="Sprite2D" parent="Decoration"]
+position = Vector2(1373.29, -149.5)
+scale = Vector2(0.253846, 0.253846)
+texture = ExtResource("4_438ul")
+
+[node name="ZbunManji6" type="Sprite2D" parent="Decoration"]
+position = Vector2(1427.29, -194.5)
+scale = Vector2(0.253846, 0.253846)
+texture = ExtResource("4_438ul")
+
+[node name="ZbunManji7" type="Sprite2D" parent="Decoration"]
+position = Vector2(1342.29, -237.5)
+scale = Vector2(0.253846, 0.253846)
+texture = ExtResource("4_438ul")
+
+[node name="ZbunMini7" type="Sprite2D" parent="Decoration"]
+position = Vector2(1343.29, -92.4998)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunMini8" type="Sprite2D" parent="Decoration"]
+position = Vector2(1446.29, -153.5)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunMini9" type="Sprite2D" parent="Decoration"]
+position = Vector2(1347.29, -189.5)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunMini10" type="Sprite2D" parent="Decoration"]
+position = Vector2(1408.29, -243.5)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("5_arixr")
+
+[node name="ZbunManji2" type="Sprite2D" parent="Decoration"]
+position = Vector2(1213.47, 192.75)
+scale = Vector2(0.257692, 0.257692)
+texture = ExtResource("4_438ul")
+
+[node name="ZbunVeci2" type="Sprite2D" parent="Decoration"]
+position = Vector2(684, 179)
+scale = Vector2(0.391892, 0.391892)
+texture = ExtResource("6_cn32p")
+
+[node name="ZbunVeci4" type="Sprite2D" parent="Decoration"]
+position = Vector2(1268, -169)
+scale = Vector2(0.391892, 0.391892)
+texture = ExtResource("6_cn32p")
+
+[node name="ZbunVeci3" type="Sprite2D" parent="Decoration"]
+position = Vector2(1555, 808)
+scale = Vector2(0.391892, 0.391892)
+texture = ExtResource("6_cn32p")
+
+[node name="NodeSelect" type="Node2D" parent="."]
+position = Vector2(960, 536)
+script = SubResource("GDScript_0cppu")
+
+[node name="RayCast2D" type="RayCast2D" parent="NodeSelect"]
+target_position = Vector2(0, -1)
+hit_from_inside = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 536)
+
+[node name="Transition" type="ColorRect" parent="Camera2D" groups=["TranisitionRect"]]
+visible = false
+z_index = 1000
+material = SubResource("ShaderMaterial_dj1rr")
+offset_left = -960.0
+offset_top = -536.0
+offset_right = 968.0
+offset_bottom = 544.0
+color = Color(0, 0, 0, 1)
 
 [node name="MapGenerator" type="Node" parent="."]
 script = ExtResource("2_ahtpe")
 
 [node name="RoomBuilder" type="Node" parent="."]
 script = ExtResource("3_cme82")
+
+[node name="MapNodes" type="Node2D" parent="."]
+
+[node name="NodeGroup" type="Node2D" parent="MapNodes"]
+
+[node name="StartRoom" parent="MapNodes/NodeGroup" groups=["StartRoom"] instance=ExtResource("4_lt21t")]
+position = Vector2(972, 965)
+roomNode = SubResource("Resource_35dk1")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="RoomNode2" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
+position = Vector2(1264, 757)
+roomNode = SubResource("Resource_80uub")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="RoomNode3" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
+position = Vector2(680, 754)
+roomNode = SubResource("Resource_k7cvn")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="RoomNode4" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
+position = Vector2(671, 417)
+roomNode = SubResource("Resource_156bb")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="RoomNode7" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
+position = Vector2(469, 107)
+roomNode = SubResource("Resource_dhepf")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="RoomNode8" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
+position = Vector2(1466, 107)
+roomNode = SubResource("Resource_eaasp")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="BossRoom" parent="MapNodes/NodeGroup" groups=["BossRoom"] instance=ExtResource("4_lt21t")]
+position = Vector2(969, -135)
+roomNode = SubResource("Resource_uvwjf")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="RoomNode5" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
+position = Vector2(1273, 417)
+roomNode = SubResource("Resource_0haf3")
+nodeConfig = ExtResource("5_cvud7")
+
+[node name="RoomNode6" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
+position = Vector2(968, 285)
+roomNode = SubResource("Resource_adius")
+nodeConfig = SubResource("Resource_4mb6s")
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(973, 1020)

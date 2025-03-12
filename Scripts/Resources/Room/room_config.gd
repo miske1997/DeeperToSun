@@ -1,3 +1,3 @@
 class_name RoomConfig extends Resource
 
-@export var roomType: String = ""
+@export var roomType: Enums.RoomType = Enums.RoomType.SPAWN

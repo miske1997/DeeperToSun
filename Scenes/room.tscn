@@ -1,12 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://tu8vyh2aqc0u"]
+[gd_scene load_steps=17 format=3 uid="uid://tu8vyh2aqc0u"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/room.gd" id="1_3m351"]
+[ext_resource type="Resource" uid="uid://cqxb7tm7a32t4" path="res://Data/Configs/Room/RoomConfig.tres" id="2_76hec"]
 [ext_resource type="Script" path="res://Scripts/Modules/spawner.gd" id="2_qi222"]
-[ext_resource type="Resource" uid="uid://dyrlxa7wk3w2p" path="res://Data/Configs/Room/eg_room.tres" id="2_x3p66"]
 [ext_resource type="PackedScene" uid="uid://b054quigmbjh7" path="res://Scenes/UI/health.tscn" id="3_6gwo6"]
+[ext_resource type="PackedScene" uid="uid://cl24kdwq1sx4o" path="res://Scenes/door.tscn" id="3_nixdo"]
 [ext_resource type="Script" path="res://Scripts/Modules/enemy_builder.gd" id="3_ot5rb"]
 [ext_resource type="Texture2D" uid="uid://er7ytppxb5us" path="res://Assets/Mape/Livada1.png" id="5_32dm8"]
 [ext_resource type="PackedScene" uid="uid://b51ouytvbh0v2" path="res://Scenes/player.tscn" id="6_w54wr"]
+[ext_resource type="PackedScene" uid="uid://blqml5o5saasv" path="res://Scenes/wave_serializer.tscn" id="7_huvsm"]
+[ext_resource type="PackedScene" uid="uid://7uefqtjc5fu3" path="res://Scenes/room_serializer.tscn" id="9_ltcgh"]
+[ext_resource type="PackedScene" uid="uid://jiwtmufujn2n" path="res://Prefabs/Enemies/shaman_gnome.tscn" id="10_ovxqh"]
+[ext_resource type="PackedScene" uid="uid://7kt263aosrai" path="res://Prefabs/Enemies/runner_gnome.tscn" id="11_uesty"]
+[ext_resource type="PackedScene" uid="uid://oopslrkimatw" path="res://Prefabs/Enemies/ogar.tscn" id="12_c4eb8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
 size = Vector2(20, 437)
@@ -213,9 +219,13 @@ shader_parameter/roll_speed = 8.0
 shader_parameter/scan_line_strength = -6.261
 shader_parameter/pixel_strength = -2.0
 
-[node name="Room" type="Node2D"]
+[node name="Room" type="Node2D" groups=["Room"]]
 script = ExtResource("1_3m351")
-roomConfig = ExtResource("2_x3p66")
+roomConfig = ExtResource("2_76hec")
+door = ExtResource("3_nixdo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(970, 545)
 
 [node name="HealthUI" parent="." instance=ExtResource("3_6gwo6")]
 z_index = 50
@@ -228,6 +238,8 @@ enemyFolder = NodePath("../Enemies")
 
 [node name="EnemyBuilder" type="Node" parent="Spawner"]
 script = ExtResource("3_ot5rb")
+
+[node name="WaveTimeout" type="Timer" parent="Spawner"]
 
 [node name="Bg" type="Sprite2D" parent="."]
 position = Vector2(964.366, 543)
@@ -262,9 +274,37 @@ shape = SubResource("RectangleShape2D_eogpp")
 
 [node name="Player" parent="." instance=ExtResource("6_w54wr")]
 position = Vector2(1007, 595)
+scale = Vector2(2.97134, 2.97134)
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = 500
 material = SubResource("ShaderMaterial_0m5iw")
 offset_right = 1927.0
 offset_bottom = 1086.0
+
+[node name="RoomStart" type="Node2D" parent="."]
+position = Vector2(592, 162)
+
+[node name="RoomEnd" type="Node2D" parent="."]
+position = Vector2(1388, 958)
+
+[node name="RoomSerializer" parent="." instance=ExtResource("9_ltcgh")]
+process_mode = 4
+
+[node name="WaveSerializer" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
+
+[node name="Enemy" parent="RoomSerializer/WaveSerializer" instance=ExtResource("10_ovxqh")]
+position = Vector2(789, 353)
+
+[node name="WaveSerializer2" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
+waveTimeout = 3.0
+
+[node name="Enemy2" parent="RoomSerializer/WaveSerializer2" instance=ExtResource("10_ovxqh")]
+position = Vector2(1172, 358)
+
+[node name="Enemy3" parent="RoomSerializer/WaveSerializer2" instance=ExtResource("11_uesty")]
+position = Vector2(786, 731)
+
+[node name="Enemy4" parent="RoomSerializer/WaveSerializer2" instance=ExtResource("12_c4eb8")]
+position = Vector2(1246, 805)
