@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceuqcev5d0qgy"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/loader.gd" id="1_qawaj"]
+[ext_resource type="Resource" uid="uid://cj5k81jx0kkk" path="res://Data/Configs/Player/player_data.tres" id="2_2lynt"]
+
+[sub_resource type="GDScript" id="GDScript_jt0sj"]
+resource_name = "DamageNumbers"
+script/source = "extends Node2D
+
+@onready var label := $NumberTemplate
+
+var offset := -6
+
+func _ready() -> void:
+	Events.enemyHit.connect(on_enemy_hit)
+	
+func on_enemy_hit(enemy: EnemyBase, damage: float):
+	var dmgNumber: Label = label.duplicate()
+	dmgNumber.visible = true
+	dmgNumber.text = str(round(damage))
+	dmgNumber.position = enemy.position - Vector2((label.size.x / 2.0) - offset, 30)
+	offset = ((offset + 2) % 12) - 6
+	add_child(dmgNumber)
+	var tween = get_tree().create_tween()
+	tween.tween_property(dmgNumber, \"position\", dmgNumber.position + Vector2(0, -30), 0.3)
+	await tween.finished
+	dmgNumber.queue_free()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ks05"]
+font_size = 20
+
+[node name="GlobalScene" type="Node2D"]
+
+[node name="Loader" type="Node" parent="."]
+script = ExtResource("1_qawaj")
+initPlayerData = ExtResource("2_2lynt")
+
+[node name="DamageNumbers" type="Node2D" parent="."]
+script = SubResource("GDScript_jt0sj")
+
+[node name="NumberTemplate" type="Label" parent="DamageNumbers"]
+visible = false
+z_index = 500
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 9)
+text = "200"
+label_settings = SubResource("LabelSettings_7ks05")
+horizontal_alignment = 1

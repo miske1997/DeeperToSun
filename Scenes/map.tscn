@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://4imh3icqbwol"]
+[gd_scene load_steps=45 format=3 uid="uid://4imh3icqbwol"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/map.gd" id="1_18e5r"]
 [ext_resource type="Script" path="res://Scripts/Modules/map/map_generator.gd" id="2_ahtpe"]
@@ -13,9 +13,8 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_node.gd" id="6_t1ym5"]
 [ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_room.gd" id="7_2lg0a"]
 [ext_resource type="Script" path="res://Scripts/Resources/wave_config.gd" id="8_j6a2s"]
-[ext_resource type="Resource" uid="uid://cqxb7tm7a32t4" path="res://Data/Configs/Room/RoomConfig.tres" id="12_b632v"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_roll.gd" id="14_gwiuj"]
-[ext_resource type="Resource" uid="uid://dyrlxa7wk3w2p" path="res://Data/Configs/Room/eg_room.tres" id="15_ryh1v"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="14_o8n6x"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item/item_config.gd" id="16_wqb86"]
 [ext_resource type="Script" path="res://Scripts/Resources/Room/shop_room.gd" id="17_5ah0i"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/node_config.gd" id="18_qh2hr"]
@@ -263,9 +262,28 @@ shader_parameter/pixel_strength = -2.0
 script = ExtResource("6_t1ym5")
 adjacentNodes = Array[NodePath]([NodePath("../RoomNode2"), NodePath("../RoomNode3")])
 
+[sub_resource type="Resource" id="Resource_2iswb"]
+script = ExtResource("8_j6a2s")
+waveType = ""
+spawns = Array[ExtResource("14_o8n6x")]([])
+randomSpawn = false
+waveTimeout = 10.0
+
+[sub_resource type="Resource" id="Resource_iuhuo"]
+script = ExtResource("8_j6a2s")
+waveType = ""
+spawns = Array[ExtResource("14_o8n6x")]([])
+randomSpawn = false
+waveTimeout = 3.0
+
+[sub_resource type="Resource" id="Resource_12n7c"]
+script = ExtResource("7_2lg0a")
+waves = Array[ExtResource("8_j6a2s")]([SubResource("Resource_2iswb"), SubResource("Resource_iuhuo")])
+roomType = 0
+
 [sub_resource type="Resource" id="Resource_mh4y4"]
 script = ExtResource("14_gwiuj")
-roomConfig = ExtResource("12_b632v")
+roomConfig = SubResource("Resource_12n7c")
 roll = Vector2(0, 1000)
 
 [sub_resource type="Resource" id="Resource_tosby"]
@@ -277,6 +295,10 @@ posibleRooms = Array[ExtResource("14_gwiuj")]([SubResource("Resource_mh4y4")])
 [sub_resource type="Resource" id="Resource_80uub"]
 script = ExtResource("6_t1ym5")
 adjacentNodes = Array[NodePath]([NodePath("../RoomNode5")])
+
+[sub_resource type="Resource" id="Resource_p0mdk"]
+script = ExtResource("6_t1ym5")
+adjacentNodes = Array[NodePath]([NodePath("../RoomNode4")])
 
 [sub_resource type="Resource" id="Resource_156bb"]
 script = ExtResource("6_t1ym5")
@@ -308,9 +330,21 @@ adjacentNodes = Array[NodePath]([NodePath("../RoomNode6"), NodePath("../RoomNode
 script = ExtResource("6_t1ym5")
 adjacentNodes = Array[NodePath]([NodePath("../BossRoom")])
 
+[sub_resource type="Resource" id="Resource_3fefk"]
+script = ExtResource("8_j6a2s")
+waveType = ""
+spawns = Array[ExtResource("14_o8n6x")]([])
+randomSpawn = false
+waveTimeout = 10.0
+
+[sub_resource type="Resource" id="Resource_vorgr"]
+script = ExtResource("7_2lg0a")
+waves = Array[ExtResource("8_j6a2s")]([SubResource("Resource_3fefk")])
+roomType = 0
+
 [sub_resource type="Resource" id="Resource_8bwpa"]
 script = ExtResource("14_gwiuj")
-roomConfig = ExtResource("15_ryh1v")
+roomConfig = SubResource("Resource_vorgr")
 roll = Vector2(0, 500)
 
 [sub_resource type="Resource" id="Resource_jpmfp"]
@@ -332,6 +366,7 @@ posibleRooms = Array[ExtResource("14_gwiuj")]([SubResource("Resource_8bwpa"), Su
 [node name="Map" type="Node2D" groups=["Map"]]
 position = Vector2(-6064, 16)
 script = ExtResource("1_18e5r")
+loadSave = false
 
 [node name="MapGenerator" type="Node" parent="."]
 script = ExtResource("2_ahtpe")
@@ -557,6 +592,7 @@ offset_bottom = 544.0
 color = Color(0, 0, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
+visible = false
 z_index = 500
 material = SubResource("ShaderMaterial_niciu")
 offset_left = -1277.0
@@ -581,6 +617,8 @@ nodeConfig = ExtResource("5_cvud7")
 
 [node name="RoomNode3" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
 position = Vector2(680, 754)
+roomNode = SubResource("Resource_p0mdk")
+nodeConfig = ExtResource("5_cvud7")
 
 [node name="RoomNode4" parent="MapNodes/NodeGroup" instance=ExtResource("4_lt21t")]
 position = Vector2(671, 417)

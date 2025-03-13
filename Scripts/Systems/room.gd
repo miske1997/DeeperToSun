@@ -23,6 +23,8 @@ func _ready() -> void:
 	#room_compleated()
 
 func _process(delta: float) -> void:
+	if has_node("RoomSerializer") and get_node("RoomSerializer").process_mode != PROCESS_MODE_DISABLED:
+		return
 	if enemyFolder.get_children().size() == 0:
 		wave_compleated()
 

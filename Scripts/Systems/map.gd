@@ -4,6 +4,7 @@ extends Node
 @export var mapData: MapData
 @export var walk := false
 @export var startPan := true
+@export var loadSave := true
 
 @onready var mapGenerator = $MapGenerator
 @onready var roomBuilder = $RoomBuilder
@@ -18,7 +19,8 @@ func _ready() -> void:
 	draw_map()
 	
 func draw_map():
-	#GameData.saveData = ResourceLoader.load("user://Saves/" + GameData.slotInUse + ".tres")
+	if loadSave:
+		GameData.saveData = ResourceLoader.load("user://Saves/" + GameData.slotInUse + ".tres")
 	if GameData.saveData:
 		mapData = GameData.saveData.mapData
 		GameData.mapData = mapData

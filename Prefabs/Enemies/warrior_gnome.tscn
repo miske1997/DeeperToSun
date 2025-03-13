@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_q50c2"]
 script = ExtResource("2_xi02p")
-movementSpeed = 150.0
+movementSpeed = 50.0
 knockback = 10.0
 health = 6
 armor = 0

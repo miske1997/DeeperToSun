@@ -12,14 +12,14 @@ func get_wave_config():
 	var waveConfig := WaveConfig.new()
 	waveConfig.randomSpawn = randomSpawns
 	waveConfig.waveTimeout = waveTimeout
-	waveConfig.enemies = []
-	waveConfig.spawnLocations = []
+	waveConfig.spawns = []
 	for enemy: EnemyBase in get_children():
 		if not enemy.is_in_group(\"Enemy\"):
 			continue
-		waveConfig.enemies.push_back(enemy.enemyConfig)
-		if not randomSpawns:
-			waveConfig.spawnLocations.push_back(convert_position(enemy.position))
+		var enemySpawn = EnemySpawn.new()
+		enemySpawn.spawn = convert_position(enemy.position)
+		enemySpawn.enemy = enemy.enemyConfig.enemyName
+		waveConfig.spawns.push_back(enemySpawn)
 		
 	return waveConfig
 

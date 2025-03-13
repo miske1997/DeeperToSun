@@ -14,8 +14,10 @@ func deal_damage(damageData: DamageData, target):
 
 func damage_player(damageData: DamageData, enemy):
 	enemy.takeDamage.emit(damageData.damage)
-	pass
+	Events.playerHit.emit(enemy, damageData)
 	
 
 func damage_enemy(damageData: DamageData, enemy):
-	enemy.takeDamage.emit(damageData.damage)
+	var damage = Players.player.stats.GetStat("Damage")
+	Events.enemyHit.emit(enemy, damage)
+	enemy.takeDamage.emit(damage)

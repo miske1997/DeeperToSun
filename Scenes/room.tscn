@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://tu8vyh2aqc0u"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/room.gd" id="1_3m351"]
-[ext_resource type="Resource" uid="uid://c1eejhhro3e4x" path="res://Data/Configs/Room/Test1.tres" id="2_je40i"]
+[ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/Test1.tres" id="2_je40i"]
 [ext_resource type="Script" path="res://Scripts/Modules/spawner.gd" id="2_qi222"]
 [ext_resource type="PackedScene" uid="uid://b054quigmbjh7" path="res://Scenes/UI/health.tscn" id="3_6gwo6"]
 [ext_resource type="PackedScene" uid="uid://cl24kdwq1sx4o" path="res://Scenes/door.tscn" id="3_nixdo"]
@@ -375,6 +375,7 @@ position = Vector2(1300, 731)
 position = Vector2(641, 430)
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = 500
 material = SubResource("ShaderMaterial_rcw8j")
 offset_left = 4.0
