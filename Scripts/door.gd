@@ -4,7 +4,7 @@ extends Node2D
 
 var roomType: Enums.RoomType
 var roomSpriteFolder = "res://Assets/RoomIndicators/"
-
+var left = false
 func _ready() -> void:
 	match roomType:
 		Enums.RoomType.SPAWN: sprite.texture = load(roomSpriteFolder + "NormalRoom.png")
@@ -19,4 +19,7 @@ func _ready() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	if left:
+		return
+	left = true
 	LevelTransition.LeaveRoom()

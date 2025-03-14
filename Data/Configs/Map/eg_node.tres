@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_node.gd" id="1_87wyo"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_roll.gd" id="2_o83u1"]
-[ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/Test1.tres" id="3_4k1uy"]
+[ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="3_4k1uy"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/node_config.gd" id="4_opwxk"]
 
 [sub_resource type="Resource" id="Resource_jum68"]
