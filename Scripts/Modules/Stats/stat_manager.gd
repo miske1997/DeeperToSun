@@ -49,11 +49,14 @@ func GetStatLocal(statName):
 	
 
 
-func SetStat(statName, valueName, value, priority, operation, duration, isBase):
+func SetStat(statName, valueName, value, priority, operation, isOneTime):
 	if not controllers.has(statName):
 		#wait("No stat with name: " .. statName)
 		return
-	GetController(statName).AddModifier(valueName, value, priority, operation, duration, isBase)
+	if isOneTime:
+		GetController(statName).AddOneTimeModifier(valueName, value, priority, operation)
+	else:
+		GetController(statName).AddModifier(valueName, value, priority, operation)
 
 
 func UpdateStat(statName, valueName, value):

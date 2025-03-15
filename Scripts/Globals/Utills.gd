@@ -14,3 +14,9 @@ func _ready() -> void:
 	for i in 10:
 		await get_tree().process_frame
 	get_tree().root.add_child(globalScene)
+	
+func get_stat(entity, statName: String):
+	if entity is Player:
+		pass
+	if entity is EnemyBase:
+		pass

@@ -54,6 +54,11 @@ WaveSerializer=""
 BossRoom=""
 TranisitionRect=""
 Map=""
+Poisoned=""
+Bleading=""
+Burning=""
+Cursed=""
+Slowed=""
 
 [input]
 

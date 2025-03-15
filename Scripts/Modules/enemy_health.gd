@@ -1,6 +1,6 @@
 extends Node
 
-var health := 10 
+var health := 10.0 
 var parent: EnemyBase
 var sprite: Sprite2D
 
@@ -10,7 +10,7 @@ func _ready() -> void:
 	parent.takeDamage.connect(on_damage_delt)
 	health = parent.enemyConfig.health
 	
-func on_damage_delt(damage):
+func on_damage_delt(damage: float):
 	health -= damage
 	if health <= 0:
 		parent.get_node("CollisionShape2D").disabled = true

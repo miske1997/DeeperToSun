@@ -5,6 +5,7 @@ class_name StatController extends Resource
 @export var lastCalcValue = 0
 #@export var lastBaseStat = 0
 @export var augments: Array[StatModification] = []
+@export var oneTimeAugments: Array[StatModification] = []
 @export var base: float
 
 signal statChanged
@@ -13,6 +14,8 @@ func GetSortedStats():
 	var sortedStats = []
 
 	for statValue in augments:
+		sortedStats.push_back(statValue)
+	for statValue in oneTimeAugments:
 		sortedStats.push_back(statValue)
 	
 	if sortedStats.size() == 1:
@@ -64,11 +67,28 @@ func GetStatValue():
 				statValue = stat.modification
 		
 	lastCalcValue = statValue
-	dirty = false
+	if oneTimeAugments.size() == 0:
+		dirty = false
+	else:
+		oneTimeAugments.clear()
 	return statValue
 
+func AddOneTimeModifier(modifierName: String, modifierValue: float, modifierPriority: int, operation: Enums.StatModifyerType):
+	if oneTimeAugments.any(func(stat: StatModification): return stat.name == modifierName):
+		return
+	
+	var statValue = StatModification.new()
+	statValue.name = modifierName
+	statValue.modification = modifierValue
+	statValue.priority = modifierPriority
+	statValue.type = operation
+	
+	oneTimeAugments.push_back(statValue)
+	dirty = true
+	
+	statChanged.emit()
 
-func AddModifier(modifierName, modifierValue, modifierPriority, operation):
+func AddModifier(modifierName: String, modifierValue: float, modifierPriority: int, operation: Enums.StatModifyerType):
 	if augments.any(func(stat: StatModification): return stat.name == modifierName):
 		print("MODIFIER EXISTS WITH NAME: " + modifierName)
 		#warn("MODIFIER EXISTS WITH NAME: " .. modifierName)

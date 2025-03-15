@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ceuqcev5d0qgy"]
+[gd_scene load_steps=6 format=3 uid="uid://ceuqcev5d0qgy"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/loader.gd" id="1_qawaj"]
 [ext_resource type="Resource" uid="uid://cj5k81jx0kkk" path="res://Data/Configs/Player/player_data.tres" id="2_2lynt"]
+[ext_resource type="PackedScene" uid="uid://dw28s0hxdyawk" path="res://Scenes/Modules/dot_manager.tscn" id="3_67w8s"]
 
 [sub_resource type="GDScript" id="GDScript_jt0sj"]
 resource_name = "DamageNumbers"
@@ -17,7 +18,7 @@ func _ready() -> void:
 func on_enemy_hit(enemy: EnemyBase, damage: float):
 	var dmgNumber: Label = label.duplicate()
 	dmgNumber.visible = true
-	dmgNumber.text = str(round(damage))
+	dmgNumber.text = str(snapped(damage, 0.01))
 	dmgNumber.position = enemy.position - Vector2((label.size.x / 2.0) - offset, 30)
 	offset = ((offset + 2) % 12) - 6
 	add_child(dmgNumber)
@@ -55,3 +56,5 @@ pivot_offset = Vector2(20, 9)
 text = "200"
 label_settings = SubResource("LabelSettings_7ks05")
 horizontal_alignment = 1
+
+[node name="DOTManager" parent="." instance=ExtResource("3_67w8s")]
