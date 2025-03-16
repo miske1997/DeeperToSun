@@ -16,6 +16,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([SubResource("Resource_ndlvu")])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
 [sub_resource type="Resource" id="Resource_18snj"]
@@ -58,6 +59,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([SubResource("Resource_18snj"), SubResource("Resource_1ctw1"), SubResource("Resource_4vvbj"), SubResource("Resource_sgpgu"), SubResource("Resource_gbojp")])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
 [sub_resource type="Resource" id="Resource_gegm7"]
@@ -72,6 +74,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([SubResource("Resource_gegm7")])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
 [sub_resource type="Resource" id="Resource_qj3ol"]
@@ -79,6 +82,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 0.0
 
 [sub_resource type="Resource" id="Resource_rfr2x"]
@@ -86,6 +90,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 300.0
 
 [sub_resource type="Resource" id="Resource_63nxi"]
@@ -93,6 +98,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
 [sub_resource type="Resource" id="Resource_c7qcc"]
@@ -100,6 +106,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
 [sub_resource type="Resource" id="Resource_y3y43"]
@@ -107,6 +114,7 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
 [resource]

@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 @export var playerConfig: PlayerConfig
 @export var playerData: PlayerData
 var health: int
+var iframes = false
 
 signal takeDamage
 

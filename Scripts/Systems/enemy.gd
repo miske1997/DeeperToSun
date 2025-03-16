@@ -9,6 +9,7 @@ class_name EnemyBase  extends CharacterBody2D
 signal takeDamage
 
 func _ready() -> void:
+	damageData = damageData.duplicate()
 	damageData.damageDealer = self
 
 func _physics_process(delta: float) -> void:

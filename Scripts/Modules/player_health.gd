@@ -1,7 +1,6 @@
 extends Node
 
 var parent: Player
-var invincible = false
 var sprite: Sprite2D
 
 func _ready() -> void:
@@ -11,9 +10,9 @@ func _ready() -> void:
 	parent.takeDamage.connect(on_damage_delt)
 	
 func on_damage_delt(damage):
-	if invincible:
+	if parent.iframes:
 		return
-	invincible = true
+	parent.iframes = true
 	sprite.use_parent_material = false
 	damage = min(damage, parent.health)
 	parent.health -= damage
@@ -28,7 +27,7 @@ func on_damage_delt(damage):
 	
 	
 func i_frames():
-	await get_tree().create_timer(0.1).timeout
-	invincible = false
+	await get_tree().create_timer(1).timeout
+	parent.iframes = false
 	sprite.use_parent_material = true
 	

@@ -9,16 +9,17 @@
 
 [sub_resource type="Resource" id="Resource_6x6j5"]
 script = ExtResource("2_k3i0x")
-movementSpeed = 290.0
+movementSpeed = 0.0
 knockback = 10.0
-health = 6
+health = 60
 armor = 0
 enemyName = "runner_gnome"
 
 [sub_resource type="Resource" id="Resource_jyct3"]
 script = ExtResource("2_d3pou")
-damage = 1.0
+damage_scale = 1.0
 stagger = 0.1
+damageSource = 5
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ui3vm"]
 radius = 3.25112

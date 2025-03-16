@@ -15,35 +15,36 @@ func deal_damage(damageData: DamageData, target):
 	else:
 		damage_player(damageData, target)
 
-func damage_player(damageData: DamageData, enemy):
-	prok_on_player_hit(damageData, enemy)
+func damage_player(damageData: DamageData, enemy: Player):
+	if enemy.iframes:
+		return
+	prok(damageData, enemy, Enums.ItemProcs.PRE_PLAYER_HIT)
 	enemy.takeDamage.emit(damageData.damage_scale * 1)
 	Events.playerHit.emit(enemy, damageData)
+	prok(damageData, enemy, Enums.ItemProcs.POST_PLAYER_HIT)
 	
 
 func damage_enemy(damageData: DamageData, enemy: EnemyBase):
 	if not damageData.damageSource == Enums.DamageSource.BURN and not damageData.damageSource == Enums.DamageSource.POISON:
-		prok_on_enemy_hit(damageData, enemy)
+		prok(damageData, enemy, Enums.ItemProcs.PRE_ENEMY_HIT)
+		
 	var damage = damageData.damage_scale * Players.player.stats.GetStat("Damage")
 	if enemy.is_in_group("Cursed") and (damageData.damageSource == Enums.DamageSource.BURN or damageData.damageSource == Enums.DamageSource.POISON):
 		damage *= 2
+	if enemy.is_in_group("Bleading") and damageData.damageSource == Enums.DamageSource.AUTO_ATTACK:
+		damage *= 1.1
 	if damageData.damageSource == Enums.DamageSource.POISON and damage > enemy.get_node("EnemyHealth").health:
 		return
-	print(str(damage))
+	#print(str(damage))
 	Events.enemyHit.emit(enemy, damage)
 	enemy.takeDamage.emit(damage)
+	if not damageData.damageSource == Enums.DamageSource.BURN and not damageData.damageSource == Enums.DamageSource.POISON:
+		prok(damageData, enemy, Enums.ItemProcs.POST_ENEMY_HIT)
 	
-	
-func prok_on_player_hit(damageData: DamageData, enemy):
+
+func prok(damageData: DamageData, enemy, prockType: Enums.ItemProcs):
 	for item: PassiveItem in Players.player.collectedItems:
 		if not item is PassiveItem:
 			continue
-		if items_data.has(item.name) and items_data[item.name].procs == Enums.ItemProcs.PLAYER_HIT:
-			item_functions[items_data[item.name].function + item.state].call()
-	
-func prok_on_enemy_hit(damageData: DamageData, enemy):
-	for item: PassiveItem in Players.player.collectedItems:
-		if not item is PassiveItem:
-			continue
-		if items_data.has(item.name) and items_data[item.name].procs == Enums.ItemProcs.ENEMY_HIT:
-			item_functions[items_data[item.name].function + item.state].call(enemy)
+		if items_data.has(item.name) and items_data[item.name].procs == prockType:
+			item_functions[items_data[item.name].function + item.state].call({enemy = enemy, damageData = damageData})
