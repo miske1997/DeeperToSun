@@ -18,15 +18,16 @@ func _ready() -> void:
 	waveTimer.timeout.connect(on_wave_timeout)
 	set_room_bg()
 	spawn_player()
-	#wait
+	
 	spawn_enemies(roomConfig.waves[waveCount])
-	#room_compleated()
+	room_compleated()
 
 func _process(delta: float) -> void:
 	if has_node("RoomSerializer") and get_node("RoomSerializer").process_mode != PROCESS_MODE_DISABLED:
 		return
 	if enemyFolder.get_children().size() == 0:
 		wave_compleated()
+
 
 func wave_compleated():
 	waveCount += 1

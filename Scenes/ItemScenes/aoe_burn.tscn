@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7fye3unawexn"]
+
+[ext_resource type="PackedScene" uid="uid://bbmyskkg61rcf" path="res://Scenes/Basic/in_circle_detect.tscn" id="1_letja"]
+
+[sub_resource type="GDScript" id="GDScript_vm1w1"]
+resource_name = "AoEBurn"
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	$InCircleDetect.detected.connect(enemiesHit)
+
+func enemiesHit(enemies):
+	for enemy: EnemyBase in enemies:
+		Utills.set_status_effect(enemy, \"Burning\", 3.0, true)
+	queue_free()
+"
+
+[node name="AoEBurn" type="Node2D"]
+scale = Vector2(57.9768, 57.9768)
+script = SubResource("GDScript_vm1w1")
+
+[node name="InCircleDetect" parent="." instance=ExtResource("1_letja")]

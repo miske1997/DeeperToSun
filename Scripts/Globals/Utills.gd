@@ -20,3 +20,10 @@ func get_stat(entity, statName: String):
 		pass
 	if entity is EnemyBase:
 		pass
+
+func set_status_effect(enemyHit, effectName: String, duration: float, extend: bool):
+	enemyHit.add_to_group(effectName)
+	if enemyHit.has_meta(effectName + "Duration") and extend:
+		enemyHit.set_meta(effectName + "Duration", enemyHit.get_meta(effectName + "Duration") + duration)
+	else:
+		enemyHit.set_meta(effectName + "Duration", duration)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatManager" load_steps=19 format=3 uid="uid://dylyw83ge3ave"]
+[gd_resource type="Resource" script_class="StatManager" load_steps=14 format=3 uid="uid://dylyw83ge3ave"]
 
 [ext_resource type="Script" path="res://Scripts/Modules/Stats/stat_modification.gd" id="1_gjmtu"]
 [ext_resource type="Script" path="res://Scripts/Modules/Stats/stat_controller.gd" id="2_gh3v1"]
@@ -19,46 +19,11 @@ augments = Array[ExtResource("1_gjmtu")]([SubResource("Resource_ndlvu")])
 oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
-[sub_resource type="Resource" id="Resource_18snj"]
-script = ExtResource("1_gjmtu")
-name = ""
-type = 1
-modification = 2
-priority = -1
-
-[sub_resource type="Resource" id="Resource_1ctw1"]
-script = ExtResource("1_gjmtu")
-name = ""
-type = 0
-modification = 2
-priority = -1
-
-[sub_resource type="Resource" id="Resource_4vvbj"]
-script = ExtResource("1_gjmtu")
-name = ""
-type = 0
-modification = 2
-priority = -1
-
-[sub_resource type="Resource" id="Resource_sgpgu"]
-script = ExtResource("1_gjmtu")
-name = ""
-type = 2
-modification = 1
-priority = 0
-
-[sub_resource type="Resource" id="Resource_gbojp"]
-script = ExtResource("1_gjmtu")
-name = ""
-type = 0
-modification = 9
-priority = 2
-
 [sub_resource type="Resource" id="Resource_r38kj"]
 script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
-augments = Array[ExtResource("1_gjmtu")]([SubResource("Resource_18snj"), SubResource("Resource_1ctw1"), SubResource("Resource_4vvbj"), SubResource("Resource_sgpgu"), SubResource("Resource_gbojp")])
+augments = Array[ExtResource("1_gjmtu")]([])
 oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 

@@ -6,13 +6,13 @@ extends Node
 var dotTimer = 0.0
 
 func _ready() -> void:
-	while not get_tree().get_first_node_in_group("Player"):
-		await get_tree().process_frame
-	burningDamageData.damageDealer = get_tree().get_first_node_in_group("Player")
-	poisonDamageData.damageDealer = get_tree().get_first_node_in_group("Player")
+	pass
+
 
 func _process(delta: float) -> void:
 	dotTimer += delta
+	burningDamageData.damageDealer = Players.player.character
+	poisonDamageData.damageDealer = Players.player.character
 	process_poisoned(delta)
 	process_bleading(delta)
 	process_burning(delta)

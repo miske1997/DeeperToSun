@@ -2,6 +2,7 @@ class_name StatManager extends Resource
 
 @export var controllers: Dictionary = {}
 
+
 func InitFromConfig(playerConfig: PlayerConfig):
 	controllers["Damage"] = StatController.new()
 	controllers["Damage"].base = 1 
@@ -51,12 +52,16 @@ func GetStatLocal(statName):
 
 func SetStat(statName, valueName, value, priority, operation, isOneTime):
 	if not controllers.has(statName):
-		#wait("No stat with name: " .. statName)
 		return
 	if isOneTime:
 		GetController(statName).AddOneTimeModifier(valueName, value, priority, operation)
 	else:
 		GetController(statName).AddModifier(valueName, value, priority, operation)
+
+func SetExpiraitonStat(statName, valueName, value, priority, operation, expirationTime):
+	if not controllers.has(statName):
+		return
+	GetController(statName).AddExpirationModifier(valueName, value, priority, operation, expirationTime)
 
 
 func UpdateStat(statName, valueName, value):
@@ -66,6 +71,9 @@ func UpdateStat(statName, valueName, value):
 	
 	GetController(statName).ChangeModifier(valueName, value)
 
+func ClearAllAugmentsWithName(name):
+	for key in controllers:
+		controllers[key].RemoveModifier(name)
 
 func RegisterEvent(eventObject):
 	#table.insert(registerdEvents, eventObject)

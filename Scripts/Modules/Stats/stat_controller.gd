@@ -10,6 +10,14 @@ class_name StatController extends Resource
 
 signal statChanged
 
+func Tick(delta: float):
+	for expirationModifier in augments:
+		if not expirationModifier is ExpirationModification:
+			continue
+		expirationModifier.expirationTime -= delta
+		if expirationModifier.expirationTime <= 0:
+			RemoveModifier(expirationModifier.name)
+
 func GetSortedStats():
 	var sortedStats = []
 
@@ -88,6 +96,22 @@ func AddOneTimeModifier(modifierName: String, modifierValue: float, modifierPrio
 	
 	statChanged.emit()
 
+func AddExpirationModifier(modifierName: String, modifierValue: float, modifierPriority: int, operation: Enums.StatModifyerType, expirationTime: float):
+	if ProlongExpirationStat(modifierName, expirationTime):
+		return
+	
+	var statValue = ExpirationModification.new()
+	statValue.name = modifierName
+	statValue.modification = modifierValue
+	statValue.priority = modifierPriority
+	statValue.type = operation
+	statValue.expirationTime = expirationTime
+	
+	augments.push_back(statValue)
+	dirty = true
+	
+	statChanged.emit()
+
 func AddModifier(modifierName: String, modifierValue: float, modifierPriority: int, operation: Enums.StatModifyerType):
 	if augments.any(func(stat: StatModification): return stat.name == modifierName):
 		print("MODIFIER EXISTS WITH NAME: " + modifierName)
@@ -130,3 +154,11 @@ func RemoveModifier(modifierName):
 		augments = augments.filter(func(stat: StatModification): return stat.name != modifierName)
 		dirty = true
 		statChanged.emit()
+		
+func ProlongExpirationStat(modifierName, time):
+	for stat: StatModification in augments:
+		if stat.name != modifierName:
+			continue
+		stat.expirationTime = time
+		return true
+	return false

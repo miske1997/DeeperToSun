@@ -1,6 +1,6 @@
 extends Node
 
-var health := 10.0 
+
 var parent: EnemyBase
 var sprite: Sprite2D
 
@@ -8,16 +8,17 @@ func _ready() -> void:
 	parent = get_parent()
 	sprite = parent.get_node("Sprite2D")
 	parent.takeDamage.connect(on_damage_delt)
-	health = parent.enemyConfig.health
+	parent.health = parent.enemyConfig.health
 	
-func on_damage_delt(damage: float):
-	health -= damage
-	if health <= 0:
+func on_damage_delt(damageData: DamageData):
+	parent.health -= damageData.damage
+	if parent.health <= 0:
 		parent.get_node("CollisionShape2D").disabled = true
 		#play death animation
 		#destroy enemy
-		parent.queue_free()
-	flash()
+		Events.enemyDied.emit(parent)
+	else:
+		flash()
 func flash():
 	if not sprite.use_parent_material:
 		return

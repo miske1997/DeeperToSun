@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_buax0"]
 script = ExtResource("2_315hg")
 state = ""
-name = "ThornMail"
+name = "PinCushion"
 type = "passive"
 
 [resource]

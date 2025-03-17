@@ -7,3 +7,5 @@ class_name PlayerData extends Resource
 @export var name: String = "Dan"
 @export var gold: int = 0
 var health: int
+var shields: int
+var character: Player

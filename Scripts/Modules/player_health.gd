@@ -9,12 +9,13 @@ func _ready() -> void:
 	parent.health = parent.playerConfig.health
 	parent.takeDamage.connect(on_damage_delt)
 	
-func on_damage_delt(damage):
+func on_damage_delt(damageData: DamageData):
+	
 	if parent.iframes:
 		return
 	parent.iframes = true
 	sprite.use_parent_material = false
-	damage = min(damage, parent.health)
+	var damage = min(damageData.damage, parent.health)
 	parent.health -= damage
 	Events.playerHit.emit(damage)
 	if parent.health <= 0:

@@ -18,8 +18,9 @@ func deal_damage(damageData: DamageData, target):
 func damage_player(damageData: DamageData, enemy: Player):
 	if enemy.iframes:
 		return
+	damageData.damage = damageData.damage_scale * 1
 	prok(damageData, enemy, Enums.ItemProcs.PRE_PLAYER_HIT)
-	enemy.takeDamage.emit(damageData.damage_scale * 1)
+	enemy.takeDamage.emit(damageData)
 	Events.playerHit.emit(enemy, damageData)
 	prok(damageData, enemy, Enums.ItemProcs.POST_PLAYER_HIT)
 	
@@ -27,17 +28,18 @@ func damage_player(damageData: DamageData, enemy: Player):
 func damage_enemy(damageData: DamageData, enemy: EnemyBase):
 	if not damageData.damageSource == Enums.DamageSource.BURN and not damageData.damageSource == Enums.DamageSource.POISON:
 		prok(damageData, enemy, Enums.ItemProcs.PRE_ENEMY_HIT)
-		
-	var damage = damageData.damage_scale * Players.player.stats.GetStat("Damage")
+	
+	if not damageData.fixed:
+		damageData.damage = damageData.damage_scale * Players.player.stats.GetStat("Damage")
 	if enemy.is_in_group("Cursed") and (damageData.damageSource == Enums.DamageSource.BURN or damageData.damageSource == Enums.DamageSource.POISON):
-		damage *= 2
+		damageData.damage *= 2
 	if enemy.is_in_group("Bleading") and damageData.damageSource == Enums.DamageSource.AUTO_ATTACK:
-		damage *= 1.1
-	if damageData.damageSource == Enums.DamageSource.POISON and damage > enemy.get_node("EnemyHealth").health:
+		damageData.damage *= 1.1
+	if damageData.damageSource == Enums.DamageSource.POISON and damageData.damage > enemy.get_node("EnemyHealth").health:
 		return
-	#print(str(damage))
-	Events.enemyHit.emit(enemy, damage)
-	enemy.takeDamage.emit(damage)
+
+	Events.enemyHit.emit(enemy, damageData)
+	enemy.takeDamage.emit(damageData)
 	if not damageData.damageSource == Enums.DamageSource.BURN and not damageData.damageSource == Enums.DamageSource.POISON:
 		prok(damageData, enemy, Enums.ItemProcs.POST_ENEMY_HIT)
 	
@@ -47,4 +49,6 @@ func prok(damageData: DamageData, enemy, prockType: Enums.ItemProcs):
 		if not item is PassiveItem:
 			continue
 		if items_data.has(item.name) and items_data[item.name].procs == prockType:
-			item_functions[items_data[item.name].function + item.state].call({enemy = enemy, damageData = damageData})
+			if not item_functions.get_method_list().any(func(f): return f.name == items_data[item.name].function + item.state) :
+				return
+			return item_functions[items_data[item.name].function + item.state].call({enemy = enemy, damageData = damageData})

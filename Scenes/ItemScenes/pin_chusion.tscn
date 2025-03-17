@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc11lu57xr54k"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_7m3n2"]
+
+[sub_resource type="GDScript" id="GDScript_r0mff"]
+resource_name = "PinCushion"
+script/source = "extends Node
+
+@export var damageData: DamageData
+var parent: EnemyBase
+var acumulatedDamage := 0.0
+
+func _ready() -> void:
+	parent = get_parent()
+	parent.takeDamage.connect(on_damage_delt)
+
+func on_damage_delt(damageData: DamageData):
+	acumulatedDamage += damageData.damage
+
+func _on_timeout() -> void:
+	damageData.damage = acumulatedDamage * 0.5
+	damageData.damageDealer = Players.player.character
+	DealDamage.deal_damage(damageData, parent)
+	await get_tree().physics_frame
+	queue_free()
+"
+
+[sub_resource type="Resource" id="Resource_njfqv"]
+script = ExtResource("1_7m3n2")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 3
+fixed = true
+
+[node name="PinChusion" type="Timer"]
+wait_time = 3.0
+autostart = true
+script = SubResource("GDScript_r0mff")
+damageData = SubResource("Resource_njfqv")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

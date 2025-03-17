@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://tu8vyh2aqc0u"]
+[gd_scene load_steps=24 format=3 uid="uid://tu8vyh2aqc0u"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/room.gd" id="1_3m351"]
 [ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="2_je40i"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bbov1aforaspi" path="res://Prefabs/Enemies/warrior_gnome.tscn" id="11_titot"]
 [ext_resource type="PackedScene" uid="uid://7kt263aosrai" path="res://Prefabs/Enemies/runner_gnome.tscn" id="11_uesty"]
 [ext_resource type="PackedScene" uid="uid://oopslrkimatw" path="res://Prefabs/Enemies/ogar.tscn" id="12_c4eb8"]
+[ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="15_038gf"]
+[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="16_en67b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
 size = Vector2(20, 437)
@@ -220,6 +222,39 @@ shader_parameter/roll_speed = 8.0
 shader_parameter/scan_line_strength = -6.261
 shader_parameter/pixel_strength = -4.0
 
+[sub_resource type="Curve" id="Curve_niggq"]
+_data = [Vector2(0, 0.125366), 0.0, 0.0, 0, 0, Vector2(0.357143, 0.807146), 0.5514, 0.5514, 0, 0, Vector2(0.980296, 0.967405), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jythy"]
+curve = SubResource("Curve_niggq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hhlus"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angular_velocity_min = 161.02
+angular_velocity_max = 161.02
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_jythy")
+
+[sub_resource type="GDScript" id="GDScript_1qht1"]
+resource_name = "ItemProckOnRoomEnter"
+script/source = "extends Node2D
+
+@export var items_data: Resource
+@export var item_functions: Resource
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	proc_items()
+
+
+func proc_items():
+	for item in Players.player.collectedItems:
+		if item.procs == Enums.ItemProcs.ROOM_LOAD:
+			item_functions[item.function + item.state].call({})
+"
+
 [node name="Room" type="Node2D" groups=["Room"]]
 script = ExtResource("1_3m351")
 roomConfig = ExtResource("2_je40i")
@@ -248,6 +283,11 @@ script = ExtResource("3_ot5rb")
 position = Vector2(964.366, 543)
 scale = Vector2(0.603334, 0.603334)
 texture = ExtResource("5_32dm8")
+
+[node name="TemporaryObjects" type="Node2D" parent="." groups=["TemporaryObjects"]]
+
+[node name="Item" parent="." instance=ExtResource("15_038gf")]
+position = Vector2(929, 452)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -382,3 +422,12 @@ offset_left = 4.0
 offset_right = 1931.0
 offset_bottom = 1086.0
 metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_hhlus")
+texture = ExtResource("16_en67b")
+
+[node name="ItemProck" type="Node2D" parent="."]
+script = SubResource("GDScript_1qht1")

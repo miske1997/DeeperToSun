@@ -4,10 +4,10 @@ extends Node
 
 func _ready() -> void:
 	load_save()
-	Players.player = initPlayerData
+	Players.player = initPlayerData.duplicate()
 	#await  get_tree().create_timer(1).timeout
-	#initPlayerData.stats.controllers["AttackSpeed"].AddModifier("munem", 2, 3, Enums.StatModifyerType.ADD)
-	#await  get_tree().create_timer(1).timeout
+	#initPlayerData.stats.controllers["AttackSpeed"].AddExpirationModifier("munem", 10, 3, Enums.StatModifyerType.MULTIPLY, 3.0)
+	#await  get_tree().create_timer(2).timeout
 	#initPlayerData.stats.controllers["AttackSpeed"].ChangeModifier("munem", 5)
 	#await  get_tree().create_timer(1).timeout
 	#initPlayerData.stats.controllers["AttackSpeed"].RemoveModifier("munem")

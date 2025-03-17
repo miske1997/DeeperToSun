@@ -59,6 +59,7 @@ Bleading=""
 Burning=""
 Cursed=""
 Slowed=""
+TemporaryObjects=""
 
 [input]
 
