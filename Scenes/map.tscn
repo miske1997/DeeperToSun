@@ -366,6 +366,7 @@ posibleRooms = Array[ExtResource("14_gwiuj")]([SubResource("Resource_8bwpa"), Su
 [node name="Map" type="Node2D" groups=["Map"]]
 position = Vector2(-6064, 16)
 script = ExtResource("1_18e5r")
+startPan = false
 loadSave = false
 
 [node name="MapGenerator" type="Node" parent="."]

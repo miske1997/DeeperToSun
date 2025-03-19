@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DamageData" load_steps=2 format=3 uid="uid://bcakug2uyb5b4"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_1sbxj"]
+
+[resource]
+script = ExtResource("1_1sbxj")
+damage_scale = 0.1
+damage = 1.0
+stagger = 0.0
+damageSource = 3
+fixed = false

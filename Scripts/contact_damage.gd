@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	position = parent.position
-	target_position = (position - prevLoacation)
+	target_position = (position - prevLoacation) * 1.3
 	prevLoacation = parent.position
 	if not is_colliding():
 		return

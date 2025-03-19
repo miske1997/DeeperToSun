@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqn2moieim6bf"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="1_tvqpg"]
+[ext_resource type="Texture2D" uid="uid://dwulgcgxt41i7" path="res://Assets/Dekoracije/Senka1.png" id="1_ua55u"]
+[ext_resource type="Texture2D" uid="uid://jmiv0ysq7aef" path="res://Assets/Projectiles/YellowGunProjectile.png" id="2_tlpvp"]
+[ext_resource type="PackedScene" uid="uid://ca2ggbe5dxw76" path="res://Scenes/Basic/interactible.tscn" id="3_r3x6e"]
+
+[sub_resource type="GDScript" id="GDScript_gbfk7"]
+resource_name = "item_pedistal"
+script/source = "extends Node2D
+
+@export var item: ItemConfig
+
+@onready var itemSprite: Sprite2D = $ItemSprite
+@onready var cost = $Control/Label
+@onready var interactible := $Interact
+var tween: Tween
+var collected = false
+
+func _ready() -> void:
+	animateDown()
+	interactible.interacted.connect(onBuy)
+	
+func onBuy():
+	interactible.active = false
+	Events.itemBought.emit(item.name)
+	collected = true
+	itemSprite.hide()
+
+func animateUp():
+	if collected:
+		return
+	tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(itemSprite, \"position\", Vector2(0, -30), 1.5)
+	tween.finished.connect(animateDown, CONNECT_ONE_SHOT)
+
+func animateDown():
+	if collected:
+		return
+	tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(itemSprite, \"position\", Vector2(0, -20), 1.5)
+	tween.finished.connect(animateUp, CONNECT_ONE_SHOT)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="Resource" id="Resource_nu625"]
+script = ExtResource("1_tvqpg")
+state = ""
+name = "BackShots"
+type = "passive"
+
+[node name="ItemPedistal" type="Node2D"]
+position = Vector2(658, 382)
+script = SubResource("GDScript_gbfk7")
+item = SubResource("Resource_nu625")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+text = "20"
+horizontal_alignment = 1
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0.796243, 0.796243, 0.796243, 1)
+self_modulate = Color(1, 0.417678, 0.541278, 1)
+position = Vector2(0, 1)
+scale = Vector2(0.268859, 0.268859)
+texture = ExtResource("1_ua55u")
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+rotation = -0.462734
+texture = ExtResource("2_tlpvp")
+
+[node name="Interact" parent="." instance=ExtResource("3_r3x6e")]
+interactDistance = 80.0

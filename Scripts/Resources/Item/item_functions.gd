@@ -22,10 +22,10 @@ func blackjack(data):
 
 func airbag(data):
 	var player: Player = data.enemy
-	if player.health <= data.damageData.damage:
+	if player.playerData.health <= data.damageData.damage:
 		data.damageData.damage = 0
 		print("added 2 shields")
-		player.playerData.shields += 2
+		player.shealdUp.emit(2)
 		for item in player.playerData.collectedItems:
 			if item.name == "Airbag":
 				item.state = "Used"
@@ -70,6 +70,12 @@ func splitPersonalities(data):
 func snakeFang(data):
 	var enemyHit: EnemyBase = data.enemy
 	Utills.set_status_effect(enemyHit, "Poisoned", 3.0, true)
+	
+func tungstenBalls(data):
+	if data.damageData.damageSource != Enums.DamageSource.AUTO_ATTACK:
+		return
+	var enemyHit: EnemyBase = data.enemy
+	enemyHit.speedController.AddExpirationModifier("TungstenBalls", 0.5, 0, Enums.StatModifyerType.MULTIPLY, 3.0)
 
 func molotov(data):
 	var pool = preload("res://Scenes/Basic/dot_poll.tscn").instantiate()
@@ -79,6 +85,17 @@ func molotov(data):
 	pool.dotName = "Burning"
 	pool.position = enemy.position
 	tempFolder.add_child(pool)
+	
+func glassShield(data):
+	var shields = preload("res://Scenes/ItemScenes/glass_shields.tscn").instantiate()
+	var player: Player = Players.player.character
+	player.add_child(shields)
+	
+func fragileGlass(data):
+	var projectileConfig: ProjectileConfig = preload("res://Data/Configs/Projectiles/GlassShard.tres").duplicate()
+	var damageData: DamageData = preload("res://Data/Configs/Damage/glassShard.tres").duplicate()
+	damageData.damageDealer = Players.player.character
+	ProjectileEmitter.spawn_in_random_dir(projectileConfig, damageData, data.enemy.position, 8)
 
 func oilyRag(data):
 	var enemyHit: EnemyBase = data.enemy
@@ -97,10 +114,13 @@ func sharperThanYouThought(data):
 	var enemyHit: EnemyBase = data.enemy
 	Utills.set_status_effect(enemyHit, "Bleading", 3.0, true)
 	
-		
 func maledictio(data):
 	var enemyHit: EnemyBase = data.enemy
 	Utills.set_status_effect(enemyHit, "Cursed", 3.0, true)
+	
+func backShots(data):
+	Players.player.stats.SetStat("Damage", "BackShots", 2, -1, Enums.StatModifyerType.MULTIPLY, false)
+	Players.player.invertAim = true
 		
 func thornMail(data):
 	if data.damageData.damageSource != Enums.DamageSource.CONTACT:
@@ -123,3 +143,42 @@ func shortFuse(data):
 	var tempFolder = player.get_tree().get_first_node_in_group("TemporaryObjects")
 	bomb.position = player.position
 	tempFolder.add_child(bomb)
+
+func kamikaze(data):
+	if data.dashing:
+		return
+	var player: Player = data.player
+	var bomb = preload("res://Scenes/ItemScenes/ticking_bomb.tscn").instantiate()
+	var tempFolder = player.get_tree().get_first_node_in_group("TemporaryObjects")
+	bomb.position = player.position
+	tempFolder.add_child(bomb)
+	
+func tempo(data):
+	if data.dashing:
+		return
+	Players.player.stats.SetExpiraitonStat("AttackSpeed", "tempo", 5, -1, Enums.StatModifyerType.MULTIPLY, 2.0)
+	
+func smokeBomb(data):
+	var player: Player = data.player
+	if data.dashing:
+		player.iframes = true
+	else:
+		player.iframes = false
+		
+func hiddenDagger(data):
+	if data.dashing:
+		return
+	var player: Player = data.player
+	var projectileConfig: ProjectileConfig = preload("res://Data/Configs/Projectiles/HiddenDagger.tres").duplicate()
+	var damageData: DamageData = preload("res://Data/Configs/Damage/hiddenDagger.tres").duplicate()
+	damageData.damageDealer = Players.player.character
+	var enemies = player.get_tree().get_nodes_in_group("Enemy")
+	if enemies.size() == 0:
+		return
+	var clossestEnemy: EnemyBase = null
+	var minDistance := 100000
+	for enemy: EnemyBase in enemies:
+		if (enemy.position - player.position).length() < minDistance:
+			clossestEnemy = enemy
+			minDistance = (enemy.position - player.position).length()
+	ProjectileEmitter.target_projectile_at(projectileConfig, damageData, damageData.damageDealer.position, clossestEnemy.position)

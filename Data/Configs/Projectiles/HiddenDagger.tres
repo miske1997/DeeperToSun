@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BasicProjectile" load_steps=2 format=3 uid="uid://dmm72es7hk4aq"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="1_53u2m"]
+
+[resource]
+script = ExtResource("1_53u2m")
+direction = Vector2(0, 0)
+speed = 500.0
+drag = 0.0
+range = 200.0
+acceleration = 0.0
+duration = 10.0
+health = 0.0
+frendly = true
+spriteName = "knife"
+size = Vector2(0.1, 0.1)

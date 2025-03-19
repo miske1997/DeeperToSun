@@ -6,6 +6,7 @@ class_name PlayerData extends Resource
 @export var stats: StatManager
 @export var name: String = "Dan"
 @export var gold: int = 0
-var health: int
-var shields: int
+var health: int = 6
+var shields: int = 2
 var character: Player
+var invertAim := false

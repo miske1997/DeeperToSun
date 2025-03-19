@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://drr0p1eobgged"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_a74bc"]
+[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="1_bfu6h"]
+
+[sub_resource type="GDScript" id="GDScript_63xo8"]
+resource_name = "GlassShields"
+script/source = "extends Node2D
+
+@export var damageData: DamageData
+@export var bleadDuration: float = 3.0
+@export var speedPerSecond := 90
+
+func _physics_process(delta: float) -> void:
+	rotation_degrees += speedPerSecond * delta
+	rotation_degrees = float(floori(rotation_degrees) % 360)
+	
+func on_body_entered(enemy, shieldName: String):
+	if not enemy is EnemyBase:
+		return
+	damageData.damageDealer = Players.player.character
+	DealDamage.deal_damage(damageData, enemy)
+	Utills.set_status_effect(enemy, \"Bleading\", bleadDuration, true)
+	get_node(shieldName).queue_free()
+"
+
+[sub_resource type="Resource" id="Resource_ktlx1"]
+script = ExtResource("1_a74bc")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 3
+fixed = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_84e51"]
+radius = 54.8571
+
+[node name="GlassShields" type="Node2D"]
+script = SubResource("GDScript_63xo8")
+damageData = SubResource("Resource_ktlx1")
+bleadDuration = 10.0
+speedPerSecond = 180
+
+[node name="Shield" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Shield"]
+position = Vector2(26, 0)
+scale = Vector2(0.0546875, 0.0546875)
+texture = ExtResource("1_bfu6h")
+
+[node name="Area2D" type="Area2D" parent="Shield/Sprite2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield/Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_84e51")
+
+[node name="Shield2" type="Node2D" parent="."]
+rotation = 2.0944
+
+[node name="Sprite2D" type="Sprite2D" parent="Shield2"]
+position = Vector2(26, 0)
+scale = Vector2(0.0546875, 0.0546875)
+texture = ExtResource("1_bfu6h")
+
+[node name="Area2D" type="Area2D" parent="Shield2/Sprite2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield2/Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_84e51")
+
+[node name="Shield3" type="Node2D" parent="."]
+rotation = 4.18879
+
+[node name="Sprite2D" type="Sprite2D" parent="Shield3"]
+position = Vector2(26, 0)
+scale = Vector2(0.0546875, 0.0546875)
+texture = ExtResource("1_bfu6h")
+
+[node name="Area2D" type="Area2D" parent="Shield3/Sprite2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield3/Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_84e51")
+
+[connection signal="body_entered" from="Shield/Sprite2D/Area2D" to="." method="on_body_entered" binds= ["Shield"]]
+[connection signal="body_entered" from="Shield2/Sprite2D/Area2D" to="." method="on_body_entered" binds= ["Shield2"]]
+[connection signal="body_entered" from="Shield3/Sprite2D/Area2D" to="." method="on_body_entered" binds= ["Shield3"]]

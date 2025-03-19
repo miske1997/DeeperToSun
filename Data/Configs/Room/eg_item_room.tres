@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ThroneRoom" load_steps=4 format=3 uid="uid://cbkqp3w0epf2k"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Room/throne_room.gd" id="1_ehdjf"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="1_k3x53"]
+
+[sub_resource type="Resource" id="Resource_a2xg5"]
+script = ExtResource("1_k3x53")
+state = ""
+name = "TungstenBalls"
+type = "passive"
+
+[resource]
+script = ExtResource("1_ehdjf")
+item = SubResource("Resource_a2xg5")
+roomType = 5

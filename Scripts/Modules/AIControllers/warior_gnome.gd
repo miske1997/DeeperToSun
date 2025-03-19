@@ -20,5 +20,5 @@ func hit_target_chack(target:Node2D):
 		weapon.activate.emit()
 
 func move_to_target(player: Node2D):
-	enemy.velocity = (player.position - enemy.position).normalized() * 	enemy.enemyConfig.movementSpeed
+	enemy.velocity = (player.position - enemy.position).normalized() * enemy.speedController.GetStatValue()
 	enemy.move_and_slide()

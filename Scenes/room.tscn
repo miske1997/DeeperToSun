@@ -1,7 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://tu8vyh2aqc0u"]
+[gd_scene load_steps=29 format=3 uid="uid://tu8vyh2aqc0u"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/room.gd" id="1_3m351"]
-[ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="2_je40i"]
+[ext_resource type="Resource" uid="uid://bet1gxq6kqxx2" path="res://Data/Configs/Room/eg_trap_roon.tres" id="2_76y65"]
 [ext_resource type="Script" path="res://Scripts/Modules/spawner.gd" id="2_qi222"]
 [ext_resource type="PackedScene" uid="uid://b054quigmbjh7" path="res://Scenes/UI/health.tscn" id="3_6gwo6"]
 [ext_resource type="PackedScene" uid="uid://cl24kdwq1sx4o" path="res://Scenes/door.tscn" id="3_nixdo"]
@@ -9,16 +9,26 @@
 [ext_resource type="Texture2D" uid="uid://er7ytppxb5us" path="res://Assets/Mape/Livada1.png" id="5_32dm8"]
 [ext_resource type="PackedScene" uid="uid://b51ouytvbh0v2" path="res://Scenes/player.tscn" id="6_w54wr"]
 [ext_resource type="PackedScene" uid="uid://blqml5o5saasv" path="res://Scenes/wave_serializer.tscn" id="7_huvsm"]
+[ext_resource type="PackedScene" uid="uid://cqn2moieim6bf" path="res://Scenes/Basic/item_pedistal.tscn" id="9_dlfe8"]
 [ext_resource type="PackedScene" uid="uid://7uefqtjc5fu3" path="res://Scenes/room_serializer.tscn" id="9_ltcgh"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="10_4qi8o"]
 [ext_resource type="PackedScene" uid="uid://jiwtmufujn2n" path="res://Prefabs/Enemies/shaman_gnome.tscn" id="10_ovxqh"]
 [ext_resource type="PackedScene" uid="uid://bbov1aforaspi" path="res://Prefabs/Enemies/warrior_gnome.tscn" id="11_titot"]
 [ext_resource type="PackedScene" uid="uid://7kt263aosrai" path="res://Prefabs/Enemies/runner_gnome.tscn" id="11_uesty"]
 [ext_resource type="PackedScene" uid="uid://oopslrkimatw" path="res://Prefabs/Enemies/ogar.tscn" id="12_c4eb8"]
 [ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="15_038gf"]
 [ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="16_en67b"]
+[ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="17_ya66c"]
+[ext_resource type="Resource" uid="uid://sqfmja62rseq" path="res://Data/Items/item_functions.tres" id="18_t17o6"]
+
+[sub_resource type="Resource" id="Resource_o37cy"]
+script = ExtResource("10_4qi8o")
+state = ""
+name = "Airbag"
+type = "passive"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
-size = Vector2(20, 437)
+size = Vector2(27.5331, 437)
 
 [sub_resource type="Shader" id="Shader_h37th"]
 code = "/*
@@ -246,19 +256,22 @@ script/source = "extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	while not Players.player:
+		await get_tree().process_frame
 	proc_items()
 
 
 func proc_items():
 	for item in Players.player.collectedItems:
-		if item.procs == Enums.ItemProcs.ROOM_LOAD:
-			item_functions[item.function + item.state].call({})
+		if items_data.items[item.name].procs == Enums.ItemProcs.ROOM_LOAD:
+			item_functions[items_data.items[item.name].function + item.state].call({})
 "
 
 [node name="Room" type="Node2D" groups=["Room"]]
 script = ExtResource("1_3m351")
-roomConfig = ExtResource("2_je40i")
+roomConfig = ExtResource("2_76y65")
 door = ExtResource("3_nixdo")
+itemOnGround = ExtResource("15_038gf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(970, 545)
@@ -288,6 +301,19 @@ texture = ExtResource("5_32dm8")
 
 [node name="Item" parent="." instance=ExtResource("15_038gf")]
 position = Vector2(929, 452)
+itemName = "TungstenBalls"
+
+[node name="Item2" parent="." instance=ExtResource("15_038gf")]
+position = Vector2(1114, 507)
+itemName = "SmokeBomb"
+
+[node name="Item3" parent="." instance=ExtResource("15_038gf")]
+position = Vector2(977, 744)
+itemName = "BackShots"
+
+[node name="ItemPedistal" parent="." instance=ExtResource("9_dlfe8")]
+position = Vector2(841, 646)
+item = SubResource("Resource_o37cy")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -298,26 +324,26 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-1, 16.5)
+position = Vector2(-3.06799, 16.5)
 shape = SubResource("RectangleShape2D_eogpp")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(411, 17)
+position = Vector2(409.848, 17)
 shape = SubResource("RectangleShape2D_eogpp")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(202, -196)
+position = Vector2(202, -197.744)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_eogpp")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(202, 222)
+position = Vector2(202, 215.574)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_eogpp")
 
 [node name="Player" parent="." instance=ExtResource("6_w54wr")]
-position = Vector2(1007, 595)
-scale = Vector2(2.97134, 2.97134)
+position = Vector2(1073, 670)
+scale = Vector2(3, 3)
 
 [node name="RoomStart" type="Node2D" parent="."]
 position = Vector2(592, 162)
@@ -431,3 +457,5 @@ texture = ExtResource("16_en67b")
 
 [node name="ItemProck" type="Node2D" parent="."]
 script = SubResource("GDScript_1qht1")
+items_data = ExtResource("17_ya66c")
+item_functions = ExtResource("18_t17o6")

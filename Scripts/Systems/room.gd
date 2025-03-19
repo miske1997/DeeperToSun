@@ -2,6 +2,7 @@ extends Node
 
 @export var roomConfig: RoomConfig
 @export var door: PackedScene
+@export var itemOnGround: PackedScene
 var mapNode: MapNode
 
 @onready var enemyFolder := $Enemies
@@ -11,6 +12,7 @@ var mapNode: MapNode
 @onready var roomEnd: Vector2 = get_tree().get_first_node_in_group("Room").get_node("RoomEnd").position
 
 var waveCount = 0
+var roomStarted = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if has_node("RoomSerializer") and get_node("RoomSerializer").process_mode != PROCESS_MODE_DISABLED:
@@ -19,13 +21,23 @@ func _ready() -> void:
 	set_room_bg()
 	spawn_player()
 	
-	spawn_enemies(roomConfig.waves[waveCount])
-	room_compleated()
+	if roomConfig.roomType == Enums.RoomType.SPAWN:
+		roomStarted = true
+		spawn_enemies(roomConfig.waves[waveCount])
+	if roomConfig.roomType == Enums.RoomType.ITEM:
+		spawn_item()
+		Events.itemCollected.connect(func(itemOnGround): room_compleated(), CONNECT_ONE_SHOT)
+	if roomConfig.roomType == Enums.RoomType.SHOP:
+		spawn_item()
+	if roomConfig.roomType == Enums.RoomType.TRAP:
+		spawn_item()
+		Events.itemCollected.connect(func(itemOnGround): roomStarted = true; spawn_enemies(roomConfig.waves[waveCount]), CONNECT_ONE_SHOT)
+	#room_compleated()
 
 func _process(delta: float) -> void:
 	if has_node("RoomSerializer") and get_node("RoomSerializer").process_mode != PROCESS_MODE_DISABLED:
 		return
-	if enemyFolder.get_children().size() == 0:
+	if enemyFolder.get_children().size() == 0 and roomStarted:
 		wave_compleated()
 
 
@@ -57,6 +69,15 @@ func spawn_door(offset, type):
 	
 
 func set_room_bg():
+	pass
+
+func spawn_item():
+	var item: Node2D = itemOnGround.instantiate()
+	item.position = roomStart + (roomEnd - roomStart) / 2
+	item.name = roomConfig.item.name
+	add_child(item)
+
+func spawn_shop():
 	pass
 
 func spawn_enemies(waveConfig):

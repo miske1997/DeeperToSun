@@ -8,8 +8,11 @@
 
 [sub_resource type="Resource" id="Resource_uld44"]
 script = ExtResource("2_hbm5i")
+damage_scale = 1.0
 damage = 2.0
 stagger = 0.1
+damageSource = 0
+fixed = false
 
 [sub_resource type="Resource" id="Resource_xlggc"]
 script = ExtResource("3_20355")
@@ -50,5 +53,5 @@ shape = SubResource("RectangleShape2D_b3vpf")
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="DamageOnAreaHit" parent="." groups=["Enemy"] instance=ExtResource("5_4j80y")]
+[node name="DamageOnAreaHit" parent="." instance=ExtResource("5_4j80y")]
 process_mode = 4

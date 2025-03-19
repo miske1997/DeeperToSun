@@ -22,5 +22,5 @@ func hit_target_chack(target:Node2D):
 func move_to_target(player: Node2D):
 	if (player.position - enemy.position).length() < 150:
 		return
-	enemy.velocity = (player.position - enemy.position).normalized() * 	enemy.enemyConfig.movementSpeed
+	enemy.velocity = (player.position - enemy.position).normalized() * enemy.speedController.GetStatValue()
 	enemy.move_and_slide()

@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1_w08v7")
 damage_scale = 0.1
+damage = 1.0
 stagger = 0.0
-damageSource = 2
+damageSource = 3
+fixed = false

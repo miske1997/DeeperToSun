@@ -43,6 +43,18 @@ var items = {
 		cost = 30,
 		sprite = "pinCushion"
 	},
+	"FragileGlass" = {
+		function = "fragileGlass",
+		procs = Enums.ItemProcs.ENEMY_DEATH,
+		cost = 30,
+		sprite = "fragileGlass"
+	},
+	"GlassShield" = {
+		function = "glassShield",
+		procs = Enums.ItemProcs.ROOM_LOAD,
+		cost = 30,
+		sprite = "glassShield"
+	},
 	"SplitPersonalities" = {
 		function = "splitPersonalities",
 		procs = Enums.ItemProcs.PRE_ENEMY_HIT,
@@ -54,6 +66,12 @@ var items = {
 		procs = Enums.ItemProcs.POST_ENEMY_HIT,
 		cost = 30,
 		sprite = "snakeFang"
+	},
+	"TungstenBalls" = {
+		function = "tungstenBalls",
+		procs = Enums.ItemProcs.POST_ENEMY_HIT,
+		cost = 30,
+		sprite = "tungstenBalls"
 	},
 	"Molotov" = {
 		function = "molotov",
@@ -102,5 +120,35 @@ var items = {
 		procs = Enums.ItemProcs.POST_PLAYER_HIT,
 		cost = 30,
 		sprite = "shortFuse"
+	},
+	"BackShots" = {
+		function = "backShots",
+		procs = Enums.ItemProcs.PICKUP,
+		cost = 30,
+		sprite = "backShots"
+	},
+	"Kamikaze" = {
+		function = "kamikaze",
+		procs = Enums.ItemProcs.DASH,
+		cost = 30,
+		sprite = "kamikaze"
+	},
+	"Tempo" = {
+		function = "tempo",
+		procs = Enums.ItemProcs.DASH,
+		cost = 30,
+		sprite = "tempo"
+	},
+	"SmokeBomb" = {
+		function = "smokeBomb",
+		procs = Enums.ItemProcs.DASH,
+		cost = 30,
+		sprite = "smokeBomb"
+	},
+	"HiddenDagger" = {
+		function = "hiddenDagger",
+		procs = Enums.ItemProcs.DASH,
+		cost = 30,
+		sprite = "hiddenDagger"
 	}
 }

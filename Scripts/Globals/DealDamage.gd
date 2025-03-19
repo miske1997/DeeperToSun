@@ -1,7 +1,7 @@
 extends Node
 
-var items_data = preload("res://Data/Items/items_data.tres").items
-var item_functions = preload("res://Data/Items/item_functions.tres")
+var items_data = load("res://Data/Items/items_data.tres").items
+var item_functions = load("res://Data/Items/item_functions.tres")
 
 
 func deal_damage(damageData: DamageData, target):
@@ -35,7 +35,7 @@ func damage_enemy(damageData: DamageData, enemy: EnemyBase):
 		damageData.damage *= 2
 	if enemy.is_in_group("Bleading") and damageData.damageSource == Enums.DamageSource.AUTO_ATTACK:
 		damageData.damage *= 1.1
-	if damageData.damageSource == Enums.DamageSource.POISON and damageData.damage > enemy.get_node("EnemyHealth").health:
+	if damageData.damageSource == Enums.DamageSource.POISON and damageData.damage > enemy.health:
 		return
 
 	Events.enemyHit.emit(enemy, damageData)
@@ -49,6 +49,7 @@ func prok(damageData: DamageData, enemy, prockType: Enums.ItemProcs):
 		if not item is PassiveItem:
 			continue
 		if items_data.has(item.name) and items_data[item.name].procs == prockType:
+			#print(item_functions.get_method_list())
 			if not item_functions.get_method_list().any(func(f): return f.name == items_data[item.name].function + item.state) :
 				return
-			return item_functions[items_data[item.name].function + item.state].call({enemy = enemy, damageData = damageData})
+			item_functions[items_data[item.name].function + item.state].call({enemy = enemy, damageData = damageData})

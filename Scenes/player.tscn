@@ -1,35 +1,44 @@
-[gd_scene load_steps=11 format=3 uid="uid://b51ouytvbh0v2"]
+[gd_scene load_steps=16 format=3 uid="uid://b51ouytvbh0v2"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/player.gd" id="1_e11nl"]
 [ext_resource type="Script" path="res://Scripts/Resources/Entity/player_config.gd" id="2_i7qi1"]
 [ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="3_2pvbj"]
 [ext_resource type="Texture2D" uid="uid://caavgbts730dq" path="res://Assets/Characters/Archer.png" id="3_ibrl0"]
+[ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="3_ughrn"]
+[ext_resource type="Resource" uid="uid://sqfmja62rseq" path="res://Data/Items/item_functions.tres" id="4_2bjll"]
 [ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_gmcms"]
 [ext_resource type="Script" path="res://Scripts/Controllers/Player/ArcherController.gd" id="4_wxxyx"]
 [ext_resource type="Script" path="res://Scripts/Modules/player_health.gd" id="6_u61t3"]
 [ext_resource type="PackedScene" uid="uid://bdd0af3gev72y" path="res://Prefabs/Weapons/Bow.tscn" id="8_txwfd"]
+[ext_resource type="PackedScene" uid="uid://bnv5hfuq0rys0" path="res://Scenes/ItemScenes/dash.tscn" id="9_ncmto"]
+[ext_resource type="Script" path="res://Scripts/Systems/interact_manager.gd" id="12_t6noj"]
+[ext_resource type="PackedScene" uid="uid://co4hy02lv7bip" path="res://Scenes/UI/interact_ui.tscn" id="13_428ra"]
 
 [sub_resource type="Resource" id="Resource_1orvv"]
 script = ExtResource("2_i7qi1")
 movementSpeed = 300.0
 knockback = 10.0
 health = 6
-armor = 0
+shields = 2
 character = "Archer"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8p5f3"]
-radius = 4.0
-height = 22.0
+radius = 2.0
+height = 10.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-scale = Vector2(2, 2)
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_e11nl")
 playerConfig = SubResource("Resource_1orvv")
+items_data = ExtResource("3_ughrn")
+item_functions = ExtResource("4_2bjll")
 
-[node name="ContactDamage" parent="." instance=ExtResource("3_2pvbj")]
+[node name="ContactDetect" parent="." instance=ExtResource("3_2pvbj")]
+enabled = true
 exclude_parent = true
+collision_mask = 4
+collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
@@ -49,3 +58,10 @@ script = ExtResource("4_wxxyx")
 script = ExtResource("6_u61t3")
 
 [node name="Bow" parent="." instance=ExtResource("8_txwfd")]
+
+[node name="Dash" parent="." instance=ExtResource("9_ncmto")]
+
+[node name="InteractManager" type="Node2D" parent="."]
+script = ExtResource("12_t6noj")
+
+[node name="InteractUI" parent="InteractManager" instance=ExtResource("13_428ra")]
