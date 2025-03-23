@@ -16,4 +16,4 @@ script = ExtResource("2_056vv")
 collectedItems = Array[ExtResource("1_tyqkj")]([SubResource("Resource_buax0")])
 stats = ExtResource("3_xfe7w")
 name = "Dan"
-gold = 0
+gold = 50

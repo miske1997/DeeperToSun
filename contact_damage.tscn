@@ -9,3 +9,5 @@ enabled = false
 exclude_parent = false
 target_position = Vector2(0, 0)
 script = ExtResource("1_7vvvr")
+
+[node name="Line2D" type="Line2D" parent="."]

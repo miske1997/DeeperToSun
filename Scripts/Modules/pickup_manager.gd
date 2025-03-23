@@ -7,7 +7,17 @@ func _ready() -> void:
 	Events.itemCollected.connect(on_item_pickup)
 	Events.itemBought.connect(on_item_bought)
 
-func on_item_bought(itemName):
+func on_item_bought(pedistal, itemName, cost):
+	if Players.player.gold < cost:
+		return
+	Players.player.gold -= cost
+	if itemName == "Heart":
+		Players.player.character.healthUp.emit(1)
+		return
+	elif itemName == "Shield":
+		Players.player.character.shealdUp.emit(1)
+		return
+	pedistal.bought()
 	add_item(itemName)
 
 func on_item_pickup(itemOnGround):
@@ -21,5 +31,7 @@ func add_item(itemName: String):
 	if Players.player.collectedItems.any(func(i): return i.name == passiveItem.name):
 		return
 	Players.player.collectedItems.push_back(passiveItem)
-	if item.procs == Enums.ItemProcs.PICKUP or item.procs == Enums.ItemProcs.ROOM_LOAD:
-		item_functions[item.function + passiveItem.state].call({})
+	if item.procs.has(Enums.ItemProcs.PICKUP):
+		item_functions[item.procs[Enums.ItemProcs.PICKUP] + passiveItem.state].call({})
+	if item.procs.has(Enums.ItemProcs.ROOM_LOAD):
+		item_functions[item.procs[Enums.ItemProcs.ROOM_LOAD] + passiveItem.state].call({})

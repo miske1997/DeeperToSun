@@ -12,6 +12,7 @@ damage_scale = 1.0
 damage = 1.0
 stagger = 0.1
 damageSource = 0
+fixed = false
 
 [sub_resource type="Resource" id="Resource_sfc8p"]
 script = ExtResource("2_60qsg")

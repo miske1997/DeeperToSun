@@ -22,8 +22,10 @@ func _ready() -> void:
 	interactible.interacted.connect(onBuy)
 	
 func onBuy():
+	Events.itemBought.emit(self, item.name, 10)
+	
+func bought():
 	interactible.active = false
-	Events.itemBought.emit(item.name)
 	collected = true
 	itemSprite.hide()
 

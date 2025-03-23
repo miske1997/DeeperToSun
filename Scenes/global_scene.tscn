@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ceuqcev5d0qgy"]
+[gd_scene load_steps=10 format=3 uid="uid://ceuqcev5d0qgy"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/loader.gd" id="1_qawaj"]
 [ext_resource type="Resource" uid="uid://cj5k81jx0kkk" path="res://Data/Configs/Player/player_data.tres" id="2_2lynt"]
 [ext_resource type="PackedScene" uid="uid://dw28s0hxdyawk" path="res://Scenes/Modules/dot_manager.tscn" id="3_67w8s"]
 [ext_resource type="Script" path="res://Scripts/Modules/pickup_manager.gd" id="4_ubnvl"]
 [ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="5_agh1e"]
-[ext_resource type="Resource" uid="uid://sqfmja62rseq" path="res://Data/Items/item_functions.tres" id="6_if2qr"]
 [ext_resource type="PackedScene" uid="uid://0vktkf2tfklc" path="res://Prefabs/Modules/stat_manager.tscn" id="7_g25vw"]
 
 [sub_resource type="GDScript" id="GDScript_jt0sj"]
@@ -40,7 +39,7 @@ resource_name = "EnemyDeath"
 script/source = "extends Node
 
 @export var items_data: Resource
-@export var item_functions: Resource
+var item_functions: Resource = load(\"res://Data/Items/item_functions.tres\")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Events.enemyDied.connect(on_enemy_died)
@@ -50,8 +49,8 @@ func on_enemy_died(enemy):
 	for item: PassiveItem in Players.player.collectedItems:
 		if not item is PassiveItem:
 			continue
-		if items_data.items.has(item.name) and items_data.items[item.name].procs == Enums.ItemProcs.ENEMY_DEATH:
-			item_functions[items_data.items[item.name].function + item.state].call({enemy = enemy})
+		if items_data.items.has(item.name) and items_data.items[item.name].procs.has(Enums.ItemProcs.ENEMY_DEATH):
+			item_functions[items_data.items[item.name].procs[Enums.ItemProcs.ENEMY_DEATH] + item.state].call({enemy = enemy})
 	
 	enemy.queue_free()
 "
@@ -90,6 +89,5 @@ script = ExtResource("4_ubnvl")
 [node name="EnemyDeathManager" type="Node" parent="."]
 script = SubResource("GDScript_7vwep")
 items_data = ExtResource("5_agh1e")
-item_functions = ExtResource("6_if2qr")
 
 [node name="StatManager" parent="." instance=ExtResource("7_g25vw")]

@@ -1,16 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://bprrlmiynmmg6"]
+[gd_scene load_steps=8 format=3 uid="uid://bprrlmiynmmg6"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/enemy.gd" id="1_lewwx"]
 [ext_resource type="Script" path="res://Scripts/Modules/AIControllers/ai_controller.gd" id="2_ym71f"]
 [ext_resource type="Script" path="res://Scripts/Modules/enemy_health.gd" id="3_pc08g"]
 [ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="4_qflg0"]
 [ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_r2sqt"]
+[ext_resource type="PackedScene" uid="uid://bnv5hfuq0rys0" path="res://Scenes/ItemScenes/dash.tscn" id="6_0o8sl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u4m5i"]
 radius = 10.198
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
-collision_mask = 5
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+floor_stop_on_slope = false
+floor_block_on_wall = false
 script = ExtResource("1_lewwx")
 
 [node name="AIController" type="Node" parent="."]
@@ -29,3 +34,8 @@ use_parent_material = true
 position = Vector2(-9.53674e-07, 9.53674e-07)
 scale = Vector2(0.160156, 0.160156)
 texture = ExtResource("4_qflg0")
+
+[node name="Dash" parent="." instance=ExtResource("6_0o8sl")]
+dashDistance = 150.0
+disableMaskNumbers = Array[int]([1, 2])
+disableMask = true

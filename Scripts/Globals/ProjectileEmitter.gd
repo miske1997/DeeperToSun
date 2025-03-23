@@ -26,8 +26,28 @@ func target_projectile_at(projectileConfig: ProjectileConfig, damageData: Damage
 	var direction = (target - origin).normalized()
 	spawn_projectile(projectileConfig, damageData, origin, direction.angle(), direction)
 	
-func spawn_projectiles_cone(projectile, origin, direction, angle):
-	pass
+func spawn_projectiles_cone(projectileConfig: ProjectileConfig, damageData: DamageData, origin: Vector2, direction: Vector2, angle: float, amount: int):
+	var step = angle / (amount + 1)
+	var currentAngle = rad_to_deg(direction.angle())
+	var startAngle = currentAngle - (angle / 2)
+	for i in amount:
+		var rotation = deg_to_rad(startAngle + (step * (i + 1)))
+		spawn_projectile(projectileConfig, damageData, origin, rotation, Vector2.from_angle(rotation))
+
+	
+func spawn_projectiles_cone_middle(projectileConfig: ProjectileConfig, damageData: DamageData, origin: Vector2, direction: Vector2, angle: float, amount: int):
+	var step = angle / (amount + 1)
+	var baseRotation = direction.angle()
+	var divideVec = Vector2.from_angle(baseRotation + deg_to_rad(90)) * 10
+	var currentAngle = rad_to_deg(direction.angle())
+	var startAngle = currentAngle - (angle / 2)
+	for i in amount:
+		if amount % 2 == 0 and (i + 1 == amount / 2 or i + 1 == (amount / 2) + 1):
+			spawn_projectile(projectileConfig, damageData, origin + divideVec, baseRotation, direction)
+			divideVec *= -1
+		else:
+			var rotation = deg_to_rad(startAngle + (step * (i + 1)))
+			spawn_projectile(projectileConfig, damageData, origin, rotation, Vector2.from_angle(rotation))
 	
 	
 func spawn_projectile_sphere(projectileConfig, damageData, origin, count):

@@ -20,5 +20,8 @@ func hit_target_chack(target:Node2D):
 		weapon.activate.emit()
 
 func move_to_target(player: Node2D):
+	if enemy.dashing:
+		return
 	enemy.velocity = (player.position - enemy.position).normalized() * enemy.speedController.GetStatValue()
+	enemy.velocity += enemy.collisionInfluence
 	enemy.move_and_slide()

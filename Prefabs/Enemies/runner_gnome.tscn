@@ -18,8 +18,10 @@ enemyName = "runner_gnome"
 [sub_resource type="Resource" id="Resource_jyct3"]
 script = ExtResource("2_d3pou")
 damage_scale = 1.0
+damage = 1.0
 stagger = 0.1
 damageSource = 5
+fixed = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ui3vm"]
 radius = 3.25112
@@ -27,8 +29,6 @@ height = 9.6009
 
 [node name="RunnerGnome" instance=ExtResource("1_s5whv")]
 scale = Vector2(3.69793, 3.69793)
-collision_layer = 2
-collision_mask = 2
 enemyConfig = SubResource("Resource_6x6j5")
 damageData = SubResource("Resource_jyct3")
 
@@ -43,5 +43,6 @@ position = Vector2(-9.53674e-07, -5)
 texture = ExtResource("2_dj80s")
 
 [node name="ContactDetect" parent="." index="4" instance=ExtResource("3_wf408")]
+collision_mask = 5
 
 [node name="DamageOnHit" parent="." index="5" instance=ExtResource("4_mefcr")]

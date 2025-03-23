@@ -1,154 +1,149 @@
-extends Resource
+extends Drop
 
 var items = {
 	"BigFShot" = {
-		function = "bigFShot",
-		procs = Enums.ItemProcs.PICKUP,
+		procs = {Enums.ItemProcs.PICKUP: "bigFShot"},
 		cost = 20,
 		sprite = "bigFShot"
 	},
 	"SeeingDouble" = {
-		function = "seeingDouble",
-		procs = Enums.ItemProcs.PICKUP,
+		procs = {Enums.ItemProcs.PICKUP: "seeingDouble"},
 		cost = 20,
 		sprite = "seeingDouble"
 	},
 	"SeeingDoubleDouble" = {
-		function = "seeingDoubleDouble",
-		procs = ["playerHit"],
+		procs = {Enums.ItemProcs.PICKUP: "seeingDoubleDouble"},
 		cost = 30,
 		sprite = "seeingDoubleDouble"
 	},
 	"FungalInfection" = {
-		function = "fungalInfection",
-		procs = Enums.ItemProcs.ENEMY_DEATH,
+		procs = {Enums.ItemProcs.ENEMY_DEATH: "fungalInfection"},
 		cost = 30,
 		sprite = "fungalInfection"
 	},
 	"Blackjack" = {
-		function = "blackjack",
-		procs = Enums.ItemProcs.POST_ENEMY_HIT,
+		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "blackjack"},
 		cost = 30,
 		sprite = "blackjack"
 	},
 	"Airbag" = {
-		function = "airbag",
-		procs = Enums.ItemProcs.PRE_PLAYER_HIT,
+		procs = {Enums.ItemProcs.PRE_PLAYER_HIT: "airbag"},
 		cost = 30,
 		sprite = "airbag"
 	},
 	"PinCushion" = {
-		function = "pinCushion",
-		procs = Enums.ItemProcs.PRE_ENEMY_HIT,
+		procs = {Enums.ItemProcs.PRE_ENEMY_HIT: "pinCushion"},
 		cost = 30,
 		sprite = "pinCushion"
 	},
 	"FragileGlass" = {
-		function = "fragileGlass",
-		procs = Enums.ItemProcs.ENEMY_DEATH,
+		procs = {Enums.ItemProcs.ENEMY_DEATH: "fragileGlass"},
 		cost = 30,
 		sprite = "fragileGlass"
 	},
 	"GlassShield" = {
-		function = "glassShield",
-		procs = Enums.ItemProcs.ROOM_LOAD,
+		procs = {Enums.ItemProcs.ROOM_LOAD: "glassShield"},
 		cost = 30,
 		sprite = "glassShield"
 	},
 	"SplitPersonalities" = {
-		function = "splitPersonalities",
-		procs = Enums.ItemProcs.PRE_ENEMY_HIT,
+		procs = {Enums.ItemProcs.PRE_ENEMY_HIT: "splitPersonalities"},
 		cost = 30,
 		sprite = "splitPersonalities"
 	},
 	"SnakeFang" = {
-		function = "snakeFang",
-		procs = Enums.ItemProcs.POST_ENEMY_HIT,
+		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "snakeFang"},
 		cost = 30,
 		sprite = "snakeFang"
 	},
 	"TungstenBalls" = {
-		function = "tungstenBalls",
-		procs = Enums.ItemProcs.POST_ENEMY_HIT,
+		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "tungstenBalls"},
 		cost = 30,
 		sprite = "tungstenBalls"
 	},
 	"Molotov" = {
-		function = "molotov",
-		procs = Enums.ItemProcs.ENEMY_DEATH,
+		procs = {Enums.ItemProcs.ENEMY_DEATH: "molotov"},
 		cost = 30,
 		sprite = "molotov"
 	},
 	"OilyRag" = {
-		function = "oilyRag",
-		procs = Enums.ItemProcs.POST_ENEMY_HIT,
+		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "oilyRag"},
 		cost = 30,
 		sprite = "oilyRag"
 	},
 	"TickingBomb" = {
-		function = "tickingBomb",
-		procs = Enums.ItemProcs.ENEMY_DEATH,
+		procs = {Enums.ItemProcs.ENEMY_DEATH: "tickingBomb"},
 		cost = 30,
 		sprite = "tickingBomb"
 	},
 	"SharperThanYouThought" = {
-		function = "sharperThanYouThought",
-		procs = Enums.ItemProcs.POST_ENEMY_HIT,
+		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "sharperThanYouThought"},
 		cost = 30,
 		sprite = "sharperThanYouThought"
 	},
 	"ThornMail" = {
 		function = "thornMail",
-		procs = Enums.ItemProcs.POST_PLAYER_HIT,
+		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "thornMail"},
 		cost = 30,
 		sprite = "thornMail"
 	},
 	"Maledictio" = {
-		function = "maledictio",
-		procs = Enums.ItemProcs.POST_PLAYER_HIT,
+		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "maledictio"},
 		cost = 30,
 		sprite = "maledictio"
 	},
 	"GlassAmour" = {
-		function = "glassAmour",
-		procs = Enums.ItemProcs.POST_PLAYER_HIT,
+		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "glassAmour"},
 		cost = 30,
 		sprite = "glassAmour"
 	},
 	"ShortFuse" = {
-		function = "shortFuse",
-		procs = Enums.ItemProcs.POST_PLAYER_HIT,
+		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "shortFuse"},
 		cost = 30,
 		sprite = "shortFuse"
 	},
 	"BackShots" = {
-		function = "backShots",
-		procs = Enums.ItemProcs.PICKUP,
+		procs = {Enums.ItemProcs.PICKUP: "backShots"},
 		cost = 30,
 		sprite = "backShots"
 	},
 	"Kamikaze" = {
-		function = "kamikaze",
-		procs = Enums.ItemProcs.DASH,
+		procs = {Enums.ItemProcs.DASH: "kamikaze"},
 		cost = 30,
 		sprite = "kamikaze"
 	},
 	"Tempo" = {
-		function = "tempo",
-		procs = Enums.ItemProcs.DASH,
+		procs = {Enums.ItemProcs.DASH: "tempo"},
 		cost = 30,
 		sprite = "tempo"
 	},
 	"SmokeBomb" = {
-		function = "smokeBomb",
-		procs = Enums.ItemProcs.DASH,
+		procs = {Enums.ItemProcs.DASH: "smokeBomb"},
 		cost = 30,
 		sprite = "smokeBomb"
 	},
 	"HiddenDagger" = {
-		function = "hiddenDagger",
-		procs = Enums.ItemProcs.DASH,
+		procs = {Enums.ItemProcs.DASH: "hiddenDagger"},
 		cost = 30,
 		sprite = "hiddenDagger"
+	},
+	"Airflow" = {
+		procs = {Enums.ItemProcs.DASH: "airflow"},
+		cost = 30,
+		sprite = "airflow"
+	},
+	"GlassArmor" = {
+		procs = {
+			Enums.ItemProcs.PRE_PLAYER_HIT: "glassArmorNegate",
+			Enums.ItemProcs.ROOM_LOAD: "glassArmorReset",
+		},
+		cost = 30,
+		sprite = "push"
 	}
 }
+
+func get_drop():
+	var roll = randi_range(0, items.size() - 1)
+	var item = ItemConfig.new()
+	item.name = items.keys()[roll] 
+	return item

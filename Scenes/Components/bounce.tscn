@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dglumetwuq4y7"]
+
+[sub_resource type="GDScript" id="GDScript_61y1q"]
+resource_name = "Bounce"
+script/source = "extends Node
+
+@onready var parent:Projectile = get_parent()
+@onready var contactDetect: ContactDetect = get_parent().get_node(\"ContactDetect\")
+
+var ignore = null
+func _ready() -> void:
+	contactDetect.hit.connect(on_contact)
+
+func on_contact(hit: Node):
+	if not hit.get_collision_layer() == 4:
+		return
+	if ignore == hit:
+		return
+	var normal = contactDetect.get_collision_normal(0)
+	var collisionPos = contactDetect.get_collision_point(0)
+	var direction = parent.projectileConfig.direction * -1
+	#if normal == Vector2.LEFT or normal == Vector2.RIGHT:
+		#direction = Vector2(direction.x, -direction.y)
+	#if normal == Vector2.UP or normal == Vector2.DOWN:
+		#direction = Vector2(-direction.x, direction.y)
+	#print(direction)
+	var newAngle = normal.angle() - (direction.angle() - normal.angle())
+	var neDirection = Vector2.from_angle(newAngle)
+	#var newAngle = direction.angle()
+	parent.projectileConfig.direction = neDirection
+	contactDetect.prevLoacation = parent.position
+	ignore = hit
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	ignore = null
+	parent.rotation = newAngle
+"
+
+[node name="Bounce" type="Node"]
+script = SubResource("GDScript_61y1q")

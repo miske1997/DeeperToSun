@@ -27,7 +27,9 @@ func activate_weapon():
 
 func on_frame_change():
 	if sprite.frame == 4:
-		ProjectileEmitter.spawn_projectile(weaponConfig.projectileConfig, weaponConfig.damageData, sprite.global_position, rotation, Vector2(cos(rotation), sin(rotation)))
+		var amount = Players.player.stats.GetStat("Amount")
+		#ProjectileEmitter.spawn_projectile(weaponConfig.projectileConfig, weaponConfig.damageData, sprite.global_position, rotation, Vector2(cos(rotation), sin(rotation)))
+		ProjectileEmitter.spawn_projectiles_cone_middle(weaponConfig.projectileConfig, weaponConfig.damageData, sprite.global_position, Vector2(cos(rotation), sin(rotation)), 20.0 * amount, amount)
 
 
 func look_at_target():

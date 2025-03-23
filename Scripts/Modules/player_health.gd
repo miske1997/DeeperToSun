@@ -9,7 +9,6 @@ func _ready() -> void:
 	parent.takeDamage.connect(on_damage_delt)
 	parent.shealdUp.connect(on_sheald_up)
 	parent.healthUp.connect(on_health_up)
-	parent.takeDamage.connect(on_damage_delt)
 	while not Players.player:
 		await get_tree().process_frame
 	parent.playerData.health = parent.playerConfig.health

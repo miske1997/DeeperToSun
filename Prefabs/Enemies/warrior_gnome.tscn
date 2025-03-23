@@ -1,51 +1,51 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbov1aforaspi"]
+[gd_scene load_steps=11 format=3 uid="uid://b03r2cwy7msfe"]
 
-[ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_ufl4a"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_gme7i"]
-[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_xi02p"]
-[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/warior_gnome.gd" id="3_uxvce"]
-[ext_resource type="Texture2D" uid="uid://cly5ovjm88pqx" path="res://Assets/Enemies/GnomeWarior.png" id="3_whgg6"]
-[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="4_6okkg"]
-[ext_resource type="PackedScene" uid="uid://chhqff6v6c07v" path="res://Prefabs/Weapons/Dagger.tscn" id="7_gdk2m"]
+[ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_4rcfj"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_q5t8w"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="3_lh2yh"]
+[ext_resource type="PackedScene" uid="uid://chhqff6v6c07v" path="res://Prefabs/Weapons/Dagger.tscn" id="4_p8tr5"]
+[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/warior_gnome.gd" id="5_7tkoi"]
+[ext_resource type="Texture2D" uid="uid://cly5ovjm88pqx" path="res://Assets/Enemies/GnomeWarior.png" id="6_l6sn1"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="7_belq7"]
 
 [sub_resource type="Resource" id="Resource_q50c2"]
-script = ExtResource("2_xi02p")
-movementSpeed = 50.0
+script = ExtResource("2_q5t8w")
+movementSpeed = 200.0
 knockback = 10.0
 health = 6
 armor = 0
 enemyName = "warrior_gnome"
 
 [sub_resource type="Resource" id="Resource_jyct3"]
-script = ExtResource("2_gme7i")
+script = ExtResource("3_lh2yh")
+damage_scale = 1.0
 damage = 1.0
 stagger = 0.1
+damageSource = 0
+fixed = false
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ui3vm"]
-radius = 3.25112
-height = 9.6009
+[sub_resource type="CircleShape2D" id="CircleShape2D_woasj"]
+radius = 4.11266
 
-[node name="Enemy" instance=ExtResource("1_ufl4a")]
+[node name="Enemy" instance=ExtResource("1_4rcfj")]
 scale = Vector2(2.67615, 2.67615)
-collision_layer = 2
-collision_mask = 2
 enemyConfig = SubResource("Resource_q50c2")
 damageData = SubResource("Resource_jyct3")
 
-[node name="Dagger" parent="." index="0" instance=ExtResource("7_gdk2m")]
+[node name="Dagger" parent="." index="0" instance=ExtResource("4_p8tr5")]
 position = Vector2(0, -3.90135)
 
 [node name="AIController" parent="." index="1"]
-script = ExtResource("3_uxvce")
+script = ExtResource("5_7tkoi")
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -3.5)
-scale = Vector2(0.81904, 1)
-shape = SubResource("CapsuleShape2D_ui3vm")
+shape = SubResource("CircleShape2D_woasj")
 
 [node name="Sprite2D" parent="." index="4"]
 modulate = Color(1, 1, 1, 1)
 position = Vector2(-9.53674e-07, -5)
-texture = ExtResource("3_whgg6")
+texture = ExtResource("6_l6sn1")
 
-[node name="ContactDetect" parent="." index="5" instance=ExtResource("4_6okkg")]
+[node name="ContactDetect" parent="." index="5" instance=ExtResource("7_belq7")]
+collision_mask = 5

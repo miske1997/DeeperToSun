@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var itemName: String
-@export var itemsData: Resource
 var itemCollected = false
 func _ready() -> void:
 	#set sprite

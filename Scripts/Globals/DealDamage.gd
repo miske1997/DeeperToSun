@@ -48,8 +48,8 @@ func prok(damageData: DamageData, enemy, prockType: Enums.ItemProcs):
 	for item: PassiveItem in Players.player.collectedItems:
 		if not item is PassiveItem:
 			continue
-		if items_data.has(item.name) and items_data[item.name].procs == prockType:
+		if items_data.has(item.name) and items_data[item.name].procs.has(prockType):
 			#print(item_functions.get_method_list())
-			if not item_functions.get_method_list().any(func(f): return f.name == items_data[item.name].function + item.state) :
+			if not item_functions.get_method_list().any(func(f): return f.name == items_data[item.name].procs[prockType] + item.state) :
 				return
-			item_functions[items_data[item.name].function + item.state].call({enemy = enemy, damageData = damageData})
+			item_functions[items_data[item.name].procs[prockType] + item.state].call({enemy = enemy, damageData = damageData})

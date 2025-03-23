@@ -1,12 +1,12 @@
 class_name EnemyBase  extends CharacterBody2D
 
-
-
 @onready var sprite := $Sprite2D
 @export var enemyConfig: EnemyConfig
 @export var damageData: DamageData
 var speedController = StatController.new()
 var health := 10.0 
+var collisionInfluence = Vector2.ZERO
+var dashing = false
 
 signal takeDamage
 
@@ -23,3 +23,11 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
+	
+	if get_slide_collision_count() == 0:
+		return
+	for collisionIndex in get_slide_collision_count():
+		var collision := get_slide_collision(collisionIndex)
+		if not collision.get_collider() or not collision.get_collider() is CharacterBody2D:
+			continue
+		position += -collision.get_normal() - collision.get_collider().velocity.normalized()

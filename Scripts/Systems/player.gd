@@ -23,6 +23,7 @@ func _ready() -> void:
 	
 func init_player_data():
 	playerData = Players.player
+
 	#playerData = PlayerData.new()
 	#playerData.stats = StatManager.new()
 	#playerData.stats.InitFromConfig(playerConfig)
@@ -30,8 +31,8 @@ func init_player_data():
 func set_dashing(value: bool):
 	dashing = value
 	for item in Players.player.collectedItems:
-		if items_data.items[item.name].procs == Enums.ItemProcs.DASH:
-			item_functions[items_data.items[item.name].function + item.state].call({dashing = dashing, player = self})
+		if items_data.items[item.name].procs.has(Enums.ItemProcs.DASH):
+			item_functions[items_data.items[item.name].procs[Enums.ItemProcs.DASH] + item.state].call({dashing = dashing, player = self})
 	
 
 	

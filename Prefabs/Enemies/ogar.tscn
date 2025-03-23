@@ -18,17 +18,17 @@ enemyName = "ogar"
 
 [sub_resource type="Resource" id="Resource_jyct3"]
 script = ExtResource("2_18f1r")
+damage_scale = 1.0
 damage = 1.0
 stagger = 0.1
+damageSource = 0
+fixed = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yu1ih"]
 radius = 3.52221
 
 [node name="Ogar" instance=ExtResource("1_51ovx")]
 scale = Vector2(3.76994, 3.76994)
-collision_layer = 2
-collision_mask = 2
-motion_mode = 1
 enemyConfig = SubResource("Resource_rjtql")
 damageData = SubResource("Resource_jyct3")
 
@@ -49,3 +49,4 @@ position = Vector2(-9.53674e-07, -5)
 texture = ExtResource("4_lfb1a")
 
 [node name="ContactDetect" parent="." index="5" instance=ExtResource("6_2ooef")]
+collision_mask = 5

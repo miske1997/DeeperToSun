@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://b03r2cwy7msfe"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="1_k2cgn"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_e8svg"]
+[ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_aej22"]
+[ext_resource type="PackedScene" uid="uid://chhqff6v6c07v" path="res://Prefabs/Weapons/Dagger.tscn" id="4_yxba2"]
+[ext_resource type="Texture2D" uid="uid://cly5ovjm88pqx" path="res://Assets/Enemies/GnomeWarior.png" id="6_ep6nc"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="7_u5hft"]
+
+[sub_resource type="GDScript" id="GDScript_4bq7r"]
+resource_name = "TextEnemy"
+script/source = "extends RigidBody2D
+
+@onready var sprite := $Sprite2D
+@export var enemyConfig: EnemyConfig
+@export var damageData: DamageData
+var speedController = StatController.new()
+var health := 10.0 
+var collisionInfluence = Vector2.ZERO
+
+signal takeDamage
+
+func _ready() -> void:
+	print(\"JA SAM TET\")
+	speedController.base = enemyConfig.movementSpeed
+	damageData = damageData.duplicate()
+	damageData.damageDealer = self
+
+func _process(delta: float) -> void:
+	speedController.Tick(delta)
+
+func _physics_process(delta: float) -> void:
+	if linear_velocity.x > 0:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+"
+
+[sub_resource type="Resource" id="Resource_xguf1"]
+script = ExtResource("1_k2cgn")
+movementSpeed = 200.0
+knockback = 10.0
+health = 6
+armor = 0
+enemyName = ""
+
+[sub_resource type="Resource" id="Resource_cl6ch"]
+script = ExtResource("2_e8svg")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[sub_resource type="GDScript" id="GDScript_s48k3"]
+resource_name = "TestEnemyCntrl"
+script/source = "extends Node
+
+@onready var enemy: RigidBody2D = get_parent()
+@onready var weapon: WeaponBase = get_parent().get_node(\"Dagger\")
+
+func _process(delta: float) -> void:
+	if get_tree().get_node_count_in_group(\"Player\") == 0:
+		return
+	var player: Player = get_tree().get_nodes_in_group(\"Player\")[0]
+	if not weapon.attacking:
+		move_to_target(player)
+	set_weapon_look_target(player.position)
+	hit_target_chack(player)
+
+func set_weapon_look_target(target: Vector2):
+	weapon.lookAtTaret = target
+	
+func hit_target_chack(target:Node2D):
+	if (target.position - enemy.position).length() < 28:
+		weapon.activate.emit()
+
+func move_to_target(player: Node2D):
+	enemy.linear_velocity = (player.position - enemy.position).normalized() * enemy.speedController.GetStatValue()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvruh"]
+radius = 3.7119
+
+[node name="TestGnome" type="RigidBody2D"]
+lock_rotation = true
+script = SubResource("GDScript_4bq7r")
+enemyConfig = SubResource("Resource_xguf1")
+damageData = SubResource("Resource_cl6ch")
+
+[node name="Dagger" parent="." instance=ExtResource("4_yxba2")]
+position = Vector2(0, -3.90135)
+
+[node name="AIController" type="Node" parent="."]
+script = SubResource("GDScript_s48k3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.5)
+scale = Vector2(3.24974, 3.96774)
+shape = SubResource("CircleShape2D_kvruh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("4_aej22")
+use_parent_material = true
+position = Vector2(-9.53674e-07, -5)
+scale = Vector2(0.599768, 0.599768)
+texture = ExtResource("6_ep6nc")
+
+[node name="ContactDetect" parent="." instance=ExtResource("7_u5hft")]

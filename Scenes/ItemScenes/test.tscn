@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c13uy548cfa1c"]
+[gd_scene load_steps=7 format=3 uid="uid://c13uy548cfa1c"]
 
+[ext_resource type="Texture2D" uid="uid://er7ytppxb5us" path="res://Assets/Mape/Livada1.png" id="1_7tta8"]
 [ext_resource type="PackedScene" uid="uid://b51ouytvbh0v2" path="res://Scenes/player.tscn" id="1_wqfjs"]
+[ext_resource type="PackedScene" uid="uid://b03r2cwy7msfe" path="res://Prefabs/Enemies/warrior_gnome_test.tscn" id="3_r6rci"]
+[ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="4_m86j6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gpyed"]
 friction = 0.0
@@ -10,8 +13,13 @@ size = Vector2(251, 20)
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(964.366, 543)
+scale = Vector2(0.603334, 0.603334)
+texture = ExtResource("1_7tta8")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(552, 128)
+position = Vector2(952, 132)
 scale = Vector2(1.9102, 1.59389)
 disable_mode = 1
 collision_layer = 7
@@ -23,5 +31,27 @@ position = Vector2(-1.5, 0)
 shape = SubResource("RectangleShape2D_2fv17")
 
 [node name="Player" parent="." instance=ExtResource("1_wqfjs")]
-position = Vector2(447, 214)
+position = Vector2(1175, 703)
 scale = Vector2(4.19647, 4.19647)
+
+[node name="TestGnome" parent="." instance=ExtResource("3_r6rci")]
+position = Vector2(667, 267)
+
+[node name="TestGnome2" parent="." instance=ExtResource("3_r6rci")]
+position = Vector2(771, 259)
+
+[node name="TestGnome3" parent="." instance=ExtResource("3_r6rci")]
+position = Vector2(864, 237)
+
+[node name="TestGnome4" parent="." instance=ExtResource("3_r6rci")]
+position = Vector2(821, 305)
+
+[node name="TestGnome5" parent="." instance=ExtResource("3_r6rci")]
+position = Vector2(715, 336)
+
+[node name="TestGnome6" parent="." instance=ExtResource("3_r6rci")]
+position = Vector2(788, 377)
+
+[node name="Item" parent="." instance=ExtResource("4_m86j6")]
+position = Vector2(1028, 386)
+itemName = "Push"

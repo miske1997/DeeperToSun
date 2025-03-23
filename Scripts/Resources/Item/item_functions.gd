@@ -2,7 +2,7 @@ extends Resource
 
 
 var blackjackCount = 0
-
+var glassArmorBroken = false
 
 func bigFShot(data):
 	Players.player.stats.SetStat("Damage", "BigFShot", 3, 0, Enums.StatModifyerType.ADD, false)
@@ -165,6 +165,17 @@ func smokeBomb(data):
 	else:
 		player.iframes = false
 		
+func airflow(data):
+	if data.dashing:
+		return
+	var player: Player = data.player
+	var enemies = player.get_tree().get_nodes_in_group("Enemy")
+
+	for body: EnemyBase in enemies:
+		if (body.position - player.position).length() < 150:
+			body.get_node("Dash").begin_dash((body.position - player.position).normalized())
+	
+		
 func hiddenDagger(data):
 	if data.dashing:
 		return
@@ -182,3 +193,26 @@ func hiddenDagger(data):
 			clossestEnemy = enemy
 			minDistance = (enemy.position - player.position).length()
 	ProjectileEmitter.target_projectile_at(projectileConfig, damageData, damageData.damageDealer.position, clossestEnemy.position)
+
+func push(data):
+	var enemy: EnemyBase = data.enemy
+	var enemies = enemy.get_tree().get_nodes_in_group("Enemy")
+
+	for body: EnemyBase in enemies:
+		if body == enemy:
+			continue
+		if (body.position - enemy.position).length() < 300:
+			#print("pushed")
+			body.get_node("Dash").begin_dash((body.position - enemy.position).normalized())
+
+func glassArmorNegate(data):
+	if glassArmorBroken:
+		data.damageData.damage *= 2
+		return
+		
+	if data.damageData.damage > 0:
+		glassArmorBroken = true
+		data.damageData.damage = 0
+	
+func glassArmorReset(data):
+	glassArmorBroken = false

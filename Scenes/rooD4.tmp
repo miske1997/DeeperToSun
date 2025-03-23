@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://tu8vyh2aqc0u"]
+[gd_scene load_steps=30 format=3 uid="uid://tu8vyh2aqc0u"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/room.gd" id="1_3m351"]
 [ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="2_fsu8q"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://7uefqtjc5fu3" path="res://Scenes/room_serializer.tscn" id="9_ltcgh"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="10_4qi8o"]
 [ext_resource type="PackedScene" uid="uid://jiwtmufujn2n" path="res://Prefabs/Enemies/shaman_gnome.tscn" id="10_ovxqh"]
-[ext_resource type="PackedScene" uid="uid://b03r2cwy7msfe" path="res://Prefabs/Enemies/warrior_gnome.tscn" id="11_titot"]
+[ext_resource type="PackedScene" uid="uid://bbov1aforaspi" path="res://Prefabs/Enemies/warrior_gnome.tscn" id="11_titot"]
 [ext_resource type="PackedScene" uid="uid://7kt263aosrai" path="res://Prefabs/Enemies/runner_gnome.tscn" id="11_uesty"]
 [ext_resource type="PackedScene" uid="uid://oopslrkimatw" path="res://Prefabs/Enemies/ogar.tscn" id="12_c4eb8"]
 [ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="15_038gf"]
@@ -25,19 +25,7 @@
 [sub_resource type="Resource" id="Resource_o37cy"]
 script = ExtResource("10_4qi8o")
 state = ""
-name = "BackShots"
-type = "passive"
-
-[sub_resource type="Resource" id="Resource_xf715"]
-script = ExtResource("10_4qi8o")
-state = ""
-name = "Heart"
-type = "passive"
-
-[sub_resource type="Resource" id="Resource_3ppdt"]
-script = ExtResource("10_4qi8o")
-state = ""
-name = "Shield"
+name = "SeeingDouble"
 type = "passive"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
@@ -276,8 +264,8 @@ func _ready() -> void:
 
 func proc_items():
 	for item in Players.player.collectedItems:
-		if items_data.items[item.name].procs.has(Enums.ItemProcs.ROOM_LOAD):
-			item_functions[items_data.items[item.name].procs[Enums.ItemProcs.ROOM_LOAD] + item.state].call({})
+		if items_data.items[item.name].procs == Enums.ItemProcs.ROOM_LOAD:
+			item_functions[items_data.items[item.name].function + item.state].call({})
 "
 
 [node name="Room" type="Node2D" groups=["Room"]]
@@ -321,38 +309,19 @@ texture = ExtResource("5_32dm8")
 
 [node name="Item" parent="." instance=ExtResource("15_038gf")]
 position = Vector2(929, 452)
-itemName = "GlassArmor"
+itemName = "Push"
 
 [node name="Item2" parent="." instance=ExtResource("15_038gf")]
 position = Vector2(1114, 507)
-itemName = "Airflow"
+itemName = "SmokeBomb"
 
 [node name="Item3" parent="." instance=ExtResource("15_038gf")]
 position = Vector2(977, 744)
 itemName = "BackShots"
 
-[node name="Shop" type="Node2D" parent="."]
-position = Vector2(-43, -68)
-
-[node name="ItemPedistal" parent="Shop" instance=ExtResource("9_dlfe8")]
+[node name="ItemPedistal" parent="." instance=ExtResource("9_dlfe8")]
 position = Vector2(841, 646)
 item = SubResource("Resource_o37cy")
-
-[node name="ItemPedistal2" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(929, 647)
-item = SubResource("Resource_xf715")
-
-[node name="ItemPedistal3" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(1018, 646)
-item = SubResource("Resource_3ppdt")
-
-[node name="ItemPedistal4" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(1108, 646)
-item = SubResource("Resource_3ppdt")
-
-[node name="ItemPedistal5" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(1194, 646)
-item = SubResource("Resource_3ppdt")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -400,9 +369,6 @@ waveTimeout = 0.5
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer" instance=ExtResource("11_titot")]
 position = Vector2(1000, 315)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer2" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
@@ -410,9 +376,6 @@ waveTimeout = 0.5
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer2" instance=ExtResource("11_titot")]
 position = Vector2(1191, 403)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer3" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
@@ -420,9 +383,6 @@ waveTimeout = 0.5
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer3" instance=ExtResource("11_titot")]
 position = Vector2(1271, 614)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer4" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
@@ -430,9 +390,6 @@ waveTimeout = 0.5
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer4" instance=ExtResource("11_titot")]
 position = Vector2(1208, 812)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer5" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
@@ -440,9 +397,6 @@ waveTimeout = 0.5
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer5" instance=ExtResource("11_titot")]
 position = Vector2(996, 887)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer6" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
@@ -450,9 +404,6 @@ waveTimeout = 0.5
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer6" instance=ExtResource("11_titot")]
 position = Vector2(773, 809)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer7" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
@@ -460,9 +411,6 @@ waveTimeout = 0.5
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer7" instance=ExtResource("11_titot")]
 position = Vector2(710, 599)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer8" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
@@ -470,58 +418,35 @@ waveTimeout = 15.0
 
 [node name="Enemy" parent="RoomSerializer/WaveSerializer8" instance=ExtResource("11_titot")]
 position = Vector2(791, 393)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer9" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
 
 [node name="RunnerGnome" parent="RoomSerializer/WaveSerializer9" instance=ExtResource("11_uesty")]
 position = Vector2(628, 214)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="RunnerGnome2" parent="RoomSerializer/WaveSerializer9" instance=ExtResource("11_uesty")]
 position = Vector2(1342, 925)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer10" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 visible = false
 
 [node name="RunnerGnome" parent="RoomSerializer/WaveSerializer10" instance=ExtResource("11_uesty")]
 position = Vector2(1351, 210)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="RunnerGnome2" parent="RoomSerializer/WaveSerializer10" instance=ExtResource("11_uesty")]
 position = Vector2(627, 928)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="WaveSerializer11" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
 
 [node name="Ogar" parent="RoomSerializer/WaveSerializer11" instance=ExtResource("12_c4eb8")]
 position = Vector2(976, 575)
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="ShamanGnome" parent="RoomSerializer/WaveSerializer11" instance=ExtResource("10_ovxqh")]
 position = Vector2(1300, 731)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="ShamanGnome2" parent="RoomSerializer/WaveSerializer11" instance=ExtResource("10_ovxqh")]
 position = Vector2(641, 430)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
