@@ -10,3 +10,5 @@ class_name ProjectileConfig extends Resource
 @export var frendly: bool = false
 @export var spriteName: String = "bullet"
 @export var size: Vector2 = Vector2.ONE
+@export var radius: float = 8.0
+@export var addons: Array[String] = []

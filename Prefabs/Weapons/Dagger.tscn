@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_17yon"]
 [ext_resource type="Texture2D" uid="uid://t5d8yh2qtf3d" path="res://Assets/Weapons/Dager.png" id="2_m2aft"]
 [ext_resource type="Script" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="3_d7k1n"]
-[ext_resource type="PackedScene" uid="uid://cmfpr7n1yiiee" path="res://Scenes/Components/damage_on_area_hit.tscn" id="5_vf4xg"]
+[ext_resource type="PackedScene" uid="uid://cmfpr7n1yiiee" path="res://Scenes/ProjectileComponents/damage_on_area_hit.tscn" id="5_vf4xg"]
 
 [sub_resource type="Resource" id="Resource_yjmqk"]
 script = ExtResource("2_17yon")

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://e5rt6atvcyku"]
+
+[sub_resource type="GDScript" id="GDScript_0gr47"]
+resource_name = "BossBar"
+script/source = "extends Control
+
+var boss: EnemyBase
+
+func _ready() -> void:
+	boss = get_tree().get_first_node_in_group(\"Boss\")
+	$ProgressBar.max_value = boss.enemyConfig.health
+	if not boss:
+		hide()
+
+
+func _process(delta: float) -> void:
+	if not boss:
+		return
+	$ProgressBar.value = boss.health
+"
+
+[node name="BossBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_0gr47")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -557.0
+offset_top = 51.0
+offset_right = 558.0
+offset_bottom = 102.0
+grow_horizontal = 2
+value = 100.0

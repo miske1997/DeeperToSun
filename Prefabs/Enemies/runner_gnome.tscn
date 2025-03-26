@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c1rpo7r6s7mp1" path="res://Assets/Enemies/Gnome.png" id="2_dj80s"]
 [ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_k3i0x"]
 [ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="3_wf408"]
-[ext_resource type="PackedScene" uid="uid://c8thni28ootba" path="res://Scenes/Components/contact_damage.tscn" id="4_mefcr"]
+[ext_resource type="PackedScene" uid="uid://c8thni28ootba" path="res://Scenes/ProjectileComponents/contact_damage.tscn" id="4_mefcr"]
 
 [sub_resource type="Resource" id="Resource_6x6j5"]
 script = ExtResource("2_k3i0x")

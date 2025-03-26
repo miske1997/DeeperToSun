@@ -8,6 +8,10 @@ var prevLoaction: Vector2
 var distanceTraveled := 0.0
 var lifeTime = 0.0
 
+signal onDestroyed
+
+func _ready() -> void:
+	$CollisionShape2D.shape.radius = projectileConfig.radius
 
 func _physics_process(delta: float) -> void:
 	prevLoaction = position
@@ -21,9 +25,11 @@ func _physics_process(delta: float) -> void:
 	
 func check_range_reached():
 	if distanceTraveled >= projectileConfig.range:
+		onDestroyed.emit()
 		queue_free()
 	
 func check_life_time(delta: float):
 	lifeTime += delta
 	if lifeTime >= projectileConfig.duration:
+		onDestroyed.emit()
 		queue_free()

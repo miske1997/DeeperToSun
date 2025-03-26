@@ -1,26 +1,30 @@
 extends Node
 
-@export var projectile: PackedScene
+@export var projectileTemplate: PackedScene
 var projectileSprites: Dictionary = {}
+var componentsDir := "res://Scenes/ProjectileComponents/"
+
 func _ready() -> void:
-	projectile = load("res://Scenes/Components/projectile.tscn")
+	projectileTemplate = load("res://Scenes/ProjectileComponents/projectile.tscn")
 	projectileSprites.bullet = load("res://Assets/Projectiles/GunProjectile.png")
 	projectileSprites.redBall = load("res://Assets/Projectiles/EnemiesProjectile.png")
 	projectileSprites.yellowBall = load("res://Assets/Projectiles/YellowProjectile.png")
 	projectileSprites.arrow = load("res://Assets/Projectiles/ArrowProjectile.png")
 	projectileSprites.glass = load("res://Assets/Projectiles/BlueMagicProjectile.png")
+	projectileSprites.boulder = load("res://Assets/Projectiles/Boulder.png")
 	projectileSprites.knife = load("res://Assets/Weapons/Dager.png")
 
 func spawn_projectile(projectileConfig: ProjectileConfig, damageData: DamageData, origin: Vector2, rotation: float, direction: Vector2):
-	var bullet:Projectile = projectile.instantiate()
-	bullet.get_node("Sprite2D").texture = projectileSprites[projectileConfig.spriteName]
-	bullet.rotation = rotation
-	bullet.scale = projectileConfig.size
-	bullet.position = origin
-	bullet.damageData = damageData
-	bullet.projectileConfig = projectileConfig.duplicate()
-	bullet.projectileConfig.direction = direction
-	get_node("/root").add_child(bullet)
+	var projectile:Projectile = projectileTemplate.instantiate()
+	projectile.get_node("Sprite2D").texture = projectileSprites[projectileConfig.spriteName]
+	projectile.rotation = rotation
+	projectile.scale = projectileConfig.size
+	projectile.position = origin
+	projectile.damageData = damageData
+	projectile.projectileConfig = projectileConfig.duplicate()
+	projectile.projectileConfig.direction = direction
+	add_components(projectile)
+	get_node("/root").add_child(projectile)
 
 func target_projectile_at(projectileConfig: ProjectileConfig, damageData: DamageData, origin: Vector2, target: Vector2):
 	var direction = (target - origin).normalized()
@@ -60,3 +64,9 @@ func spawn_in_random_dir(projectileConfig: ProjectileConfig, damageData: DamageD
 	for i in amount:
 		rotation = randf_range(0, 360)
 		spawn_projectile(projectileConfig, damageData, origin, rotation, Vector2(cos(rotation), sin(rotation)))
+
+
+func add_components(projectile: Projectile):
+	for addonName in projectile.projectileConfig.addons:
+		var addon = load(componentsDir + addonName + ".tscn").instantiate()
+		projectile.add_child(addon)

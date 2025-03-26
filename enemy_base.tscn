@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://de26tsfixmvdi"]
 
 [ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="1_2alax"]
-[ext_resource type="PackedScene" uid="uid://d3g1ffr68sjhg" path="res://Scenes/Components/projectile.tscn" id="2_kg1qt"]
+[ext_resource type="PackedScene" uid="uid://d3g1ffr68sjhg" path="res://Scenes/ProjectileComponents/projectile.tscn" id="2_kg1qt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w4jtc"]
 

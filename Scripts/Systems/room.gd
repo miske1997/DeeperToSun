@@ -74,10 +74,10 @@ func set_room_bg():
 func spawn_item():
 	var rolledItem = roomConfig.dropTable.get_drop()
 	print(rolledItem.name)
-	var item: Node2D = itemOnGround.instantiate()
-	item.position = roomStart + (roomEnd - roomStart) / 2
-	item.itemName = rolledItem.name
-	add_child(item)
+	var itemPickup: Node2D = itemOnGround.instantiate()
+	itemPickup.position = roomStart + (roomEnd - roomStart) / 2
+	itemPickup.item = rolledItem
+	add_child(itemPickup)
 
 func spawn_shop():
 	pass

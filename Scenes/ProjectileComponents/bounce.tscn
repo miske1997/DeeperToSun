@@ -10,6 +10,8 @@ script/source = "extends Node
 var ignore = null
 func _ready() -> void:
 	contactDetect.hit.connect(on_contact)
+	if parent.has_node(\"WallDetect\"):
+		parent.get_node(\"WallDetect\").queue_free()
 
 func on_contact(hit: Node):
 	if not hit.get_collision_layer() == 4:

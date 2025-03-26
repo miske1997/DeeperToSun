@@ -1,0 +1,145 @@
+[gd_scene load_steps=15 format=3 uid="uid://by88octgsku2y"]
+
+[ext_resource type="Texture2D" uid="uid://d2ilmf7u62q78" path="res://Assets/Effects/Explosion2.0-Sheet.png" id="1_rjkyf"]
+
+[sub_resource type="GDScript" id="GDScript_i0v0h"]
+resource_name = "GroundBurst"
+script/source = "extends Node2D
+
+@export var direction: Vector2
+@export var travelTime: float = 1
+@onready var raycast := $RayCast2D
+var damageData: DamageData
+var timeout = 0
+func _ready() -> void:
+	timeout = travelTime
+	raycast.target_position = direction * $Area2D/CollisionShape2D.shape.radius * 2
+	$AnimatedSprite2D.play(\"explode\")
+
+func _process(delta: float) -> void:
+	timeout -= delta
+	if timeout > 0 or $AnimatedSprite2D.is_playing():
+		dealDamageCheck()
+		return
+	timeout = travelTime
+	if not canTravel():
+		queue_free()
+		return
+	position = position + (direction * $Area2D/CollisionShape2D.shape.radius * 2)
+	$GPUParticles2D.restart()
+	$AnimatedSprite2D.play(\"explode\")
+func dealDamageCheck():
+	if $AnimatedSprite2D.frame < 4:
+		return
+	if $Area2D.get_overlapping_bodies().size() > 0 and $AnimatedSprite2D.is_playing():
+		DealDamage.deal_damage(damageData, $Area2D.get_overlapping_bodies()[0])
+
+func canTravel():
+	return raycast.get_collider() == null
+"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qm3oh"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 23.182
+initial_velocity_min = 106.94
+initial_velocity_max = 201.16
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_48vui"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0e60q"]
+radius = 24.1868
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5hpn"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o23pd"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th21w"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qt45"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qjn1"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(0, 320, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jytsg"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(320, 320, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh3n2"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(640, 320, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gob8a"]
+atlas = ExtResource("1_rjkyf")
+region = Rect2(960, 320, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_orl4j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5hpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o23pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th21w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qt45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qjn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jytsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh3n2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gob8a")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 10.0
+}]
+
+[node name="GroundBurst" type="Node2D"]
+script = SubResource("GDScript_i0v0h")
+travelTime = 0.3
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_qm3oh")
+texture = SubResource("PlaceholderTexture2D_48vui")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.45
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0e60q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.309375, 0.304688)
+sprite_frames = SubResource("SpriteFrames_orl4j")
+animation = &"explode"

@@ -88,7 +88,7 @@ var items = {
 		sprite = "thornMail"
 	},
 	"Maledictio" = {
-		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "maledictio"},
+		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "maledictio"},
 		cost = 30,
 		sprite = "maledictio"
 	},
@@ -139,11 +139,47 @@ var items = {
 		},
 		cost = 30,
 		sprite = "push"
+	},
+}
+
+var activeItems = {
+	
+	"PressTheAttack" = {
+		procs = {},
+		cooldown = 5.0,
+		function = "pressTheAttack",
+		cost = 30,
+		sprite = "push"
+	},
+	"Smite" = {
+		procs = {},
+		cooldown = 5.0,
+		function = "smite",
+		cost = 30,
+		sprite = "push"
 	}
 }
 
+var consumables = {
+	
+}
+
 func get_drop():
-	var roll = randi_range(0, items.size() - 1)
-	var item = ItemConfig.new()
-	item.name = items.keys()[roll] 
+	var roll = randi_range(0, items.size() + activeItems.size() + consumables.size() - 1)
+	var item
+	if roll < items.size():
+		item = PassiveItem.new()
+		item.name = items.keys()[roll] 
+	elif roll - items.size() < activeItems.size():
+		item = ActiveItem.new()
+		item.name = activeItems.keys()[roll - items.size()]
+		item.cooldown = activeItems[item.name].cooldown
+		item.function = activeItems[item.name].function
+		item.sprite = activeItems[item.name].sprite
+	else:
+		item = ConsumableItem.new()
+		item.name = consumables.keys()[roll - items.size() - activeItems.size()]
+		item.function = consumables[item.name].function
+		item.sprite = consumables[item.name].sprite
+	
 	return item

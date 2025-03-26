@@ -172,7 +172,7 @@ func airflow(data):
 	var enemies = player.get_tree().get_nodes_in_group("Enemy")
 
 	for body: EnemyBase in enemies:
-		if (body.position - player.position).length() < 150:
+		if (body.position - player.position).length() < 150 and body.has_node("Dash"):
 			body.get_node("Dash").begin_dash((body.position - player.position).normalized())
 	
 		
@@ -216,3 +216,18 @@ func glassArmorNegate(data):
 	
 func glassArmorReset(data):
 	glassArmorBroken = false
+
+
+
+
+
+
+
+
+###########ACTIVE
+
+func pressTheAttack(data):
+	Players.player.stats.SetExpiraitonStat("AttackSpeed", "pressTheAttack", 5, -1, Enums.StatModifyerType.MULTIPLY, 2.0)
+	
+func smite(data):
+	Players.player.stats.SetExpiraitonStat("Damage", "smite", 5, -1, Enums.StatModifyerType.MULTIPLY, 2.0)

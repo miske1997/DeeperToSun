@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://cancytfqr6bid"]
+
+[ext_resource type="Texture2D" uid="uid://e40aixjvnmxs" path="res://Assets/Weapons/OgarClub.png" id="1_2qstq"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_054b7"]
+[ext_resource type="PackedScene" uid="uid://cmfpr7n1yiiee" path="res://Scenes/ProjectileComponents/damage_on_area_hit.tscn" id="2_76koe"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="2_y2rll"]
+
+[sub_resource type="GDScript" id="GDScript_8hr1e"]
+resource_name = "BossClub"
+script/source = "extends WeaponBase
+
+
+@onready var hilt: Node2D = $Hilt
+@onready var sprite: Sprite2D = $Hilt/Sprite2D
+@onready var timer: Timer = $Timer
+@onready var area := $Hilt/Area2D
+@onready var damageOnHit := $DamageOnAreaHit
+
+var onCooldown = false
+
+func _ready() -> void:
+	activate.connect(activate_weapon)
+	timer.wait_time = weaponConfig.attackSpeed
+	weaponConfig.damageData.damageDealer = get_parent()
+
+func _physics_process(delta: float) -> void:
+	look_at_target()
+
+func activate_weapon():
+	if onCooldown:
+		return
+	onCooldown = true
+	attacking = true
+	detect()
+	swing_sword()
+
+func look_at_target():
+	if (lookAtTaret - global_position).x < 0:
+		scale = Vector2(abs(scale.x) * -1  , scale.y)
+	else:
+		scale = Vector2(abs(scale.x)  , scale.y)
+		
+	
+func swing_sword():
+	var tween = get_tree().create_tween()
+	tween.tween_property(hilt, \"rotation_degrees\", 179, weaponConfig.attackSpeed)
+	await tween.finished
+	attacking = false
+	get_tree().create_tween().tween_property(hilt, \"rotation_degrees\", -40, 0.1)
+	stop_detect()
+	await get_tree().create_timer(2).timeout
+	onCooldown = false
+
+func detect():
+	damageOnHit.hitBodies = []
+	damageOnHit.process_mode = ProcessMode.PROCESS_MODE_INHERIT
+
+func stop_detect():
+	damageOnHit.process_mode = ProcessMode.PROCESS_MODE_DISABLED
+"
+
+[sub_resource type="Resource" id="Resource_ixxfj"]
+script = ExtResource("1_054b7")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[sub_resource type="Resource" id="Resource_moygh"]
+script = ExtResource("2_y2rll")
+stagger = 1.0
+frendly = false
+attackSpeed = 0.3
+damageData = SubResource("Resource_ixxfj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qwkk"]
+size = Vector2(35.3698, 61.8601)
+
+[node name="BossClub" type="Node2D" groups=["Weapon"]]
+z_index = -10
+scale = Vector2(0.438028, 0.438028)
+script = SubResource("GDScript_8hr1e")
+weaponConfig = SubResource("Resource_moygh")
+
+[node name="Hilt" type="Node2D" parent="."]
+position = Vector2(39.7725, 0)
+rotation = -0.698132
+scale = Vector2(1.07058, 1.07058)
+
+[node name="Sprite2D" type="Sprite2D" parent="Hilt"]
+z_index = 20
+position = Vector2(1.33512, -49.8245)
+rotation = 1.5708
+scale = Vector2(1.92664, 1.92664)
+texture = ExtResource("1_2qstq")
+
+[node name="Area2D" type="Area2D" parent="Hilt"]
+position = Vector2(1.33512, -49.8245)
+collision_layer = 8
+collision_mask = 3
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hilt/Area2D"]
+position = Vector2(-7.62939e-06, -16.797)
+shape = SubResource("RectangleShape2D_8qwkk")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="DamageOnAreaHit" parent="." instance=ExtResource("2_76koe")]
+process_mode = 4

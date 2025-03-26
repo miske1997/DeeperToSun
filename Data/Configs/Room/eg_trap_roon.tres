@@ -1,15 +1,8 @@
-[gd_resource type="Resource" script_class="TrapRoom" load_steps=32 format=3 uid="uid://bet1gxq6kqxx2"]
+[gd_resource type="Resource" script_class="TrapRoom" load_steps=30 format=3 uid="uid://bet1gxq6kqxx2"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Room/trap_room.gd" id="1_4fjlk"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="1_uutjs"]
 [ext_resource type="Script" path="res://Scripts/Resources/wave_config.gd" id="2_qobci"]
 [ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="4_nbbgc"]
-
-[sub_resource type="Resource" id="Resource_0xgwc"]
-script = ExtResource("1_uutjs")
-state = ""
-name = "Molotov"
-type = "passive"
 
 [sub_resource type="Resource" id="Resource_yr3jx"]
 script = ExtResource("4_nbbgc")
@@ -166,5 +159,4 @@ waveTimeout = 10.0
 [resource]
 script = ExtResource("1_4fjlk")
 waves = Array[ExtResource("2_qobci")]([SubResource("Resource_5qej7"), SubResource("Resource_2diau"), SubResource("Resource_3v1wy"), SubResource("Resource_a1627"), SubResource("Resource_je5i2"), SubResource("Resource_oks71"), SubResource("Resource_38qyl"), SubResource("Resource_774tx"), SubResource("Resource_bsrfo"), SubResource("Resource_f5w7w"), SubResource("Resource_rrcxs")])
-item = SubResource("Resource_0xgwc")
 roomType = 1

@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://cef53hh3a5q1q"]
+
+[ext_resource type="Texture2D" uid="uid://c31e8uuur0aca" path="res://Assets/Items/GlassArmour.png" id="1_qdwjs"]
+[ext_resource type="Script" path="res://Scripts/UI/active_slot.gd" id="1_s4hby"]
+[ext_resource type="Texture2D" uid="uid://b58vpvoafduul" path="res://Assets/Effects/ItemShadow.png" id="3_c0bg1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekdad"]
+bg_color = Color(0.164706, 0.164706, 0.164706, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_udr45"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_5nt61"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[node name="ActiveSlot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s4hby")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 91.0
+offset_bottom = 91.0
+scale = Vector2(0.81436, 0.81436)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ekdad")
+
+[node name="Sprite" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qdwjs")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -19.5
+offset_top = 1.0
+offset_right = 20.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Q"
+label_settings = SubResource("LabelSettings_udr45")
+horizontal_alignment = 1
+
+[node name="Cooldown" type="Label" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Q"
+label_settings = SubResource("LabelSettings_5nt61")
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Panel"]
+layout_mode = 1
+offset_right = 320.0
+offset_bottom = 320.0
+scale = Vector2(0.287017, 0.287017)
+fill_mode = 8
+radial_initial_angle = 180.0
+texture_progress = ExtResource("3_c0bg1")

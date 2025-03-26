@@ -1,11 +1,12 @@
 extends Node2D
 
-@export var itemName: String
-var itemCollected = false
+@export var item: ItemConfig
+var itemCollected = true
+
 func _ready() -> void:
 	#set sprite
-	pass
-
+	await get_tree().create_timer(1).timeout
+	itemCollected = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if itemCollected:

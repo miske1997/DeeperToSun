@@ -1,0 +1,468 @@
+[gd_scene load_steps=20 format=3 uid="uid://bvw4wy7mexeuu"]
+
+[ext_resource type="Script" path="res://Scripts/state_mashine.gd" id="1_iwyg5"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="2_v6cji"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="3_cxbus"]
+[ext_resource type="PackedScene" uid="uid://by88octgsku2y" path="res://Scenes/Basic/ground_burst.tscn" id="4_lk127"]
+
+[sub_resource type="GDScript" id="GDScript_phnr8"]
+resource_name = "spawn"
+script/source = "extends NodeState
+
+@export var spawnTimeout := 3.0
+
+func _on_process(_delta : float) -> void:
+	spawnTimeout -= _delta
+
+
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+
+func _on_next_transitions() -> void:
+	if spawnTimeout <= 0:
+		transition.emit(\"FazeOne\")
+
+
+func _on_enter() -> void:
+	pass
+
+
+func _on_exit() -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_b4v6g"]
+resource_name = "FazeOne"
+script/source = "extends NodeState
+
+@onready var enemy: EnemyBase = get_parent().get_parent()
+
+func _on_process(_delta : float) -> void:
+	pass
+
+
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+
+func _on_next_transitions() -> void:
+	if enemy.health <= enemy.enemyConfig.health * 0.55:
+		transition.emit(\"FazeTwo\")
+		return
+	var roll = randi_range(0, 100)
+	if roll < 33:
+		transition.emit(\"ChargeOne\")
+	elif roll < 66:
+		transition.emit(\"Chaice\")
+	else:
+		transition.emit(\"ThrowBoulder\")
+
+
+func _on_enter() -> void:
+	pass
+
+
+func _on_exit() -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_5pgde"]
+resource_name = "ThrowBoulder"
+script/source = "extends NodeState
+
+@onready var enemy: EnemyBase = get_parent().get_parent()
+@export var projectileConfig: ProjectileConfig
+@export var damageData: DamageData
+@export var cooldown := 1.0
+var timeout
+var thrown = 0
+func _on_process(_delta : float) -> void:
+	timeout -= _delta
+
+
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+
+func _on_next_transitions() -> void:
+	if timeout <= 0:
+		if thrown == 2:
+			transition.emit(\"FazeOne\")
+			thrown = 0
+		else:
+			thrown += 1
+			transition.emit(\"ThrowBoulder\")
+
+
+func _on_enter() -> void:
+	timeout = cooldown
+	damageData.damageDealer = enemy
+	var throwDir = (enemy.target.position - enemy.position).normalized()
+	ProjectileEmitter.spawn_projectile(projectileConfig, damageData, enemy.position + throwDir * 30, 0, throwDir)
+
+func _on_exit() -> void:
+	pass
+"
+
+[sub_resource type="Resource" id="Resource_mebjh"]
+script = ExtResource("2_v6cji")
+direction = Vector2(0, 0)
+speed = 500.0
+drag = 0.0
+range = 3000.0
+acceleration = 0.0
+duration = 20.0
+health = 0.0
+frendly = false
+spriteName = "boulder"
+size = Vector2(1, 1)
+radius = 20.0
+addons = Array[String](["bounce"])
+
+[sub_resource type="Resource" id="Resource_7rfv1"]
+script = ExtResource("3_cxbus")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[sub_resource type="GDScript" id="GDScript_8uf8f"]
+resource_name = "Chaice"
+script/source = "extends NodeState
+
+@onready var enemy: EnemyBase = get_parent().get_parent()
+@export var tranistionWait := 5.0
+var timeout
+
+func _on_process(_delta : float) -> void:
+	timeout -= _delta
+
+
+func _on_physics_process(_delta : float) -> void:
+
+	enemy.velocity = (enemy.target.position - enemy.position).normalized() * enemy.speedController.GetStatValue()
+	enemy.move_and_slide()
+
+func _on_next_transitions() -> void:
+	if (enemy.target.position - enemy.position).length() < 200:
+		transition.emit(\"Swing\")
+	if timeout <= 0:
+		transition.emit(\"ThrowBoulder\")
+
+func _on_enter() -> void:
+	enemy.walkStart()
+	timeout = tranistionWait
+	
+func _on_exit() -> void:
+	enemy.walkEnd()
+"
+
+[sub_resource type="GDScript" id="GDScript_2pa8n"]
+resource_name = "Swing"
+script/source = "extends NodeState
+
+@onready var enemy = get_parent().get_parent()
+@export var wait := 1
+@export var preHitWait := 0.5
+var timeout
+
+func _on_process(_delta : float) -> void:
+	timeout -= _delta
+
+
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+func _on_next_transitions() -> void:
+	if timeout <= 0:
+		transition.emit(\"FazeOne\")
+
+
+func _on_enter() -> void:
+	timeout = wait + preHitWait
+	await get_tree().create_timer(preHitWait).timeout
+	enemy.weapon.activate.emit()
+	
+func _on_exit() -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_6w7lk"]
+resource_name = "ChargeOne"
+script/source = "extends NodeState
+
+@onready var rayCast: RayCast2D= $\"../../RayCast2D\"
+@onready var enemy: EnemyBase = get_parent().get_parent()
+@export var chargeSpeed := 350.0
+var chargeCount = 0
+var chargeDir := Vector2.ZERO
+
+func _on_process(_delta : float) -> void:
+	pass
+
+
+func _on_physics_process(_delta : float) -> void:
+	rayCast.global_position = enemy.position
+	rayCast.target_position = enemy.velocity.normalized() * 30
+	
+	enemy.velocity = chargeDir * chargeSpeed
+	enemy.move_and_slide()
+
+
+func _on_next_transitions() -> void:
+	if rayCast.get_collider():
+		if chargeCount == 3:
+			transition.emit(\"FazeOne\")
+			chargeCount = 0
+		else:
+			chargeCount += 1
+			transition.emit(\"ChargeOne\")
+
+
+func _on_enter() -> void:
+	enemy.chargeStart(chargeSpeed)
+	chargeDir = (enemy.target.position - enemy.position).normalized()
+
+func _on_exit() -> void:
+	enemy.chargeEnd()
+"
+
+[sub_resource type="GDScript" id="GDScript_5v58y"]
+resource_name = "FazeTwo"
+script/source = "extends NodeState
+
+
+func _on_process(_delta : float) -> void:
+	pass
+
+
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+
+func _on_next_transitions() -> void:
+	var roll = randi_range(0, 100)
+	if roll < 33:
+		transition.emit(\"ChargeTwo\")
+	elif roll < 50:
+		transition.emit(\"Chaice\")
+	elif roll < 70:
+		transition.emit(\"ThrowBoulder2\")
+	else:
+		transition.emit(\"Stomp\")
+		
+
+
+func _on_enter() -> void:
+	pass
+
+
+func _on_exit() -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_tcfjs"]
+resource_name = "ChargeTwo"
+script/source = "extends NodeState
+
+@onready var rayCast: RayCast2D= $\"../../RayCast2D\"
+@onready var enemy: EnemyBase = get_parent().get_parent()
+@export var chargeSpeed := 450.0
+var chargeCount = 0
+var chargeDir := Vector2.ZERO
+
+func _on_process(_delta : float) -> void:
+	pass
+
+
+func _on_physics_process(_delta : float) -> void:
+	rayCast.global_position = enemy.position
+	rayCast.target_position = enemy.velocity.normalized() * 30
+	
+	enemy.velocity = chargeDir * chargeSpeed
+	enemy.move_and_slide()
+
+
+func _on_next_transitions() -> void:
+	if rayCast.get_collider():
+		if chargeCount == 4:
+			transition.emit(\"FazeTwo\")
+			chargeCount = 0
+		else:
+			chargeCount += 1
+			transition.emit(\"ChargeTwo\")
+
+
+func _on_enter() -> void:
+	enemy.chargeStart(chargeSpeed)
+	chargeDir = (enemy.target.position - enemy.position).normalized()
+
+func _on_exit() -> void:
+	enemy.chargeEnd()
+"
+
+[sub_resource type="GDScript" id="GDScript_8qtu3"]
+resource_name = "ThrowBoulder2"
+script/source = "extends NodeState
+
+@onready var enemy: EnemyBase = get_parent().get_parent()
+@export var projectileConfig: ProjectileConfig
+@export var damageData: DamageData
+@export var cooldown := 1.0
+var timeout
+var thrown = 0
+func _on_process(_delta : float) -> void:
+	timeout -= _delta
+
+
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+
+func _on_next_transitions() -> void:
+	if timeout <= 0:
+		if thrown == 2:
+			transition.emit(\"FazeTwo\")
+			thrown = 0
+		else:
+			thrown += 1
+			transition.emit(\"ThrowBoulder2\")
+
+
+func _on_enter() -> void:
+	timeout = cooldown
+	damageData.damageDealer = enemy
+	var throwDir = (enemy.target.position - enemy.position).normalized()
+	ProjectileEmitter.spawn_projectile(projectileConfig, damageData, enemy.position + throwDir * 30, 0, throwDir)
+
+func _on_exit() -> void:
+	pass
+"
+
+[sub_resource type="Resource" id="Resource_wdj6l"]
+script = ExtResource("2_v6cji")
+direction = Vector2(0, 0)
+speed = 600.0
+drag = 0.0
+range = 2000.0
+acceleration = 0.0
+duration = 20.0
+health = 0.0
+frendly = false
+spriteName = "boulder"
+size = Vector2(1, 1)
+radius = 20.0
+addons = Array[String](["bounce", "explode_boulder"])
+
+[sub_resource type="Resource" id="Resource_orvb1"]
+script = ExtResource("3_cxbus")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[sub_resource type="GDScript" id="GDScript_0gg1l"]
+resource_name = "Stomp"
+script/source = "extends NodeState
+
+@onready var enemy: EnemyBase = get_parent().get_parent()
+@export var damageData: DamageData
+@export var cooldown := 1.0
+@export var groundBurst: PackedScene
+
+var timeout
+var thrown = 0
+func _on_process(_delta : float) -> void:
+	timeout -= _delta
+
+
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+
+func _on_next_transitions() -> void:
+	if timeout <= 0:
+		if thrown == 0:
+			transition.emit(\"FazeTwo\")
+			thrown = 0
+		else:
+			thrown += 1
+			transition.emit(\"Stomp\")
+
+
+func _on_enter() -> void:
+	timeout = cooldown
+	damageData.damageDealer = enemy
+	var throwDir: Vector2= (enemy.target.position - enemy.position).normalized()
+	var throwLeft = throwDir.rotated(90)
+	var burst = groundBurst.instantiate()
+	burst.damageData = damageData
+	burst.direction = throwDir
+	burst.position = enemy.position + throwDir * 60
+	get_tree().root.add_child(burst)
+	var dup = burst.duplicate()
+	dup.damageData = damageData
+	dup.position += throwLeft * 60
+	get_tree().root.add_child(dup)
+	dup = burst.duplicate()
+	dup.damageData = damageData
+	dup.position += throwLeft * -60
+	get_tree().root.add_child(dup)
+	
+func _on_exit() -> void:
+	pass
+"
+
+[sub_resource type="Resource" id="Resource_6dhtc"]
+script = ExtResource("3_cxbus")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[node name="OgreAI" type="Node" node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("1_iwyg5")
+initial_node_state = NodePath("Spawn")
+
+[node name="Spawn" type="Node" parent="."]
+script = SubResource("GDScript_phnr8")
+
+[node name="FazeOne" type="Node" parent="."]
+script = SubResource("GDScript_b4v6g")
+
+[node name="ThrowBoulder" type="Node" parent="."]
+script = SubResource("GDScript_5pgde")
+projectileConfig = SubResource("Resource_mebjh")
+damageData = SubResource("Resource_7rfv1")
+
+[node name="Chaice" type="Node" parent="."]
+script = SubResource("GDScript_8uf8f")
+
+[node name="Swing" type="Node" parent="."]
+script = SubResource("GDScript_2pa8n")
+
+[node name="ChargeOne" type="Node" parent="."]
+script = SubResource("GDScript_6w7lk")
+chargeSpeed = 500.0
+
+[node name="FazeTwo" type="Node" parent="."]
+script = SubResource("GDScript_5v58y")
+
+[node name="ChargeTwo" type="Node" parent="."]
+script = SubResource("GDScript_tcfjs")
+chargeSpeed = 550.0
+
+[node name="ThrowBoulder2" type="Node" parent="."]
+script = SubResource("GDScript_8qtu3")
+projectileConfig = SubResource("Resource_wdj6l")
+damageData = SubResource("Resource_orvb1")
+
+[node name="Stomp" type="Node" parent="."]
+script = SubResource("GDScript_0gg1l")
+damageData = SubResource("Resource_6dhtc")
+cooldown = 0.5
+groundBurst = ExtResource("4_lk127")

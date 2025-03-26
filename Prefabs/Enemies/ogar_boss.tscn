@@ -1,0 +1,126 @@
+[gd_scene load_steps=21 format=3 uid="uid://bbvjpa7eb87gd"]
+
+[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/ogar_boss.gd" id="1_x2mgc"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_oawak"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="3_nflrw"]
+[ext_resource type="PackedScene" uid="uid://bvw4wy7mexeuu" path="res://Prefabs/AI/ogre_ai.tscn" id="3_rfl3i"]
+[ext_resource type="Script" path="res://Scripts/Modules/enemy_health.gd" id="4_a08w0"]
+[ext_resource type="PackedScene" uid="uid://cancytfqr6bid" path="res://Prefabs/Weapons/boss_club.tscn" id="5_3stji"]
+[ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="5_afiox"]
+[ext_resource type="Texture2D" uid="uid://d4kg07bhdjbfj" path="res://Assets/Enemies/SHREK ANIMATION-2-Sheet.png" id="6_wra3k"]
+[ext_resource type="PackedScene" uid="uid://c8thni28ootba" path="res://Scenes/ProjectileComponents/contact_damage.tscn" id="9_7emt1"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="10_utb68"]
+
+[sub_resource type="Resource" id="Resource_70uhp"]
+script = ExtResource("2_oawak")
+movementSpeed = 200.0
+knockback = 10.0
+health = 200
+armor = 0
+enemyName = ""
+
+[sub_resource type="Resource" id="Resource_ghpwo"]
+script = ExtResource("3_nflrw")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4m5i"]
+radius = 24.0208
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqors"]
+atlas = ExtResource("6_wra3k")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xvyk"]
+atlas = ExtResource("6_wra3k")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq6jl"]
+atlas = ExtResource("6_wra3k")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv5j4"]
+atlas = ExtResource("6_wra3k")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwx3r"]
+atlas = ExtResource("6_wra3k")
+region = Rect2(1280, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti4c2"]
+atlas = ExtResource("6_wra3k")
+region = Rect2(1600, 0, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0p08p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqors")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xvyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cq6jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv5j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwx3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti4c2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="OgreBoss" type="CharacterBody2D" groups=["Boss", "Enemy"]]
+collision_layer = 2
+collision_mask = 6
+motion_mode = 1
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_x2mgc")
+enemyConfig = SubResource("Resource_70uhp")
+damageData = SubResource("Resource_ghpwo")
+
+[node name="AIController" type="Node" parent="."]
+
+[node name="EnemyHealth" type="Node" parent="."]
+script = ExtResource("4_a08w0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.755, 1)
+shape = SubResource("CircleShape2D_u4m5i")
+
+[node name="BossClub" parent="." instance=ExtResource("5_3stji")]
+z_index = 0
+position = Vector2(0, 13)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 20
+material = ExtResource("5_afiox")
+use_parent_material = true
+position = Vector2(0, -12)
+scale = Vector2(0.392328, 0.392328)
+sprite_frames = SubResource("SpriteFrames_0p08p")
+animation = &"walk"
+frame_progress = 0.342765
+
+[node name="OgreAI" parent="." instance=ExtResource("3_rfl3i")]
+
+[node name="DamageOnHit" parent="." instance=ExtResource("9_7emt1")]
+
+[node name="ContactDetect" parent="." instance=ExtResource("10_utb68")]
+enabled = true
+collision_mask = 5

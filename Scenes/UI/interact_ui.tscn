@@ -25,6 +25,7 @@ offset_bottom = 38.0
 scale = Vector2(0.411052, 0.448852)
 
 [node name="PanelContainer2" type="PanelContainer" parent="Control"]
+layout_mode = 0
 offset_top = -23.0
 offset_right = 6.0
 offset_bottom = -17.0
