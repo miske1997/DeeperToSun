@@ -9,7 +9,11 @@ script/source = "extends Node2D
 @export var dotDuration = 3
 
 var enemiesInPool = []
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func _ready() -> void:
+	await  get_tree().create_timer(dotDuration).timeout
+	queue_free()
+	
 func _process(delta: float) -> void:
 	enemiesInPool = enemiesInPool.filter(func(enemy): return enemy and is_instance_valid(enemy))
 	for enemy in enemiesInPool:

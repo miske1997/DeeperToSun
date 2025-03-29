@@ -1,3 +1,3 @@
 class_name ShopRoom extends RoomConfig
 
-@export var items: Array[ItemConfig] = []
+@export var dropTable: DropTable

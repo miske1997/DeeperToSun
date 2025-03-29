@@ -54,4 +54,3 @@ position = Vector2(788, 377)
 
 [node name="Item" parent="." instance=ExtResource("4_m86j6")]
 position = Vector2(1028, 386)
-itemName = "Push"

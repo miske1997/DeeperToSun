@@ -56,6 +56,11 @@ var items = {
 		cost = 30,
 		sprite = "snakeFang"
 	},
+	"FootFungus" = {
+		procs = {Enums.ItemProcs.ROOM_LOAD: "footFungus"},
+		cost = 30,
+		sprite = "FootFungus"
+	},
 	"TungstenBalls" = {
 		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "tungstenBalls"},
 		cost = 30,
@@ -71,10 +76,10 @@ var items = {
 		cost = 30,
 		sprite = "oilyRag"
 	},
-	"TickingBomb" = {
-		procs = {Enums.ItemProcs.ENEMY_DEATH: "tickingBomb"},
+	"FireSoul" = {
+		procs = {Enums.ItemProcs.ENEMY_DEATH: "fireSoul"},
 		cost = 30,
-		sprite = "tickingBomb"
+		sprite = "FireSoul"
 	},
 	"SharperThanYouThought" = {
 		procs = {Enums.ItemProcs.POST_ENEMY_HIT: "sharperThanYouThought"},
@@ -92,15 +97,20 @@ var items = {
 		cost = 30,
 		sprite = "maledictio"
 	},
-	"GlassAmour" = {
-		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "glassAmour"},
+	"GlassArmour" = {
+		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "glassArmour"},
 		cost = 30,
-		sprite = "glassAmour"
+		sprite = "GlassArmour"
 	},
 	"ShortFuse" = {
 		procs = {Enums.ItemProcs.POST_PLAYER_HIT: "shortFuse"},
 		cost = 30,
 		sprite = "shortFuse"
+	},
+	"SlimeBlessing" = {
+		procs = {Enums.ItemProcs.PROJECTILE_EMMIT: "slimeBlessing"},
+		cost = 30,
+		sprite = "SlimeBlessing"
 	},
 	"BackShots" = {
 		procs = {Enums.ItemProcs.PICKUP: "backShots"},
@@ -164,22 +174,34 @@ var consumables = {
 	
 }
 
+func get_item(itemName):
+	if items.has(itemName):
+		return items[itemName]
+	if activeItems.has(itemName):
+		return activeItems[itemName]
+	if consumables.has(itemName):
+		return consumables[itemName]
+	return null
+
 func get_drop():
 	var roll = randi_range(0, items.size() + activeItems.size() + consumables.size() - 1)
 	var item
 	if roll < items.size():
 		item = PassiveItem.new()
 		item.name = items.keys()[roll] 
+		item.cost = items[item.name].cost
 	elif roll - items.size() < activeItems.size():
 		item = ActiveItem.new()
 		item.name = activeItems.keys()[roll - items.size()]
 		item.cooldown = activeItems[item.name].cooldown
 		item.function = activeItems[item.name].function
 		item.sprite = activeItems[item.name].sprite
+		item.cost = activeItems[item.name].cost
 	else:
 		item = ConsumableItem.new()
 		item.name = consumables.keys()[roll - items.size() - activeItems.size()]
 		item.function = consumables[item.name].function
 		item.sprite = consumables[item.name].sprite
+		item.cost = consumables[item.name].cost
 	
 	return item

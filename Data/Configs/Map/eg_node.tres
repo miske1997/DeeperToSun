@@ -3,13 +3,14 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_node.gd" id="1_87wyo"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_roll.gd" id="2_o83u1"]
 [ext_resource type="Script" path="res://Scripts/Resources/Room/room_config.gd" id="3_pgvsd"]
+[ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="3_q0344"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/node_config.gd" id="4_opwxk"]
-[ext_resource type="Resource" uid="uid://bet1gxq6kqxx2" path="res://Data/Configs/Room/eg_trap_roon.tres" id="6_ae7sc"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_roll_list.gd" id="6_sefsm"]
 
 [sub_resource type="Resource" id="Resource_vf11y"]
 script = ExtResource("6_sefsm")
-rooms = Array[ExtResource("3_pgvsd")]([ExtResource("6_ae7sc")])
+rooms = Array[ExtResource("3_pgvsd")]([ExtResource("3_q0344")])
+roomConfig = ExtResource("3_q0344")
 roll = Vector2(0, 1000)
 
 [resource]

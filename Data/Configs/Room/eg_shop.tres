@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShopRoom" load_steps=7 format=3 uid="uid://5jjnbvfq44or"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DropTable/drop.gd" id="1_4pw20"]
+[ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="2_4mdt3"]
+[ext_resource type="Script" path="res://Scripts/Resources/DropTable/drop_table.gd" id="3_jp5ie"]
+[ext_resource type="Script" path="res://Scripts/Resources/Room/shop_room.gd" id="4_dl85l"]
+[ext_resource type="PackedScene" uid="uid://bvei632u5xegv" path="res://Prefabs/Rooms/Forest/shop.tscn" id="4_ulifo"]
+
+[sub_resource type="Resource" id="Resource_r2l26"]
+script = ExtResource("3_jp5ie")
+enteries = Array[ExtResource("1_4pw20")]([ExtResource("2_4mdt3")])
+
+[resource]
+script = ExtResource("4_dl85l")
+dropTable = SubResource("Resource_r2l26")
+roomType = 3
+roomScene = ExtResource("4_ulifo")

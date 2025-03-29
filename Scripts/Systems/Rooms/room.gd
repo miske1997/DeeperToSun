@@ -13,7 +13,7 @@ var mapNode: MapNode
 
 var waveCount = 0
 var roomStarted = false
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	if has_node("RoomSerializer") and get_node("RoomSerializer").process_mode != PROCESS_MODE_DISABLED:
 		return
@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 	if roomConfig.roomType == Enums.RoomType.SPAWN:
 		roomStarted = true
-		spawn_enemies(roomConfig.waves[waveCount])
+		spawn_enemies(roomConfig.spawnConfig.waves[waveCount])
 	if roomConfig.roomType == Enums.RoomType.ITEM:
 		spawn_item()
 		Events.itemCollected.connect(func(itemOnGround): room_compleated(), CONNECT_ONE_SHOT)
@@ -31,7 +31,7 @@ func _ready() -> void:
 		spawn_item()
 	if roomConfig.roomType == Enums.RoomType.TRAP:
 		spawn_item()
-		Events.itemCollected.connect(func(itemOnGround): roomStarted = true; spawn_enemies(roomConfig.waves[waveCount]), CONNECT_ONE_SHOT)
+		Events.itemCollected.connect(func(itemOnGround): roomStarted = true; spawn_enemies(roomConfig.spawnConfig.waves[waveCount]), CONNECT_ONE_SHOT)
 	#room_compleated()
 
 func _process(delta: float) -> void:
@@ -43,16 +43,17 @@ func _process(delta: float) -> void:
 
 func wave_compleated():
 	waveCount += 1
-	if roomConfig.waves.size() > waveCount:
-		spawn_enemies(roomConfig.waves[waveCount])
+	if roomConfig.spawnConfig.waves.size() > waveCount:
+		spawn_enemies(roomConfig.spawnConfig.waves[waveCount])
 	else:
 		room_compleated()
 
 func on_wave_timeout():
-	if roomConfig.waves.size() > waveCount + 1:
+	if roomConfig.spawnConfig.waves.size() > waveCount + 1:
 		wave_compleated()
 
 func room_compleated():
+	Events.roomCompleated.emit()
 	if not mapNode:
 		return
 	var step = (roomEnd.x - roomStart.x) / (mapNode.get_neighbours().size() + 1.0)

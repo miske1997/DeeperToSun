@@ -1,0 +1,161 @@
+[gd_resource type="Resource" script_class="SpawnConfig" load_steps=30 format=3 uid="uid://c1wq1e4swm8kk"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_config.gd" id="1_h23p2"]
+[ext_resource type="Script" path="res://Scripts/Resources/wave_config.gd" id="2_tu5rq"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="3_u6jeh"]
+
+[sub_resource type="Resource" id="Resource_yr3jx"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.512563, 0.192211)
+
+[sub_resource type="Resource" id="Resource_5qej7"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_yr3jx")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_ytnt7"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.752513, 0.302764)
+
+[sub_resource type="Resource" id="Resource_2diau"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_ytnt7")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_j86ln"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.853015, 0.567839)
+
+[sub_resource type="Resource" id="Resource_3v1wy"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_j86ln")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_i7j2j"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.773869, 0.816583)
+
+[sub_resource type="Resource" id="Resource_a1627"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_i7j2j")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_uspve"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.507538, 0.910804)
+
+[sub_resource type="Resource" id="Resource_je5i2"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_uspve")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_rg2ql"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.227387, 0.812814)
+
+[sub_resource type="Resource" id="Resource_oks71"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_rg2ql")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_q5f85"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.148241, 0.548995)
+
+[sub_resource type="Resource" id="Resource_38qyl"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_q5f85")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[sub_resource type="Resource" id="Resource_h7faj"]
+script = ExtResource("3_u6jeh")
+enemy = "warrior_gnome"
+spawn = Vector2(0.25, 0.290201)
+
+[sub_resource type="Resource" id="Resource_774tx"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_h7faj")])
+randomSpawn = false
+waveTimeout = 15.0
+
+[sub_resource type="Resource" id="Resource_r5o76"]
+script = ExtResource("3_u6jeh")
+enemy = "runner_gnome"
+spawn = Vector2(0.0452261, 0.0653266)
+
+[sub_resource type="Resource" id="Resource_g3bgr"]
+script = ExtResource("3_u6jeh")
+enemy = "runner_gnome"
+spawn = Vector2(0.942211, 0.958543)
+
+[sub_resource type="Resource" id="Resource_bsrfo"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_r5o76"), SubResource("Resource_g3bgr")])
+randomSpawn = false
+waveTimeout = 10.0
+
+[sub_resource type="Resource" id="Resource_jeh0a"]
+script = ExtResource("3_u6jeh")
+enemy = "runner_gnome"
+spawn = Vector2(0.953518, 0.0603015)
+
+[sub_resource type="Resource" id="Resource_edtxs"]
+script = ExtResource("3_u6jeh")
+enemy = "runner_gnome"
+spawn = Vector2(0.0439699, 0.962312)
+
+[sub_resource type="Resource" id="Resource_f5w7w"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_jeh0a"), SubResource("Resource_edtxs")])
+randomSpawn = false
+waveTimeout = 10.0
+
+[sub_resource type="Resource" id="Resource_pai8t"]
+script = ExtResource("3_u6jeh")
+enemy = "ogar"
+spawn = Vector2(0.482412, 0.518844)
+
+[sub_resource type="Resource" id="Resource_qby7m"]
+script = ExtResource("3_u6jeh")
+enemy = "shaman_gnome"
+spawn = Vector2(0.889447, 0.714824)
+
+[sub_resource type="Resource" id="Resource_ldn5h"]
+script = ExtResource("3_u6jeh")
+enemy = "shaman_gnome"
+spawn = Vector2(0.0615578, 0.336683)
+
+[sub_resource type="Resource" id="Resource_rrcxs"]
+script = ExtResource("2_tu5rq")
+waveType = ""
+spawns = Array[ExtResource("3_u6jeh")]([SubResource("Resource_pai8t"), SubResource("Resource_qby7m"), SubResource("Resource_ldn5h")])
+randomSpawn = false
+waveTimeout = 10.0
+
+[resource]
+script = ExtResource("1_h23p2")
+waves = Array[ExtResource("2_tu5rq")]([SubResource("Resource_5qej7"), SubResource("Resource_2diau"), SubResource("Resource_3v1wy"), SubResource("Resource_a1627"), SubResource("Resource_je5i2"), SubResource("Resource_oks71"), SubResource("Resource_38qyl"), SubResource("Resource_774tx"), SubResource("Resource_bsrfo"), SubResource("Resource_f5w7w"), SubResource("Resource_rrcxs")])

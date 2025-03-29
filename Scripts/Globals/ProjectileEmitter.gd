@@ -1,5 +1,8 @@
 extends Node
 
+var items_data = load("res://Data/Items/items_data.tres").items
+var item_functions = load("res://Data/Items/item_functions.tres")
+
 @export var projectileTemplate: PackedScene
 var projectileSprites: Dictionary = {}
 var componentsDir := "res://Scenes/ProjectileComponents/"
@@ -23,6 +26,8 @@ func spawn_projectile(projectileConfig: ProjectileConfig, damageData: DamageData
 	projectile.damageData = damageData
 	projectile.projectileConfig = projectileConfig.duplicate()
 	projectile.projectileConfig.direction = direction
+	if damageData.damageDealer == Players.player.character:
+		prock_items(projectile.projectileConfig, damageData, Enums.ItemProcs.PROJECTILE_EMMIT)
 	add_components(projectile)
 	get_node("/root").add_child(projectile)
 
@@ -70,3 +75,12 @@ func add_components(projectile: Projectile):
 	for addonName in projectile.projectileConfig.addons:
 		var addon = load(componentsDir + addonName + ".tscn").instantiate()
 		projectile.add_child(addon)
+		
+func prock_items(projectileConfig: ProjectileConfig, damageData: DamageData, prockType: Enums.ItemProcs):
+	for item: PassiveItem in Players.player.collectedItems:
+		if not item is PassiveItem:
+			continue
+		if items_data.has(item.name) and items_data[item.name].procs.has(prockType):
+			if not item_functions.get_method_list().any(func(f): return f.name == items_data[item.name].procs[prockType] + item.state) :
+				return
+			item_functions[items_data[item.name].procs[prockType] + item.state].call({projectileConfig = projectileConfig, damageData = damageData})

@@ -11,7 +11,7 @@ func _ready() -> void:
 	parent.healthUp.connect(on_health_up)
 	while not Players.player:
 		await get_tree().process_frame
-	parent.playerData.health = parent.playerConfig.health
+	parent.playerData = Players.player
 
 func on_health_up(healing: int):
 	parent.playerData.health += healing

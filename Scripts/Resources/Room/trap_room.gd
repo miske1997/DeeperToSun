@@ -1,4 +1,4 @@
 class_name TrapRoom extends RoomConfig
 
-@export var waves: Array[WaveConfig] = []
+@export var spawnConfig: SpawnConfig
 @export var dropTable: DropTable

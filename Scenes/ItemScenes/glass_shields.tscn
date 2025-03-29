@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://drr0p1eobgged"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_a74bc"]
-[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="1_bfu6h"]
+[ext_resource type="Texture2D" uid="uid://dxefs0gw0n76d" path="res://Assets/Items/GlassShield.png" id="2_n56cm"]
 
 [sub_resource type="GDScript" id="GDScript_63xo8"]
 resource_name = "GlassShields"
@@ -45,8 +45,8 @@ speedPerSecond = 180
 
 [node name="Sprite2D" type="Sprite2D" parent="Shield"]
 position = Vector2(26, 0)
-scale = Vector2(0.0546875, 0.0546875)
-texture = ExtResource("1_bfu6h")
+scale = Vector2(0.095, 0.095)
+texture = ExtResource("2_n56cm")
 
 [node name="Area2D" type="Area2D" parent="Shield/Sprite2D"]
 collision_layer = 2
@@ -60,8 +60,8 @@ rotation = 2.0944
 
 [node name="Sprite2D" type="Sprite2D" parent="Shield2"]
 position = Vector2(26, 0)
-scale = Vector2(0.0546875, 0.0546875)
-texture = ExtResource("1_bfu6h")
+scale = Vector2(0.095, 0.095)
+texture = ExtResource("2_n56cm")
 
 [node name="Area2D" type="Area2D" parent="Shield2/Sprite2D"]
 collision_layer = 2
@@ -75,8 +75,8 @@ rotation = 4.18879
 
 [node name="Sprite2D" type="Sprite2D" parent="Shield3"]
 position = Vector2(26, 0)
-scale = Vector2(0.0546875, 0.0546875)
-texture = ExtResource("1_bfu6h")
+scale = Vector2(0.095, 0.095)
+texture = ExtResource("2_n56cm")
 
 [node name="Area2D" type="Area2D" parent="Shield3/Sprite2D"]
 collision_layer = 2

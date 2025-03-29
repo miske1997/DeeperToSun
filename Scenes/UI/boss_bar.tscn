@@ -7,10 +7,19 @@ script/source = "extends Control
 var boss: EnemyBase
 
 func _ready() -> void:
-	boss = get_tree().get_first_node_in_group(\"Boss\")
-	$ProgressBar.max_value = boss.enemyConfig.health
+	var enemyFolder = get_tree().get_first_node_in_group(\"Room\").get_node(\"Enemies\")
+	enemyFolder.child_entered_tree.connect(boss_detect)
 	if not boss:
 		hide()
+		return
+	boss = get_tree().get_first_node_in_group(\"Boss\")
+	$ProgressBar.max_value = boss.enemyConfig.health
+
+func boss_detect(enemy: Node2D):
+	if enemy.is_in_group(\"Boss\"):
+		boss = enemy
+		$ProgressBar.max_value = boss.enemyConfig.health
+		show()
 
 
 func _process(delta: float) -> void:

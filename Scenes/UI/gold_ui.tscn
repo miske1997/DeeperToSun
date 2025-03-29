@@ -7,15 +7,10 @@ resource_name = "gold_ui"
 script/source = "extends Control
 
 
-var player: Player
-
-func _ready() -> void:
-	player = get_tree().get_nodes_in_group(\"Player\")[0]
-
 func _process(delta: float) -> void:
-	if not player or not is_instance_valid(player):
+	if Players.player == null:
 		return
-	$HBoxContainer/Label.text = str(player.playerData.gold)
+	$HBoxContainer/Label.text = str(Players.player.gold)
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_013kv"]

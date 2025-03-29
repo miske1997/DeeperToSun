@@ -1,3 +1,3 @@
 class_name SpawnRoom extends RoomConfig
 
-@export var waves: Array[WaveConfig] = []
+@export var spawnConfig: SpawnConfig

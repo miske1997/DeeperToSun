@@ -65,3 +65,5 @@ script = ExtResource("6_u61t3")
 script = ExtResource("12_t6noj")
 
 [node name="InteractUI" parent="InteractManager" instance=ExtResource("13_428ra")]
+
+[node name="Items" type="Node2D" parent="."]

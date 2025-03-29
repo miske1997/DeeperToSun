@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 	if not interactible:
 		ui.hide()
 		return
+	interactible.selected = true
 	ui.show()
 	text.text = interactible.interactText
 	if Input.is_action_just_pressed("Interact"):
@@ -33,6 +34,7 @@ func get_closest_interactible(interactibles: Array[Interactible]):
 func get_interactibles():
 	var interactibles: Array[Interactible] = []
 	for interactible: Interactible in get_tree().get_nodes_in_group("Interactible"):
+		interactible.selected = false
 		if not interactible.active or (global_position - interactible.global_position).length() > interactible.interactDistance:
 			interactible.inRange = false
 			continue

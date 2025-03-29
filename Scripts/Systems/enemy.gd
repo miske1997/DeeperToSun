@@ -3,10 +3,13 @@ class_name EnemyBase  extends CharacterBody2D
 @onready var sprite := $Sprite2D
 @export var enemyConfig: EnemyConfig
 @export var damageData: DamageData
+@export var dropTable: DropTable
+
 var speedController = StatController.new()
 var health := 10.0 
 var collisionInfluence = Vector2.ZERO
 var dashing = false
+var died := false
 
 signal takeDamage
 

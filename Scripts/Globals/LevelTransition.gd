@@ -22,7 +22,12 @@ func SaveGame():
 
 func LoadRoom(mapNode: MapNode, camera: Camera2D):
 	await get_tree().create_tween().tween_property(transitionRect, 'material:shader_parameter/circle_size', 0.0, 0.5).finished
-	var room = roomScene.instantiate()
+	var room
+	if mapNode.roomNode.roomConfig.roomScene != null:
+		room = mapNode.roomNode.roomConfig.roomScene.instantiate()
+	else:
+		room = roomScene.instantiate()
+		
 	room.roomConfig = mapNode.roomNode.roomConfig
 	room.mapNode = mapNode
 	get_tree().root.add_child(room)

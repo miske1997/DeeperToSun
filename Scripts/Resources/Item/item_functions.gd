@@ -39,6 +39,7 @@ func fungalInfection(data):
 		return
 	pool.dotName = "Poisoned"
 	pool.position = enemy.position
+	pool.dotDuration = 4
 	tempFolder.add_child(pool)
 	
 func pinCushion(data):
@@ -71,6 +72,14 @@ func snakeFang(data):
 	var enemyHit: EnemyBase = data.enemy
 	Utills.set_status_effect(enemyHit, "Poisoned", 3.0, true)
 	
+func footFungus(data):
+
+	var player: Player = Players.player.character
+	var fungus = preload("res://Scenes/ItemScenes/poison_trail.tscn").instantiate()
+	if player.get_node("Items").has_node(str(fungus.name)):
+		return
+	player.get_node("Items").add_child(fungus)
+	
 func tungstenBalls(data):
 	if data.damageData.damageSource != Enums.DamageSource.AUTO_ATTACK:
 		return
@@ -101,7 +110,7 @@ func oilyRag(data):
 	var enemyHit: EnemyBase = data.enemy
 	Utills.set_status_effect(enemyHit, "Burning", 3.0, true)
 
-func tickingBomb(data):
+func fireSoul(data):
 	var bomb = preload("res://Scenes/ItemScenes/ticking_bomb.tscn").instantiate()
 	var enemy: EnemyBase = data.enemy
 
@@ -128,8 +137,10 @@ func thornMail(data):
 	var enemyHitting: EnemyBase = data.damageData.damageDealer
 	Utills.set_status_effect(enemyHitting, "Bleading", 3.0, true)
 
+func slimeBlessing(data):
+	data.projectileConfig.addons.push_back("bounce")
 		
-func glassAmour(data):
+func glassArmour(data):
 	if data.damageData.damageSource != Enums.DamageSource.CONTACT:
 		return
 	var enemyHitting: EnemyBase = data.damageData.damageDealer

@@ -10,15 +10,21 @@
 [sub_resource type="Resource" id="Resource_buax0"]
 script = ExtResource("2_315hg")
 state = ""
+sprite = ""
 name = "PinCushion"
 type = "passive"
+description = "No description"
+cost = 20
 
 [sub_resource type="Resource" id="Resource_cotrj"]
 script = ExtResource("3_0yxdb")
 function = "pressTheAttack"
 amount = 1
+sprite = ""
 name = "PressTheAttack"
 type = "passive"
+description = "No description"
+cost = 20
 
 [sub_resource type="Resource" id="Resource_cdbqh"]
 script = ExtResource("3_nl5a2")
@@ -26,8 +32,11 @@ function = "pressTheAttack"
 state = ""
 cooldown = 5.0
 sprite = ""
+cooldownRemaning = 0.0
 name = "PressTheAttack"
 type = "passive"
+description = "No description"
+cost = 20
 
 [resource]
 script = ExtResource("2_056vv")

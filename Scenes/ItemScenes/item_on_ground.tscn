@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpoqqridouncs"]
+[gd_scene load_steps=5 format=3 uid="uid://dpoqqridouncs"]
 
 [ext_resource type="Script" path="res://Scripts/ItemScripts/item_on_ground.gd" id="1_81ysf"]
-[ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="2_kbgh3"]
+[ext_resource type="Texture2D" uid="uid://bphdbuog7pidt" path="res://Assets/Items/Funges.png" id="2_ealmw"]
+[ext_resource type="PackedScene" uid="uid://ca2ggbe5dxw76" path="res://Scenes/Basic/interactible.tscn" id="3_j0l4k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h6ut2"]
 
@@ -10,11 +11,16 @@ script = ExtResource("1_81ysf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15625, 0.15625)
-texture = ExtResource("2_kbgh3")
+texture = ExtResource("2_ealmw")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_h6ut2")
 
+[node name="Interact" parent="." instance=ExtResource("3_j0l4k")]
+interactDistance = 150.0
+interactText = "TAKE"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="interacted" from="Interact" to="." method="_on_interact_interacted"]

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpawnConfig" load_steps=6 format=3 uid="uid://bua0eg3ku6a54"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_config.gd" id="1_slp68"]
+[ext_resource type="Script" path="res://Scripts/Resources/wave_config.gd" id="2_x7u2i"]
+[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="3_y63fg"]
+
+[sub_resource type="Resource" id="Resource_3hrnf"]
+script = ExtResource("3_y63fg")
+enemy = "ogar_boss"
+spawn = Vector2(0.484925, 0.273869)
+
+[sub_resource type="Resource" id="Resource_4s6gt"]
+script = ExtResource("2_x7u2i")
+waveType = ""
+spawns = Array[ExtResource("3_y63fg")]([SubResource("Resource_3hrnf")])
+randomSpawn = false
+waveTimeout = 0.5
+
+[resource]
+script = ExtResource("1_slp68")
+waves = Array[ExtResource("2_x7u2i")]([SubResource("Resource_4s6gt")])

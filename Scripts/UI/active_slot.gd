@@ -70,6 +70,8 @@ func useActive():
 
 	
 func useConsumable():
+	if not Players.player.equppedConsumable:
+		return
 	var item = Players.player.equppedConsumable
 	item_functions[item.function].call({})
 	Players.player.equppedConsumable = null

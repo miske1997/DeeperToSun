@@ -4,4 +4,6 @@ class_name Interactible extends Node2D
 @export var interactText := "BUY"
 var inRange := false
 var active = true
+var selected := false
+
 signal interacted

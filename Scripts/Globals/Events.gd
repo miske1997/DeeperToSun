@@ -7,3 +7,4 @@ signal itemCollected
 signal itemBought
 
 signal enemyDied
+signal roomCompleated

@@ -10,7 +10,8 @@ func _ready() -> void:
 	
 func on_damage_delt(damageData: DamageData):
 	parent.health -= damageData.damage
-	if parent.health <= 0:
+	if parent.health <= 0 and not parent.died:
+		parent.died = true
 		parent.get_node("CollisionShape2D").disabled = true
 		#play death animation
 		#destroy enemy
@@ -24,4 +25,6 @@ func flash():
 	parent.sprite.use_parent_material = false
 	await get_tree().create_timer(0.1).timeout
 	parent.sprite.use_parent_material = true
+	
+
 	

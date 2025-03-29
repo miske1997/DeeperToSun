@@ -1,7 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://tu8vyh2aqc0u"]
+[gd_scene load_steps=30 format=3 uid="uid://tu8vyh2aqc0u"]
 
-[ext_resource type="Script" path="res://Scripts/Systems/room.gd" id="1_3m351"]
-[ext_resource type="Resource" uid="uid://cbkqp3w0epf2k" path="res://Data/Configs/Room/eg_item_room.tres" id="2_7bwko"]
+[ext_resource type="Script" path="res://Scripts/Systems/Rooms/room.gd" id="1_3m351"]
+[ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="2_6e61e"]
 [ext_resource type="Script" path="res://Scripts/Modules/spawner.gd" id="2_qi222"]
 [ext_resource type="PackedScene" uid="uid://b054quigmbjh7" path="res://Scenes/UI/health.tscn" id="3_6gwo6"]
 [ext_resource type="PackedScene" uid="uid://cl24kdwq1sx4o" path="res://Scenes/door.tscn" id="3_nixdo"]
@@ -12,19 +12,50 @@
 [ext_resource type="PackedScene" uid="uid://b51ouytvbh0v2" path="res://Scenes/player.tscn" id="6_w54wr"]
 [ext_resource type="PackedScene" uid="uid://blqml5o5saasv" path="res://Scenes/wave_serializer.tscn" id="7_huvsm"]
 [ext_resource type="PackedScene" uid="uid://cef53hh3a5q1q" path="res://Scenes/UI/active_slot.tscn" id="8_eckfo"]
-[ext_resource type="PackedScene" uid="uid://cqn2moieim6bf" path="res://Scenes/Basic/item_pedistal.tscn" id="9_dlfe8"]
 [ext_resource type="PackedScene" uid="uid://7uefqtjc5fu3" path="res://Scenes/room_serializer.tscn" id="9_ltcgh"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="10_4qi8o"]
-[ext_resource type="PackedScene" uid="uid://jiwtmufujn2n" path="res://Prefabs/Enemies/shaman_gnome.tscn" id="10_ovxqh"]
-[ext_resource type="PackedScene" uid="uid://b03r2cwy7msfe" path="res://Prefabs/Enemies/warrior_gnome_test.tscn" id="11_titot"]
-[ext_resource type="PackedScene" uid="uid://7kt263aosrai" path="res://Prefabs/Enemies/runner_gnome.tscn" id="11_uesty"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item/active_item.gd" id="12_af50x"]
-[ext_resource type="PackedScene" uid="uid://oopslrkimatw" path="res://Prefabs/Enemies/ogar.tscn" id="12_c4eb8"]
 [ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="15_038gf"]
 [ext_resource type="Texture2D" uid="uid://bsebc84bkkcwr" path="res://icon.svg" id="16_en67b"]
 [ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="17_ya66c"]
 [ext_resource type="Resource" uid="uid://sqfmja62rseq" path="res://Data/Items/item_functions.tres" id="18_t17o6"]
-[ext_resource type="PackedScene" uid="uid://bbvjpa7eb87gd" path="res://Prefabs/Enemies/ogar_boss.tscn" id="22_tijuf"]
+
+[sub_resource type="GDScript" id="GDScript_hogp7"]
+resource_name = "CoinsCollect"
+script/source = "extends Node2D
+
+@export var collectSpeed := 2
+var pickup := false
+
+func _ready() -> void:
+	Events.roomCompleated.connect(func(): pickup = true)
+	#await get_tree().create_timer(2).timeout
+	#pickup = true
+	
+func _process(delta: float) -> void:
+	if not pickup:
+		return
+	pickUpCoins()
+
+func pickUpCoins():
+	for coin: Node2D in get_children():
+		coin.get_node(\"Animated\").visible = true
+		var distToPlayer = (Players.player.character.position - coin.position).length()
+		if distToPlayer <= 10:
+			Players.player.gold += 1
+			coin.queue_free()
+			continue
+		coin.position -= (coin.position - Players.player.character.position).normalized() * collectSpeed  
+"
+
+[sub_resource type="Resource" id="Resource_6j048"]
+script = ExtResource("10_4qi8o")
+state = ""
+sprite = "glassShield"
+name = "GlassShield"
+type = "passive"
+description = "No description"
+cost = 20
 
 [sub_resource type="Resource" id="Resource_dj4dh"]
 script = ExtResource("12_af50x")
@@ -35,24 +66,8 @@ sprite = "smite"
 cooldownRemaning = 0.0
 name = "Smite"
 type = "passive"
-
-[sub_resource type="Resource" id="Resource_o37cy"]
-script = ExtResource("10_4qi8o")
-state = ""
-name = "BackShots"
-type = "passive"
-
-[sub_resource type="Resource" id="Resource_xf715"]
-script = ExtResource("10_4qi8o")
-state = ""
-name = "Heart"
-type = "passive"
-
-[sub_resource type="Resource" id="Resource_3ppdt"]
-script = ExtResource("10_4qi8o")
-state = ""
-name = "Shield"
-type = "passive"
+description = "No description"
+cost = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
 size = Vector2(27.5331, 437)
@@ -296,7 +311,7 @@ func proc_items():
 
 [node name="Room" type="Node2D" groups=["Room"]]
 script = ExtResource("1_3m351")
-roomConfig = ExtResource("2_7bwko")
+roomConfig = ExtResource("2_6e61e")
 door = ExtResource("3_nixdo")
 itemOnGround = ExtResource("15_038gf")
 
@@ -362,39 +377,19 @@ texture = ExtResource("5_32dm8")
 
 [node name="TemporaryObjects" type="Node2D" parent="." groups=["TemporaryObjects"]]
 
-[node name="Item" parent="." instance=ExtResource("15_038gf")]
-position = Vector2(808, 507)
-item = SubResource("Resource_dj4dh")
+[node name="Coins" type="Node2D" parent="TemporaryObjects"]
+script = SubResource("GDScript_hogp7")
+collectSpeed = 1
 
-[node name="Item2" parent="." instance=ExtResource("15_038gf")]
+[node name="Items" type="Node2D" parent="TemporaryObjects"]
+
+[node name="Item2" parent="TemporaryObjects/Items" instance=ExtResource("15_038gf")]
 position = Vector2(1114, 507)
+item = SubResource("Resource_6j048")
 
-[node name="Item3" parent="." instance=ExtResource("15_038gf")]
-position = Vector2(1006, 741)
-
-[node name="Shop" type="Node2D" parent="."]
-visible = false
-position = Vector2(-43, -68)
-
-[node name="ItemPedistal" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(841, 646)
-item = SubResource("Resource_o37cy")
-
-[node name="ItemPedistal2" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(929, 647)
-item = SubResource("Resource_xf715")
-
-[node name="ItemPedistal3" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(1018, 646)
-item = SubResource("Resource_3ppdt")
-
-[node name="ItemPedistal4" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(1108, 646)
-item = SubResource("Resource_3ppdt")
-
-[node name="ItemPedistal5" parent="Shop" instance=ExtResource("9_dlfe8")]
-position = Vector2(1194, 646)
-item = SubResource("Resource_3ppdt")
+[node name="Item" parent="TemporaryObjects/Items/Item2" instance=ExtResource("15_038gf")]
+position = Vector2(-306, 0)
+item = SubResource("Resource_dj4dh")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -440,107 +435,6 @@ configName = "Test1"
 visible = false
 waveTimeout = 0.5
 
-[node name="Enemy" parent="RoomSerializer/WaveSerializer" instance=ExtResource("11_titot")]
-position = Vector2(1000, 315)
-
-[node name="WaveSerializer2" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-waveTimeout = 0.5
-
-[node name="Enemy" parent="RoomSerializer/WaveSerializer2" instance=ExtResource("11_titot")]
-position = Vector2(1191, 403)
-
-[node name="WaveSerializer3" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-waveTimeout = 0.5
-
-[node name="Enemy" parent="RoomSerializer/WaveSerializer3" instance=ExtResource("11_titot")]
-position = Vector2(1271, 614)
-
-[node name="WaveSerializer4" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-waveTimeout = 0.5
-
-[node name="Enemy" parent="RoomSerializer/WaveSerializer4" instance=ExtResource("11_titot")]
-position = Vector2(1208, 812)
-
-[node name="WaveSerializer5" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-waveTimeout = 0.5
-
-[node name="Enemy" parent="RoomSerializer/WaveSerializer5" instance=ExtResource("11_titot")]
-position = Vector2(996, 887)
-
-[node name="WaveSerializer6" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-waveTimeout = 0.5
-
-[node name="Enemy" parent="RoomSerializer/WaveSerializer6" instance=ExtResource("11_titot")]
-position = Vector2(773, 809)
-
-[node name="WaveSerializer7" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-waveTimeout = 0.5
-
-[node name="Enemy" parent="RoomSerializer/WaveSerializer7" instance=ExtResource("11_titot")]
-position = Vector2(710, 599)
-
-[node name="WaveSerializer8" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-waveTimeout = 15.0
-
-[node name="Enemy" parent="RoomSerializer/WaveSerializer8" instance=ExtResource("11_titot")]
-position = Vector2(791, 393)
-
-[node name="WaveSerializer9" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-
-[node name="RunnerGnome" parent="RoomSerializer/WaveSerializer9" instance=ExtResource("11_uesty")]
-position = Vector2(628, 214)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
-
-[node name="RunnerGnome2" parent="RoomSerializer/WaveSerializer9" instance=ExtResource("11_uesty")]
-position = Vector2(1342, 925)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
-
-[node name="WaveSerializer10" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
-
-[node name="RunnerGnome" parent="RoomSerializer/WaveSerializer10" instance=ExtResource("11_uesty")]
-position = Vector2(1351, 210)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
-
-[node name="RunnerGnome2" parent="RoomSerializer/WaveSerializer10" instance=ExtResource("11_uesty")]
-position = Vector2(627, 928)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
-
-[node name="WaveSerializer11" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-
-[node name="Ogar" parent="RoomSerializer/WaveSerializer11" instance=ExtResource("12_c4eb8")]
-position = Vector2(976, 575)
-floor_stop_on_slope = true
-floor_block_on_wall = true
-
-[node name="ShamanGnome" parent="RoomSerializer/WaveSerializer11" instance=ExtResource("10_ovxqh")]
-position = Vector2(1300, 731)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
-
-[node name="ShamanGnome2" parent="RoomSerializer/WaveSerializer11" instance=ExtResource("10_ovxqh")]
-position = Vector2(641, 430)
-motion_mode = 0
-floor_stop_on_slope = true
-floor_block_on_wall = true
-
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 z_index = 500
@@ -560,8 +454,3 @@ texture = ExtResource("16_en67b")
 script = SubResource("GDScript_1qht1")
 items_data = ExtResource("17_ya66c")
 item_functions = ExtResource("18_t17o6")
-
-[node name="OgreBoss" parent="." instance=ExtResource("22_tijuf")]
-process_mode = 4
-position = Vector2(978, 380)
-scale = Vector2(4.51111, 4.51111)
