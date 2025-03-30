@@ -41,7 +41,7 @@ window/size/viewport_height=1080
 window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
-mouse_cursor/custom_image="res://Assets/Cursor.png"
+mouse_cursor/custom_image="res://Assets/UI/Cursor.png"
 
 [editor_plugins]
 

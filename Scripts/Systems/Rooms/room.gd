@@ -21,7 +21,7 @@ func _ready() -> void:
 	set_room_bg()
 	spawn_player()
 	
-	if roomConfig.roomType == Enums.RoomType.SPAWN:
+	if roomConfig.roomType == Enums.RoomType.SPAWN or roomConfig.roomType == Enums.RoomType.BOSS:
 		roomStarted = true
 		spawn_enemies(roomConfig.spawnConfig.waves[waveCount])
 	if roomConfig.roomType == Enums.RoomType.ITEM:

@@ -13,11 +13,16 @@ func _ready() -> void:
 		await get_tree().process_frame
 	$Panel/Label.text = actionKeyBind
 	if actionSlotType == Enums.ActiveSlotType.ACTIVE:
+		if not Players.player.equppedItem:
+			itemSprite.texture = null
 		Players.player.activeItemEquipped.connect(item_changed)
 	elif actionSlotType == Enums.ActiveSlotType.CONSUMABLE:
+		if not Players.player.consumableItemEquipped:
+			itemSprite.texture = null
 		Players.player.consumableItemEquipped.connect(item_changed)
 	else:
 		pass
+		
 
 func get_item():
 	if actionSlotType == Enums.ActiveSlotType.ACTIVE:

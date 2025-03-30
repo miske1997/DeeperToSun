@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqn2moieim6bf"]
+[gd_scene load_steps=9 format=3 uid="uid://cqn2moieim6bf"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="1_tvqpg"]
 [ext_resource type="Texture2D" uid="uid://dwulgcgxt41i7" path="res://Assets/Dekoracije/Senka1.png" id="1_ua55u"]
 [ext_resource type="Texture2D" uid="uid://jmiv0ysq7aef" path="res://Assets/Projectiles/YellowGunProjectile.png" id="2_tlpvp"]
 [ext_resource type="PackedScene" uid="uid://ca2ggbe5dxw76" path="res://Scenes/Basic/interactible.tscn" id="3_r3x6e"]
+[ext_resource type="Material" uid="uid://dahlyvlveeycu" path="res://Materials/Shaders/disolve.tres" id="3_r7ofm"]
 
 [sub_resource type="GDScript" id="GDScript_gbfk7"]
 resource_name = "item_pedistal"
@@ -97,6 +98,7 @@ scale = Vector2(0.268859, 0.268859)
 texture = ExtResource("1_ua55u")
 
 [node name="ItemSprite" type="Sprite2D" parent="."]
+material = ExtResource("3_r7ofm")
 position = Vector2(0, -30)
 rotation = -0.462734
 texture = ExtResource("2_tlpvp")

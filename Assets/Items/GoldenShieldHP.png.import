@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3v658frsem24"
-path="res://.godot/imported/HeartHalfl.png-0b4218a23251b5e53116378281ca6fb1.ctex"
+uid="uid://biw44ult7jtmx"
+path="res://.godot/imported/GoldenShieldHP.png-cae4eb891622146e11a29eb3c55dfda9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HeartHalfl.png"
-dest_files=["res://.godot/imported/HeartHalfl.png-0b4218a23251b5e53116378281ca6fb1.ctex"]
+source_file="res://Assets/Items/GoldenShieldHP.png"
+dest_files=["res://.godot/imported/GoldenShieldHP.png-cae4eb891622146e11a29eb3c55dfda9.ctex"]
 
 [params]
 

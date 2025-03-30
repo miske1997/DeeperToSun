@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b054quigmbjh7"]
 
-[ext_resource type="Texture2D" uid="uid://cyhu6vakfg3m3" path="res://Assets/HeartFull.png" id="1_66lfy"]
-[ext_resource type="Texture2D" uid="uid://bqi7ias1ic3bo" path="res://Assets/ShieldHP.png" id="2_68kke"]
+[ext_resource type="Texture2D" uid="uid://cyhu6vakfg3m3" path="res://Assets/UI/HeartFull.png" id="1_66lfy"]
+[ext_resource type="Texture2D" uid="uid://bqi7ias1ic3bo" path="res://Assets/UI/ShieldHP.png" id="2_68kke"]
 
 [sub_resource type="GDScript" id="GDScript_s4tbw"]
 resource_name = "health_ui"

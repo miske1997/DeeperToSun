@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbpkvsqntfcvp"
-path="res://.godot/imported/CoinAnimation-Sheet.png-ea6be3d450d5d0b87ff97a67ae934b44.ctex"
+uid="uid://b3v658frsem24"
+path="res://.godot/imported/HeartHalfl.png-2d666f59c68dfe4fbcbe3cb466ee52ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CoinAnimation-Sheet.png"
-dest_files=["res://.godot/imported/CoinAnimation-Sheet.png-ea6be3d450d5d0b87ff97a67ae934b44.ctex"]
+source_file="res://Assets/UI/HeartHalfl.png"
+dest_files=["res://.godot/imported/HeartHalfl.png-2d666f59c68dfe4fbcbe3cb466ee52ab.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biw44ult7jtmx"
-path="res://.godot/imported/GoldenShieldHP.png-711c4bf56da809830fb092c99e99ed51.ctex"
+uid="uid://6a1dneri0nve"
+path="res://.godot/imported/pixelnoiseSmall.png-8788f4a013ffd09d84fe25f485470cb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GoldenShieldHP.png"
-dest_files=["res://.godot/imported/GoldenShieldHP.png-711c4bf56da809830fb092c99e99ed51.ctex"]
+source_file="res://Materials/pixelnoiseSmall.png"
+dest_files=["res://.godot/imported/pixelnoiseSmall.png-8788f4a013ffd09d84fe25f485470cb4.ctex"]
 
 [params]
 

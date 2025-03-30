@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://4imh3icqbwol"]
+[gd_scene load_steps=43 format=3 uid="uid://4imh3icqbwol"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/map.gd" id="1_18e5r"]
 [ext_resource type="Script" path="res://Scripts/Modules/map/map_generator.gd" id="2_ahtpe"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_room.gd" id="7_2lg0a"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/room_roll.gd" id="14_gwiuj"]
 [ext_resource type="Resource" uid="uid://5jjnbvfq44or" path="res://Data/Configs/Room/eg_shop.tres" id="15_10l36"]
+[ext_resource type="Resource" uid="uid://bua0eg3ku6a54" path="res://Data/Configs/Room/BossSpawn.tres" id="16_27r28"]
 [ext_resource type="Script" path="res://Scripts/Resources/Room/shop_room.gd" id="17_5ah0i"]
 [ext_resource type="Script" path="res://Scripts/Resources/Map/node_config.gd" id="18_qh2hr"]
 
@@ -308,6 +309,7 @@ adjacentNodes = Array[NodePath]([NodePath("../BossRoom")])
 
 [sub_resource type="Resource" id="Resource_ej4il"]
 script = ExtResource("7_2lg0a")
+spawnConfig = ExtResource("16_27r28")
 roomType = 4
 
 [sub_resource type="Resource" id="Resource_uvwjf"]

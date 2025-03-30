@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b71ewa0wsnqed"
-path="res://.godot/imported/CoinVariations.png-45c520a18ae9b7c51053e0e4f08594b5.ctex"
+uid="uid://bqi7ias1ic3bo"
+path="res://.godot/imported/ShieldHP.png-26be20747b90d84f0d4b4eb73b87f59e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CoinVariations.png"
-dest_files=["res://.godot/imported/CoinVariations.png-45c520a18ae9b7c51053e0e4f08594b5.ctex"]
+source_file="res://Assets/UI/ShieldHP.png"
+dest_files=["res://.godot/imported/ShieldHP.png-26be20747b90d84f0d4b4eb73b87f59e.ctex"]
 
 [params]
 

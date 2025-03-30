@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqi7ias1ic3bo"
-path="res://.godot/imported/ShieldHP.png-8c7895ebb51185b995b730f30de9fb97.ctex"
+uid="uid://cbpkvsqntfcvp"
+path="res://.godot/imported/CoinAnimation-Sheet.png-403f8a3b89f6bd1d4ef4809b8c6c3381.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ShieldHP.png"
-dest_files=["res://.godot/imported/ShieldHP.png-8c7895ebb51185b995b730f30de9fb97.ctex"]
+source_file="res://Assets/Items/CoinAnimation-Sheet.png"
+dest_files=["res://.godot/imported/CoinAnimation-Sheet.png-403f8a3b89f6bd1d4ef4809b8c6c3381.ctex"]
 
 [params]
 

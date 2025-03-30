@@ -320,6 +320,12 @@ texture = ExtResource("1_k8osq")
 position = Vector2(1709, 998)
 texture = ExtResource("9_me8kp")
 
+[node name="Wind" parent="." instance=ExtResource("13_3kw7b")]
+visible = false
+position = Vector2(1, 457)
+scale = Vector2(4.57333, 3.01333)
+amount = 25
+
 [node name="Leaves" parent="." instance=ExtResource("16_v0dt2")]
 position = Vector2(991, 406)
 scale = Vector2(1.95761, 1.95761)
@@ -327,12 +333,12 @@ lifetime = 5.0
 
 [node name="Drvo" type="Sprite2D" parent="."]
 material = ExtResource("6_0mko7")
-position = Vector2(437, 613)
+position = Vector2(437, 622)
 scale = Vector2(2.20426, 2.20426)
 texture = ExtResource("10_h2fq2")
 
 [node name="Table" type="Sprite2D" parent="."]
-position = Vector2(1015.22, 952)
+position = Vector2(1015.22, 965)
 scale = Vector2(3.20273, 2.82796)
 texture = ExtResource("2_o0uhp")
 
@@ -368,12 +374,6 @@ SPEED = 700.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(966, 539)
 
-[node name="Wind" parent="." instance=ExtResource("13_3kw7b")]
-visible = false
-position = Vector2(1, 457)
-scale = Vector2(4.57333, 3.01333)
-amount = 25
-
 [node name="ExitTrigger" type="Area2D" parent="."]
 position = Vector2(1912, 1073)
 
@@ -382,7 +382,6 @@ position = Vector2(-11, -221)
 shape = SubResource("RectangleShape2D_vjtbi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 z_index = 500
 material = SubResource("ShaderMaterial_ykunv")
 offset_left = 4.0
