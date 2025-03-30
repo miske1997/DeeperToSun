@@ -21,6 +21,7 @@ func _ready() -> void:
 	animateDown()
 	interactible.interacted.connect(onBuy)
 
+
 func on_item_set(value: ItemConfig):
 	item = value
 	if not cost:
@@ -33,7 +34,9 @@ func onBuy():
 func bought():
 	interactible.active = false
 	collected = true
-	itemSprite.hide()
+	Utills.add_shader(itemSprite, \"disolve\")
+	cost.hide()
+	#itemSprite.hide()
 
 func animateUp():
 	if collected:
@@ -98,5 +101,6 @@ position = Vector2(0, -30)
 rotation = -0.462734
 texture = ExtResource("2_tlpvp")
 
-[node name="Interact" parent="." instance=ExtResource("3_r3x6e")]
+[node name="Interact" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_r3x6e")]
 interactDistance = 150.0
+sprite = NodePath("../ItemSprite")

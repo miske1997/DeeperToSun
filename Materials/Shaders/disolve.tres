@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dahlyvlveeycu"]
+
+[ext_resource type="Shader" path="res://Materials/Shaders/Scripts/disolve.gdshader" id="1_52336"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iyjqb"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t58xq"]
+noise = SubResource("FastNoiseLite_iyjqb")
+
+[resource]
+resource_local_to_scene = true
+resource_name = "disolve"
+shader = ExtResource("1_52336")
+shader_parameter/position = Vector2(0.505, 0.39)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.35
+shader_parameter/burnColor = Color(0, 0, 0, 1)
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_t58xq")
+metadata/Animated = true
+metadata/Param = "radius"
+metadata/Time = 1.5
+metadata/Goal = 1.2

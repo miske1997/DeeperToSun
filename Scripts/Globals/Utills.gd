@@ -1,5 +1,7 @@
 extends Node
 
+var shaderFolder := "res://Materials/Shaders/"
+
 func object_has_signal( object: Object, signal_name: String ) -> bool:
 	var list = object.get_signal_list()
 	
@@ -27,3 +29,18 @@ func set_status_effect(enemyHit, effectName: String, duration: float, extend: bo
 		enemyHit.set_meta(effectName + "Duration", enemyHit.get_meta(effectName + "Duration") + duration)
 	else:
 		enemyHit.set_meta(effectName + "Duration", duration)
+
+func add_shader(object: CanvasItem, shaderName: String):
+	var shader = load(shaderFolder + shaderName + ".tres").duplicate()
+	object.material = shader
+	if not shader.has_meta("Animated"):
+		return
+	get_tree().create_tween().tween_property(object, 'material:shader_parameter/' + shader.get_meta("Param"), shader.get_meta("Goal"), shader.get_meta("Time"))
+
+	
+func remove_shader(object: CanvasItem, shaderName: String):
+	if object.material and object.material.resource_name == shaderName:
+		object.material = null
+	
+	
+#func replase_shader(object, shaderName: String):

@@ -24,7 +24,7 @@
 resource_name = "CoinsCollect"
 script/source = "extends Node2D
 
-@export var collectSpeed := 2
+@export var collectSpeed := 200
 var pickup := false
 
 func _ready() -> void:
@@ -35,9 +35,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not pickup:
 		return
-	pickUpCoins()
+	pickUpCoins(delta)
 
-func pickUpCoins():
+func pickUpCoins(delta: float):
 	for coin: Node2D in get_children():
 		coin.get_node(\"Animated\").visible = true
 		var distToPlayer = (Players.player.character.position - coin.position).length()
@@ -45,7 +45,7 @@ func pickUpCoins():
 			Players.player.gold += 1
 			coin.queue_free()
 			continue
-		coin.position -= (coin.position - Players.player.character.position).normalized() * collectSpeed  
+		coin.position -= (coin.position - Players.player.character.position).normalized() * collectSpeed * delta 
 "
 
 [sub_resource type="Resource" id="Resource_6j048"]
@@ -72,7 +72,7 @@ cost = 20
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
 size = Vector2(27.5331, 437)
 
-[sub_resource type="Shader" id="Shader_h37th"]
+[sub_resource type="Shader" id="Shader_nukw7"]
 code = "/*
 Shader from Godot Shaders - the free shader library.
 
@@ -258,7 +258,7 @@ void fragment(){
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rcw8j"]
-shader = SubResource("Shader_h37th")
+shader = SubResource("Shader_nukw7")
 shader_parameter/resolution = Vector2(960, 540)
 shader_parameter/scan_line_amount = 1.0
 shader_parameter/warp_amount = 0.26
@@ -379,7 +379,6 @@ texture = ExtResource("5_32dm8")
 
 [node name="Coins" type="Node2D" parent="TemporaryObjects"]
 script = SubResource("GDScript_hogp7")
-collectSpeed = 1
 
 [node name="Items" type="Node2D" parent="TemporaryObjects"]
 

@@ -18,9 +18,10 @@ texture = ExtResource("2_ealmw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_h6ut2")
 
-[node name="Interact" parent="." instance=ExtResource("3_j0l4k")]
+[node name="Interact" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_j0l4k")]
 interactDistance = 150.0
 interactText = "TAKE"
+sprite = NodePath("../Sprite2D")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="interacted" from="Interact" to="." method="_on_interact_interacted"]
