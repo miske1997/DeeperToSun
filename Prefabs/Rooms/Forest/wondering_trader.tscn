@@ -1,21 +1,31 @@
-[gd_scene load_steps=23 format=3 uid="uid://bvei632u5xegv"]
+[gd_scene load_steps=33 format=3 uid="uid://kxrcc7yw1uf4"]
 
-[ext_resource type="PackedScene" uid="uid://dgsmnmohvgqcc" path="res://Scenes/UI/item_description.tscn" id="1_2hxah"]
-[ext_resource type="Script" path="res://Scripts/Systems/Rooms/shop_room.gd" id="1_cr7bm"]
-[ext_resource type="Texture2D" uid="uid://b1d24puc63oar" path="res://Assets/Dekoracije/BoardLivada.png" id="1_k8osq"]
-[ext_resource type="PackedScene" uid="uid://c71swurmfu3c4" path="res://Scenes/UI/gold_ui.tscn" id="2_mjp2x"]
-[ext_resource type="Texture2D" uid="uid://deeyt10sdtka7" path="res://Assets/NPC/Table.png" id="2_o0uhp"]
-[ext_resource type="Texture2D" uid="uid://bmcxfkt4xfbvd" path="res://Assets/NPC/Scavenger.png" id="3_qjidd"]
-[ext_resource type="PackedScene" uid="uid://cqn2moieim6bf" path="res://Scenes/Basic/item_pedistal.tscn" id="5_ly578"]
-[ext_resource type="PackedScene" uid="uid://cq7kng8350ev1" path="res://Scenes/player_side.tscn" id="5_m3fe8"]
-[ext_resource type="Material" uid="uid://c4mq015w5kago" path="res://Materials/Shaders/tree_sway.tres" id="6_0mko7"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="6_flhpp"]
-[ext_resource type="Texture2D" uid="uid://bwbjlxucqo1gg" path="res://Assets/Dekoracije/Trava2.png" id="9_me8kp"]
-[ext_resource type="Texture2D" uid="uid://c47pur88gjxk7" path="res://Assets/Dekoracije/Drvo.png" id="10_h2fq2"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item/active_item.gd" id="12_k156k"]
-[ext_resource type="PackedScene" uid="uid://dpehbb02g6vgc" path="res://Prefabs/Particles/wind.tscn" id="13_3kw7b"]
-[ext_resource type="Resource" uid="uid://bgygohlef5wto" path="res://Data/Items/item_descriptions.tres" id="13_nwjcc"]
-[ext_resource type="PackedScene" uid="uid://dkj43t2nxk03m" path="res://Prefabs/Particles/leaves.tscn" id="16_v0dt2"]
+[ext_resource type="Script" path="res://Scripts/Systems/Rooms/shop_room.gd" id="1_rqimd"]
+[ext_resource type="PackedScene" uid="uid://dgsmnmohvgqcc" path="res://Scenes/UI/item_description.tscn" id="2_7jo8m"]
+[ext_resource type="PackedScene" uid="uid://c71swurmfu3c4" path="res://Scenes/UI/gold_ui.tscn" id="3_xhsje"]
+[ext_resource type="Texture2D" uid="uid://c8cm1p0xhap5e" path="res://Assets/Rooms/WondererShop/Shop1-Nebo.png" id="4_6a7ak"]
+[ext_resource type="Texture2D" uid="uid://b1d24puc63oar" path="res://Assets/Dekoracije/BoardLivada.png" id="4_dnibn"]
+[ext_resource type="Texture2D" uid="uid://bkce3un6c3jam" path="res://Assets/Rooms/WondererShop/Shop1-Pozaduna-planine.png" id="5_brhiv"]
+[ext_resource type="PackedScene" uid="uid://dkj43t2nxk03m" path="res://Prefabs/Particles/leaves.tscn" id="6_fg4ks"]
+[ext_resource type="Material" uid="uid://c4mq015w5kago" path="res://Materials/Shaders/tree_sway.tres" id="7_d55d5"]
+[ext_resource type="Texture2D" uid="uid://cl4p6q53j7oal" path="res://Assets/Rooms/WondererShop/Shop1-Zbun.png" id="8_8y2k1"]
+[ext_resource type="Texture2D" uid="uid://c47pur88gjxk7" path="res://Assets/Dekoracije/Drvo.png" id="8_xr6qk"]
+[ext_resource type="Texture2D" uid="uid://deeyt10sdtka7" path="res://Assets/NPC/Table.png" id="9_cq7kd"]
+[ext_resource type="Texture2D" uid="uid://dqn7krrj2udx2" path="res://Assets/Rooms/WondererShop/Shop1-Zbun3.png" id="9_si3lg"]
+[ext_resource type="Texture2D" uid="uid://ba68gue1rg81b" path="res://Assets/Rooms/WondererShop/Shop1-Zbun2.png" id="10_fpfoh"]
+[ext_resource type="Texture2D" uid="uid://bmcxfkt4xfbvd" path="res://Assets/NPC/Scavenger.png" id="10_pf41o"]
+[ext_resource type="Texture2D" uid="uid://ctib6o47rq4yd" path="res://Assets/Dekoracije/ZbunManji.png" id="11_5dayo"]
+[ext_resource type="Resource" uid="uid://bgygohlef5wto" path="res://Data/Items/item_descriptions.tres" id="11_73fjx"]
+[ext_resource type="PackedScene" uid="uid://cqn2moieim6bf" path="res://Scenes/Basic/item_pedistal.tscn" id="12_2sber"]
+[ext_resource type="Texture2D" uid="uid://bgtidphi6njj1" path="res://Assets/Dekoracije/ZbunVeci.png" id="12_w0j5a"]
+[ext_resource type="Texture2D" uid="uid://n3sxusufdn4n" path="res://Assets/Dekoracije/Trava3.png" id="13_7kfl0"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="13_75er4"]
+[ext_resource type="Texture2D" uid="uid://lc4iwe8gr2qd" path="res://Assets/Rooms/WondererShop/Shop1-Sator.png" id="14_4ylde"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/active_item.gd" id="14_kpc7r"]
+[ext_resource type="PackedScene" uid="uid://cq7kng8350ev1" path="res://Scenes/player_side.tscn" id="15_j60ji"]
+[ext_resource type="Texture2D" uid="uid://d2i5e61cyeq6y" path="res://Assets/Rooms/WondererShop/Sop-wanderer-zemlja.png" id="15_titfh"]
+[ext_resource type="PackedScene" uid="uid://dpehbb02g6vgc" path="res://Prefabs/Particles/wind.tscn" id="16_rtc75"]
+[ext_resource type="Texture2D" uid="uid://ssq8ipfgye44" path="res://Assets/Rooms/WondererShop/Shop1-Pozaduna-Nebo.png" id="25_p5skc"]
 
 [sub_resource type="GDScript" id="GDScript_d65gv"]
 resource_name = "ShopManager"
@@ -61,7 +71,7 @@ func item_rolled(rolledItems: Array, item):
 "
 
 [sub_resource type="Resource" id="Resource_uh7mo"]
-script = ExtResource("6_flhpp")
+script = ExtResource("13_75er4")
 state = ""
 sprite = "FootFungus"
 name = "FootFungus"
@@ -70,7 +80,7 @@ description = "No description"
 cost = 20
 
 [sub_resource type="Resource" id="Resource_50cgq"]
-script = ExtResource("12_k156k")
+script = ExtResource("14_kpc7r")
 function = "pressTheAttack"
 state = ""
 cooldown = 5.0
@@ -287,10 +297,10 @@ shader_parameter/scan_line_strength = -6.261
 shader_parameter/pixel_strength = -4.0
 
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("shopManager") groups=["Room"]]
-script = ExtResource("1_cr7bm")
+script = ExtResource("1_rqimd")
 shopManager = NodePath("ShopManager")
 
-[node name="ItemDescription" parent="." instance=ExtResource("1_2hxah")]
+[node name="ItemDescription" parent="." instance=ExtResource("2_7jo8m")]
 visible = false
 z_index = 50
 anchors_preset = 7
@@ -303,7 +313,7 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="GoldUI" parent="." instance=ExtResource("2_mjp2x")]
+[node name="GoldUI" parent="." instance=ExtResource("3_xhsje")]
 z_index = 50
 offset_left = 97.0
 offset_top = 55.0
@@ -311,56 +321,171 @@ offset_right = 97.0
 offset_bottom = 55.0
 scale = Vector2(1.47367, 1.47367)
 
+[node name="BG2" type="Sprite2D" parent="."]
+position = Vector2(2688, 175)
+scale = Vector2(5.34376, 6.27281)
+texture = ExtResource("4_dnibn")
+
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(1025, 28)
-scale = Vector2(1.73625, 1.49625)
-texture = ExtResource("1_k8osq")
+position = Vector2(956, 436.3)
+scale = Vector2(3.07776, 4.19235)
+texture = ExtResource("4_6a7ak")
+metadata/_edit_lock_ = true
 
-[node name="Trava2" type="Sprite2D" parent="."]
-position = Vector2(1709, 998)
-texture = ExtResource("9_me8kp")
+[node name="Hills" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(641, 707)
+scale = Vector2(5.01884, 5.01884)
+texture = ExtResource("5_brhiv")
 
-[node name="Leaves" parent="." instance=ExtResource("16_v0dt2")]
+[node name="Zelenilo" type="Node2D" parent="."]
+
+[node name="Drvo" type="Sprite2D" parent="Zelenilo"]
+material = ExtResource("7_d55d5")
+position = Vector2(437, 630)
+scale = Vector2(2.20426, 2.20426)
+texture = ExtResource("8_xr6qk")
+
+[node name="Drvo3" type="Sprite2D" parent="Zelenilo"]
+material = ExtResource("7_d55d5")
+position = Vector2(1811, 617)
+scale = Vector2(2.20426, 2.20426)
+texture = ExtResource("8_xr6qk")
+
+[node name="Drvo5" type="Sprite2D" parent="Zelenilo"]
+visible = false
+material = ExtResource("7_d55d5")
+position = Vector2(1179, 827)
+scale = Vector2(0.414591, 0.414591)
+texture = ExtResource("8_xr6qk")
+
+[node name="Drvo4" type="Sprite2D" parent="Zelenilo"]
+visible = false
+material = ExtResource("7_d55d5")
+position = Vector2(1308, 796)
+scale = Vector2(0.792146, 0.792146)
+texture = ExtResource("8_xr6qk")
+
+[node name="Drvo2" type="Sprite2D" parent="Zelenilo"]
+material = ExtResource("7_d55d5")
+position = Vector2(267, 665)
+scale = Vector2(1.99348, 1.99348)
+texture = ExtResource("8_xr6qk")
+
+[node name="Shop1-zbun3" type="Sprite2D" parent="Zelenilo"]
+visible = false
+position = Vector2(794, 975)
+rotation = 0.12307
+scale = Vector2(1.7865, 1.7865)
+texture = ExtResource("9_si3lg")
+
+[node name="Shop1-zbun5" type="Sprite2D" parent="Zelenilo"]
+position = Vector2(325, 959)
+scale = Vector2(1.8697, 1.8697)
+texture = ExtResource("9_si3lg")
+
+[node name="Shop1-pozaduna-nebo" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(967, 64)
+scale = Vector2(3.23622, 3.23622)
+texture = ExtResource("25_p5skc")
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(965.332, 1041.75)
+scale = Vector2(3.25677, 3.25677)
+texture = ExtResource("15_titfh")
+
+[node name="Shop1-sator" type="Sprite2D" parent="."]
+position = Vector2(1607, 883)
+scale = Vector2(1.69161, 1.69161)
+texture = ExtResource("14_4ylde")
+
+[node name="NaFloor" type="Node2D" parent="."]
+
+[node name="Trava3" type="Sprite2D" parent="NaFloor"]
+position = Vector2(1763, 986)
+scale = Vector2(1.23481, 1.23481)
+texture = ExtResource("13_7kfl0")
+
+[node name="Trava4" type="Sprite2D" parent="NaFloor"]
+position = Vector2(1348, 986)
+scale = Vector2(1.23481, 1.23481)
+texture = ExtResource("13_7kfl0")
+
+[node name="Trava5" type="Sprite2D" parent="NaFloor"]
+position = Vector2(721, 984)
+scale = Vector2(1.23481, 1.23481)
+texture = ExtResource("13_7kfl0")
+
+[node name="ZbunVeci" type="Sprite2D" parent="NaFloor"]
+visible = false
+position = Vector2(1348, 898)
+scale = Vector2(1.11001, 1.11001)
+texture = ExtResource("12_w0j5a")
+
+[node name="ZbunManji" type="Sprite2D" parent="NaFloor"]
+visible = false
+position = Vector2(1119, 905)
+scale = Vector2(1.44865, 1.44865)
+texture = ExtResource("11_5dayo")
+
+[node name="Shop1-zbun" type="Sprite2D" parent="NaFloor"]
+position = Vector2(547, 952)
+scale = Vector2(1.99217, 1.99217)
+texture = ExtResource("8_8y2k1")
+
+[node name="Shop1-zbun2" type="Sprite2D" parent="NaFloor"]
+visible = false
+position = Vector2(1007, 968)
+scale = Vector2(1.40221, 1.40221)
+texture = ExtResource("8_8y2k1")
+
+[node name="Shop1-zbun3" type="Sprite2D" parent="NaFloor"]
+visible = false
+position = Vector2(1299, 951)
+scale = Vector2(1.95461, 1.95461)
+texture = ExtResource("8_8y2k1")
+
+[node name="Shop1-zbun4" type="Sprite2D" parent="NaFloor"]
+position = Vector2(144, 960)
+scale = Vector2(2.0942, 2.0942)
+texture = ExtResource("10_fpfoh")
+
+[node name="Leaves" parent="." instance=ExtResource("6_fg4ks")]
 position = Vector2(991, 406)
 scale = Vector2(1.95761, 1.95761)
 lifetime = 5.0
 
-[node name="Drvo" type="Sprite2D" parent="."]
-material = ExtResource("6_0mko7")
-position = Vector2(438, 617)
-scale = Vector2(2.20426, 2.20426)
-texture = ExtResource("10_h2fq2")
-
 [node name="Table" type="Sprite2D" parent="."]
-position = Vector2(1015.22, 952)
+position = Vector2(1015.22, 953)
 scale = Vector2(3.20273, 2.82796)
-texture = ExtResource("2_o0uhp")
+texture = ExtResource("9_cq7kd")
 
 [node name="Scavenger" type="Sprite2D" parent="."]
 position = Vector2(1482, 902)
 scale = Vector2(3.27653, 3.27653)
-texture = ExtResource("3_qjidd")
+texture = ExtResource("10_pf41o")
 
 [node name="ShopManager" type="Node2D" parent="." node_paths=PackedStringArray("itemDescription")]
 script = SubResource("GDScript_d65gv")
 itemDescription = NodePath("../ItemDescription")
-itemDescriptions = ExtResource("13_nwjcc")
+itemDescriptions = ExtResource("11_73fjx")
 
-[node name="ItemPedistal" parent="ShopManager" instance=ExtResource("5_ly578")]
+[node name="ItemPedistal" parent="ShopManager" instance=ExtResource("12_2sber")]
 position = Vector2(862, 913)
 scale = Vector2(3.24025, 3.24025)
 
-[node name="ItemPedistal2" parent="ShopManager" instance=ExtResource("5_ly578")]
+[node name="ItemPedistal2" parent="ShopManager" instance=ExtResource("12_2sber")]
 position = Vector2(1020, 913)
 scale = Vector2(3.24025, 3.24025)
 item = SubResource("Resource_uh7mo")
 
-[node name="ItemPedistal3" parent="ShopManager" instance=ExtResource("5_ly578")]
+[node name="ItemPedistal3" parent="ShopManager" instance=ExtResource("12_2sber")]
 position = Vector2(1177, 912)
 scale = Vector2(3.24025, 3.24025)
 item = SubResource("Resource_50cgq")
 
-[node name="PlayerSide" parent="." instance=ExtResource("5_m3fe8")]
+[node name="PlayerSide" parent="." instance=ExtResource("15_j60ji")]
 position = Vector2(252, 1003)
 scale = Vector2(19.3177, 19.3177)
 SPEED = 700.0
@@ -368,7 +493,7 @@ SPEED = 700.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(966, 539)
 
-[node name="Wind" parent="." instance=ExtResource("13_3kw7b")]
+[node name="Wind" parent="." instance=ExtResource("16_rtc75")]
 visible = false
 position = Vector2(1, 457)
 scale = Vector2(4.57333, 3.01333)

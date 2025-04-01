@@ -8,6 +8,7 @@ var onCooldown = false
 
 func _ready() -> void:
 	activate.connect(activate_weapon)
+	sprite.frame_changed.connect(on_frame_change)
 	timer.wait_time = weaponConfig.attackSpeed
 	weaponConfig.damageData.damageDealer = get_parent()
 
@@ -24,9 +25,11 @@ func activate_weapon():
 	await timer.timeout
 	onCooldown = false
 
-func fire():
-	var amount = Players.player.stats.GetStat("Amount")
-	ProjectileEmitter.spawn_projectiles_cone_middle(weaponConfig.projectileConfig, weaponConfig.damageData, sprite.global_position, Vector2(cos(rotation), sin(rotation)), 20.0 * amount, amount)
+func on_frame_change():
+	if sprite.frame == 4:
+		var amount = Players.player.stats.GetStat("Amount")
+		#ProjectileEmitter.spawn_projectile(weaponConfig.projectileConfig, weaponConfig.damageData, sprite.global_position, rotation, Vector2(cos(rotation), sin(rotation)))
+		ProjectileEmitter.spawn_projectiles_cone_middle(weaponConfig.projectileConfig, weaponConfig.damageData, sprite.global_position, Vector2(cos(rotation), sin(rotation)), 20.0 * amount, amount)
 
 
 func look_at_target():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csw3c3ukcrnqt"
-path="res://.godot/imported/SpikeDown.png-befe024dcdabe2d886c3d966c727d055.ctex"
+uid="uid://d2i5e61cyeq6y"
+path="res://.godot/imported/Sop-wanderer-zemlja.png-f71bbd844aea55e0cf9ed86226657616.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemies/SpikeDown.png"
-dest_files=["res://.godot/imported/SpikeDown.png-befe024dcdabe2d886c3d966c727d055.ctex"]
+source_file="res://Assets/Rooms/WondererShop/Sop-wanderer-zemlja.png"
+dest_files=["res://.godot/imported/Sop-wanderer-zemlja.png-f71bbd844aea55e0cf9ed86226657616.ctex"]
 
 [params]
 

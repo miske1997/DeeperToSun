@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chy8my4fwvlbl"
-path="res://.godot/imported/Spike.png-034b78e634f02557f11c90b509e118da.ctex"
+uid="uid://cl4p6q53j7oal"
+path="res://.godot/imported/Shop1-Zbun.png-6e9cf3698f894426ea63db0490da6b29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemies/Spike.png"
-dest_files=["res://.godot/imported/Spike.png-034b78e634f02557f11c90b509e118da.ctex"]
+source_file="res://Assets/Rooms/WondererShop/Shop1-Zbun.png"
+dest_files=["res://.godot/imported/Shop1-Zbun.png-6e9cf3698f894426ea63db0490da6b29.ctex"]
 
 [params]
 

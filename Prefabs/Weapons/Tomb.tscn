@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://g84b8p3kgoiv"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/Weapons/tomb.gd" id="1_nsayn"]
+[ext_resource type="Texture2D" uid="uid://db2dsv1aqth2m" path="res://Assets/Weapons/player/BowShoot-Sheet.png" id="5_yib4b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko1dr"]
+atlas = ExtResource("5_yib4b")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axdxm"]
+atlas = ExtResource("5_yib4b")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itddu"]
+atlas = ExtResource("5_yib4b")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khdsn"]
+atlas = ExtResource("5_yib4b")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhd8s"]
+atlas = ExtResource("5_yib4b")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bh5ya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko1dr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axdxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itddu")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_khdsn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_qhd8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko1dr")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Tomb" type="Node2D" groups=["Weapon"]]
+scale = Vector2(0.125715, 0.125715)
+script = ExtResource("1_nsayn")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(63.6358, 0)
+rotation = 3.14159
+scale = Vector2(1.92664, 1.92664)
+sprite_frames = SubResource("SpriteFrames_bh5ya")
+animation = &"shoot"
+frame = 5
+frame_progress = 1.0
+
+[node name="Timer" type="Timer" parent="."]

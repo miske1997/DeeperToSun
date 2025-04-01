@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b054quigmbjh7"]
 
-[ext_resource type="Texture2D" uid="uid://cyhu6vakfg3m3" path="res://Assets/UI/HeartFull.png" id="1_66lfy"]
+[ext_resource type="Texture2D" uid="uid://bi3aim73sdyvk" path="res://Assets/UI/Heart.png" id="1_vnyu2"]
 [ext_resource type="Texture2D" uid="uid://bqi7ias1ic3bo" path="res://Assets/UI/ShieldHP.png" id="2_68kke"]
 
 [sub_resource type="GDScript" id="GDScript_s4tbw"]
@@ -87,7 +87,7 @@ visible = false
 layout_mode = 2
 offset_right = 81.0
 offset_bottom = 78.0
-texture = ExtResource("1_66lfy")
+texture = ExtResource("1_vnyu2")
 expand_mode = 2
 
 [node name="Shield" type="TextureRect" parent="."]

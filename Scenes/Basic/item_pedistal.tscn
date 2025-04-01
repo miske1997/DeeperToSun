@@ -30,7 +30,7 @@ func on_item_set(value: ItemConfig):
 	cost.text = str(value.cost)
 
 func onBuy():
-	Events.itemBought.emit(self, item, 10)
+	Events.itemBought.emit(self, item)
 	
 func bought():
 	interactible.active = false

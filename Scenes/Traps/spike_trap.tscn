@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddosx1wl0kxug"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_7plje"]
+[ext_resource type="Texture2D" uid="uid://csw3c3ukcrnqt" path="res://Assets/Traps/SpikeDown.png" id="1_bkwxt"]
+[ext_resource type="Texture2D" uid="uid://chy8my4fwvlbl" path="res://Assets/Traps/Spike.png" id="2_4dw7u"]
+
+[sub_resource type="GDScript" id="GDScript_m48p8"]
+resource_name = "SpikeTrap"
+script/source = "extends Node2D
+
+@export var damageData: DamageData
+@export var cooldown: float
+
+@export var spikesUp: Resource
+@export var spikesDown: Resource
+
+@onready var sprite = $Sprite2D
+
+var cooldownLeft: float
+var active = true
+
+func _ready() -> void:
+	damageData.damageDealer = self
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if not active:
+		return
+	if not body.is_in_group(\"Player\"):
+		return
+	DealDamage.deal_damage(damageData, body)
+	activate()
+
+func activate():
+	sprite.texture = spikesUp
+	active = false
+	await get_tree().create_timer(cooldown).timeout
+	sprite.texture = spikesDown
+	active = true
+"
+
+[sub_resource type="Resource" id="Resource_46kie"]
+script = ExtResource("1_7plje")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sneu4"]
+size = Vector2(67, 67)
+
+[node name="SpikeTrap" type="Node2D"]
+script = SubResource("GDScript_m48p8")
+damageData = SubResource("Resource_46kie")
+cooldown = 3.0
+spikesUp = ExtResource("2_4dw7u")
+spikesDown = ExtResource("1_bkwxt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bkwxt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_sneu4")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

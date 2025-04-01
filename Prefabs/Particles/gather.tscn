@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu21nuyjw8qqh"]
+
+[sub_resource type="Curve" id="Curve_xodoe"]
+max_value = 30.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.939516, 9.56044), 45.4213, 45.4213, 0, 0, Vector2(0.995968, 30), 119.493, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_k4cpm"]
+curve = SubResource("Curve_xodoe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_16u4m"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 47.37
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -65.28
+radial_accel_max = -59.06
+tangential_accel_min = -38.72
+tangential_accel_max = 39.44
+damping_min = 13.65
+damping_max = 13.65
+damping_curve = SubResource("CurveTexture_k4cpm")
+
+[node name="Gather" type="GPUParticles2D"]
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_16u4m")
+lifetime = 5.0
+trail_enabled = true
+trail_lifetime = 0.1

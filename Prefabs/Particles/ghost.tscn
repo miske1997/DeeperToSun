@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://byavjdcmp7lyp"]
+
+[sub_resource type="GDScript" id="GDScript_madeg"]
+resource_name = "Ghost"
+script/source = "extends Timer
+
+@export var spriteImage: Sprite2D
+var enabled: float = false : set = enable_changed
+
+func enable_changed(value):
+	if value:
+		process_mode =	PROCESS_MODE_INHERIT
+	else:
+		process_mode =	PROCESS_MODE_DISABLED
+
+func _on_timeout() -> void:
+	var sprite = Sprite2D.new()
+	sprite.texture = spriteImage.texture
+	sprite.position = get_parent().position
+	sprite.global_scale = spriteImage.global_scale
+	sprite.self_modulate = Color(1, 1, 1)
+	add_child(sprite)
+	await get_tree().create_tween().tween_property(sprite, \"self_modulate\", Color(1, 1, 1, 0), 0.4).finished
+	sprite.queue_free()
+	
+"
+
+[node name="Ghost" type="Timer"]
+script = SubResource("GDScript_madeg")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

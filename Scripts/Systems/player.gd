@@ -30,6 +30,8 @@ func init_player_data():
 	
 func set_dashing(value: bool):
 	dashing = value
+	if has_node("Ghost"):
+		get_node("Ghost").enabled = value
 	for item in Players.player.collectedItems:
 		if items_data.items[item.name].procs.has(Enums.ItemProcs.DASH):
 			item_functions[items_data.items[item.name].procs[Enums.ItemProcs.DASH] + item.state].call({dashing = dashing, player = self})

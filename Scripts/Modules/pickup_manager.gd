@@ -9,11 +9,11 @@ func _ready() -> void:
 	Events.itemCollected.connect(on_item_pickup)
 	Events.itemBought.connect(on_item_bought)
 
-func on_item_bought(pedistal, item, cost):
+func on_item_bought(pedistal, item):
 	
-	if Players.player.gold < cost:
+	if Players.player.gold < item.cost:
 		return
-	Players.player.gold -= cost
+	Players.player.gold -= item.cost
 	if item.name == "Heart":
 		Players.player.character.healthUp.emit(1)
 		return

@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddoflxjqs6arl"]
+
+[sub_resource type="GDScript" id="GDScript_tdnax"]
+resource_name = "Trail"
+script/source = "extends Line2D
+
+@export var enabled: bool = true
+@export var limitLength: bool = false
+@export var length: int = 10
+@export var maxLength: int = 150
+@export var segments: int = 20
+@export var detail: float = 0.2
+
+var countdown: float
+var parent: Node2D
+var prevPos
+func _ready() -> void:
+	countdown = detail
+	parent = get_parent()
+	prevPos = parent.global_position
+	
+func _process(delta: float) -> void:
+	global_position = Vector2.ZERO
+	global_scale = Vector2.ONE
+	global_rotation = 0
+	#process_length()
+	process_time(delta)
+	
+func process_time(delta: float):
+	countdown -= delta
+	prevPos = parent.global_position
+	if limitLength and get_length() > maxLength:
+		remove_point(0)
+	if countdown > 0:
+		return
+	
+	countdown = detail
+	if enabled:
+		add_point(parent.global_position)
+	if points.size() < segments and enabled:
+		return
+	remove_point(0)
+
+func process_length():
+	if points.size() == 0:
+		add_point(parent.position)
+	if (points[points.size() - 1] - parent.position).length() > length:
+		add_point(parent.position)
+	#if (points[0] - points[1]).length() > length:
+		#remove_point(0)
+
+
+func get_length():
+	var length = 0
+	for i in points.size():
+		if i == points.size() - 1:
+			break
+		length += (points[i + 1] - points[i]).length()
+	return length
+"
+
+[node name="Trail" type="Line2D"]
+width = 2.0
+begin_cap_mode = 1
+script = SubResource("GDScript_tdnax")
+detail = 0.02

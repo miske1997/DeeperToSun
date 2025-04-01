@@ -17,7 +17,7 @@ dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([SubResource("Resource_ndlvu")])
 oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
-base = 1.0
+base = 6.0
 
 [sub_resource type="Resource" id="Resource_r38kj"]
 script = ExtResource("2_gh3v1")
@@ -39,6 +39,14 @@ script = ExtResource("2_gh3v1")
 dirty = true
 lastCalcValue = 0
 augments = Array[ExtResource("1_gjmtu")]([SubResource("Resource_gegm7")])
+oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
+base = 1.0
+
+[sub_resource type="Resource" id="Resource_y3y43"]
+script = ExtResource("2_gh3v1")
+dirty = true
+lastCalcValue = 0
+augments = Array[ExtResource("1_gjmtu")]([])
 oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
@@ -74,20 +82,13 @@ augments = Array[ExtResource("1_gjmtu")]([])
 oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
 base = 1.0
 
-[sub_resource type="Resource" id="Resource_y3y43"]
-script = ExtResource("2_gh3v1")
-dirty = true
-lastCalcValue = 0
-augments = Array[ExtResource("1_gjmtu")]([])
-oneTimeAugments = Array[ExtResource("1_gjmtu")]([])
-base = 1.0
-
 [resource]
 script = ExtResource("3_4yqc8")
 controllers = {
 "Amount": SubResource("Resource_lov4q"),
 "AttackSpeed": SubResource("Resource_r38kj"),
 "Damage": SubResource("Resource_1supw"),
+"Duration": SubResource("Resource_y3y43"),
 "Luck": SubResource("Resource_qj3ol"),
 "MovementSpeed": SubResource("Resource_rfr2x"),
 "ProjectileSpeed": SubResource("Resource_63nxi"),
