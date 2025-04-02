@@ -8,7 +8,6 @@ var onCooldown = false
 
 func _ready() -> void:
 	activate.connect(activate_weapon)
-	sprite.frame_changed.connect(on_frame_change)
 	timer.wait_time = weaponConfig.attackSpeed
 	weaponConfig.damageData.damageDealer = get_parent()
 
@@ -25,7 +24,7 @@ func activate_weapon():
 	await timer.timeout
 	onCooldown = false
 
-func on_frame_change():
+func fire():
 	if sprite.frame == 4:
 		var amount = Players.player.stats.GetStat("Amount")
 		#ProjectileEmitter.spawn_projectile(weaponConfig.projectileConfig, weaponConfig.damageData, sprite.global_position, rotation, Vector2(cos(rotation), sin(rotation)))
