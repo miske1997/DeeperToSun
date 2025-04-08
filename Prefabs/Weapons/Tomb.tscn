@@ -1,16 +1,27 @@
-[gd_scene load_steps=16 format=3 uid="uid://g84b8p3kgoiv"]
+[gd_scene load_steps=18 format=3 uid="uid://g84b8p3kgoiv"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/Weapons/tomb.gd" id="1_nsayn"]
 [ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_3anur"]
 [ext_resource type="Texture2D" uid="uid://644xmhjnl5hn" path="res://Assets/Weapons/player/Wand.png" id="2_tekvh"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/trail_config.gd" id="3_0b7ld"]
 [ext_resource type="Texture2D" uid="uid://d06mwe4vrt65k" path="res://Assets/Projectiles/PurpleMagicProjectile.png" id="3_ll4jy"]
 [ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="3_mqq4y"]
 [ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="4_vflr0"]
 [ext_resource type="PackedScene" uid="uid://brv5ibir55xoh" path="res://Scenes/UI/arcana_ui.tscn" id="5_ovr3y"]
 
+[sub_resource type="Resource" id="Resource_u0fou"]
+script = ExtResource("3_0b7ld")
+limitLength = true
+length = 10
+maxLength = 150
+segments = 20
+detail = 0.02
+trailColor = Color(0.573502, 0.0499388, 0.565503, 1)
+
 [sub_resource type="Resource" id="Resource_yx705"]
 script = ExtResource("3_mqq4y")
 direction = Vector2(0, 0)
+trailConfig = SubResource("Resource_u0fou")
 speed = 200.0
 drag = 0.0
 range = 800.0
@@ -21,7 +32,7 @@ frendly = true
 spriteName = "purpleMagicProjectile"
 size = Vector2(2, 2)
 radius = 12.0
-addons = Array[String](["damage_on_area_hit"])
+addons = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_ncusf"]
 script = ExtResource("2_3anur")
@@ -34,6 +45,7 @@ fixed = false
 [sub_resource type="Resource" id="Resource_1rbdd"]
 script = ExtResource("3_mqq4y")
 direction = Vector2(0, 0)
+trailConfig = SubResource("Resource_u0fou")
 speed = 300.0
 drag = 0.0
 range = 300.0

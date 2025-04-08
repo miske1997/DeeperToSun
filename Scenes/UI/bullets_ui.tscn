@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci40agtk66ut8"]
+
+[ext_resource type="Texture2D" uid="uid://c6ejxq5bvu1wu" path="res://Assets/Projectiles/YellowGunProjectile2.png" id="1_i28kv"]
+
+[sub_resource type="GDScript" id="GDScript_1opvx"]
+resource_name = "BulletUI"
+script/source = "extends Control
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	$HBoxContainer/Container/Label.text = str(get_parent().bulletsInMagasine)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_yesdf"]
+font_size = 24
+
+[node name="BulletUI" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_1opvx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -410.0
+offset_top = -237.0
+offset_right = -321.0
+offset_bottom = -203.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_i28kv")
+expand_mode = 3
+
+[node name="Container" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Container"]
+layout_mode = 2
+text = "5"
+label_settings = SubResource("LabelSettings_yesdf")
+horizontal_alignment = 1

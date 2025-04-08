@@ -1,38 +1,86 @@
 extends WeaponBase
 
-@export var secondaryProjectile: ProjectileConfig
+@export var trap: PackedScene
+@export var trapMark: PackedScene
+@export var trapCooldown: float = 3
+@export var trapRange: float = 300
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var spawnPos: Node2D = $Sprite2D/SpawnPos
 @onready var timer: Timer = $Timer
+@onready var secondaryTimer: Timer = $SecondaryTimer
 
-var onCooldown = false
+var secondartOnCooldown := false
+var onCooldown := false
+var bulletsInMagasine: int
 
 func _ready() -> void:
 	activate.connect(activate_weapon)
 	secondary.connect(activate_secondary)
 	timer.wait_time = weaponConfig.attackSpeed
+	secondaryTimer.wait_time = trapCooldown
+	bulletsInMagasine = weaponConfig.bullets
 	weaponConfig.damageData.damageDealer = get_parent()
 
 func _physics_process(delta: float) -> void:
 	look_at_target()
+	sprite.flip_v = sprite.global_position.x - global_position.x > 0
 
 func activate_secondary():
-	pass
+	if secondartOnCooldown:
+		return
+	secondartOnCooldown = true
+	secondaryTimer.start()
+	placeTrap()
+	await secondaryTimer.timeout
+	secondartOnCooldown = false
+	
+func placeTrap():
+	var mousePos = get_global_mouse_position()
+	var dist = (mousePos - get_parent().global_position).length()
+	if dist < trapRange:
+		spawn_trap(mousePos)
+	else:
+		spawn_trap(get_parent().global_position + (mousePos - get_parent().global_position).normalized() * trapRange)
+		
+func spawn_trap(pos: Vector2):
+	var trapClone: Node2D = trap.instantiate()
+	trapClone.position = pos
+	trapClone.cooldown = 0.5
+	trapClone.scale = Vector2(0.3, 0.3)
+	trapClone.damageData.damageDealer = get_parent()
+	trapClone.frendly = true
+	trapClone.oneTime = true
+	get_tree().get_first_node_in_group("TemporaryObjects").add_child(trapClone)
+	trapClone.onProck.connect(attach_mark, CONNECT_ONE_SHOT)
+	
+func attach_mark(body: Node2D):
+	var markClone = trapMark.instantiate()
+	markClone.damageData.damageDealer = get_parent()
+	markClone.position = Vector2.ZERO
+	body.add_child(markClone)
 
 func activate_weapon():
 	if onCooldown:
 		return
-	sprite.speed_scale = Players.player.stats.GetStat("AttackSpeed")
-	#timer.wait_time = Players.player.stats.GetStat("AttackSpeed")
+	timer.wait_time = weaponConfig.fireSpeed
 	onCooldown = true
 	fire()
+	use_bullet()
 	timer.start()
 	await timer.timeout
+	if bulletsInMagasine == 0:
+		bulletsInMagasine = weaponConfig.bullets
 	onCooldown = false
 
 func fire():
 	ProjectileEmitter.spawn_projectile(weaponConfig.projectileConfig, weaponConfig.damageData, spawnPos.global_position, rotation, Vector2(cos(rotation), sin(rotation)))
+
+func use_bullet():
+	bulletsInMagasine -= 1
+	if bulletsInMagasine == 0:
+		timer.wait_time = weaponConfig.reloadTime
+		
 
 func look_at_target():
 	look_at(lookAtTaret)

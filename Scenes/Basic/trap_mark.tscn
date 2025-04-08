@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgmn8uw8b63xs"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_1l34p"]
+[ext_resource type="Texture2D" uid="uid://by0nqp02fnlff" path="res://Assets/RoomIndicators/NormalRoom.png" id="2_onw1k"]
+
+[sub_resource type="GDScript" id="GDScript_d2a1m"]
+resource_name = "TrapMark"
+script/source = "extends Node2D
+
+@export var duration: float = 1.0
+@export var damageOnProck: float = 1.0
+@export var damageData: DamageData
+var active = true
+
+func _ready() -> void:
+	var parent = get_parent()
+	if not parent is EnemyBase and not parent is Player:
+		queue_free()
+		return
+	get_parent().takeDamage.connect(on_parent_hit)
+	global_scale = Vector2.ONE
+	
+
+func _process(delta: float) -> void:
+	duration -= delta
+	if duration <= 0:
+		queue_free()
+
+func on_parent_hit(takenDamageData: DamageData):
+	if not active:
+		return
+	if takenDamageData.damageSource != Enums.DamageSource.AUTO_ATTACK:
+		return
+	active = false
+	await get_tree().physics_frame
+	DealDamage.deal_damage(damageData, get_parent())
+	queue_free()
+"
+
+[sub_resource type="Resource" id="Resource_kj15k"]
+script = ExtResource("1_1l34p")
+damage_scale = 0.5
+damage = 1.0
+stagger = 0.0
+damageSource = 8
+fixed = false
+
+[node name="TrapMark" type="Node2D"]
+z_index = 100
+script = SubResource("GDScript_d2a1m")
+duration = 5.0
+damageData = SubResource("Resource_kj15k")
+
+[node name="TrapMark" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -67.0
+offset_right = -12.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.37392, 0.37392)
+
+[node name="TextureRect" type="TextureRect" parent="TrapMark"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = -1.0
+offset_right = 74.0
+offset_bottom = 59.0
+scale = Vector2(0.688298, 0.688298)
+texture = ExtResource("2_onw1k")

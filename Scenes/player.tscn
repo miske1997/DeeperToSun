@@ -9,8 +9,8 @@
 [ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_gmcms"]
 [ext_resource type="Script" path="res://Scripts/Controllers/Player/ArcherController.gd" id="4_wxxyx"]
 [ext_resource type="Script" path="res://Scripts/Modules/player_health.gd" id="6_u61t3"]
+[ext_resource type="PackedScene" uid="uid://8ey6p6okukoe" path="res://Prefabs/Weapons/Pistol.tscn" id="9_8yn1d"]
 [ext_resource type="PackedScene" uid="uid://bnv5hfuq0rys0" path="res://Scenes/ItemScenes/dash.tscn" id="9_ncmto"]
-[ext_resource type="PackedScene" uid="uid://g84b8p3kgoiv" path="res://Prefabs/Weapons/Tomb.tscn" id="12_fccqa"]
 [ext_resource type="Script" path="res://Scripts/Systems/interact_manager.gd" id="12_t6noj"]
 [ext_resource type="PackedScene" uid="uid://co4hy02lv7bip" path="res://Scenes/UI/interact_ui.tscn" id="13_428ra"]
 [ext_resource type="PackedScene" uid="uid://ddoflxjqs6arl" path="res://Scenes/Components/trail.tscn" id="14_ew15l"]
@@ -49,7 +49,6 @@ shape = SubResource("CapsuleShape2D_8p5f3")
 [node name="Trail" parent="." instance=ExtResource("14_ew15l")]
 visible = false
 width = 5.0
-length = 30
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -59,6 +58,8 @@ position = Vector2(-9.53674e-07, 1.07288e-06)
 scale = Vector2(0.160156, 0.160156)
 texture = ExtResource("3_ibrl0")
 
+[node name="Pistol" parent="." instance=ExtResource("9_8yn1d")]
+
 [node name="Controller" type="Node2D" parent="."]
 script = ExtResource("4_wxxyx")
 
@@ -66,8 +67,6 @@ script = ExtResource("4_wxxyx")
 script = ExtResource("6_u61t3")
 
 [node name="Dash" parent="." instance=ExtResource("9_ncmto")]
-
-[node name="Tomb" parent="." instance=ExtResource("12_fccqa")]
 
 [node name="InteractManager" type="Node2D" parent="."]
 script = ExtResource("12_t6noj")

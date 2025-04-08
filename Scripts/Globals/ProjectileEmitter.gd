@@ -4,11 +4,15 @@ var items_data = load("res://Data/Items/items_data.tres").items
 var item_functions = load("res://Data/Items/item_functions.tres")
 
 @export var projectileTemplate: PackedScene
+@export var trailTemplate: PackedScene
+
 var projectileSprites: Dictionary = {}
 var componentsDir := "res://Scenes/ProjectileComponents/"
 
 func _ready() -> void:
 	projectileTemplate = load("res://Scenes/ProjectileComponents/projectile.tscn")
+	trailTemplate = load("res://Scenes/Components/trail.tscn")
+	
 	projectileSprites.bullet = load("res://Assets/Projectiles/GunProjectile.png")
 	projectileSprites.redBall = load("res://Assets/Projectiles/EnemiesProjectile.png")
 	projectileSprites.yellowBall = load("res://Assets/Projectiles/YellowProjectile.png")
@@ -28,6 +32,7 @@ func spawn_projectile(projectileConfig: ProjectileConfig, damageData: DamageData
 	projectile.damageData = damageData
 	projectile.projectileConfig = projectileConfig.duplicate()
 	projectile.projectileConfig.direction = direction
+	attach_trail(projectile)
 	if damageData.damageDealer == Players.player.character:
 		prock_items(projectile.projectileConfig, damageData, Enums.ItemProcs.PROJECTILE_EMMIT)
 	add_components(projectile)
@@ -72,6 +77,13 @@ func spawn_in_random_dir(projectileConfig: ProjectileConfig, damageData: DamageD
 		rotation = randf_range(0, 360)
 		spawn_projectile(projectileConfig, damageData, origin, rotation, Vector2(cos(rotation), sin(rotation)))
 
+func attach_trail(projectile: Projectile):
+	if not projectile.projectileConfig.trailConfig:
+		return
+	var trailConfig: TrailConfig = projectile.projectileConfig.trailConfig
+	var trail = trailTemplate.instantiate()
+	projectile.add_child(trail)
+	trail.trailConfig = trailConfig
 
 func add_components(projectile: Projectile):
 	for addonName in projectile.projectileConfig.addons:

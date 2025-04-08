@@ -1,7 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://8ey6p6okukoe"]
+[gd_scene load_steps=14 format=3 uid="uid://8ey6p6okukoe"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/Weapons/pistol.gd" id="1_hcv1a"]
+[ext_resource type="PackedScene" uid="uid://ddosx1wl0kxug" path="res://Scenes/Traps/spike_trap.tscn" id="2_07kvm"]
 [ext_resource type="Texture2D" uid="uid://bqpnugdqsst36" path="res://Assets/Weapons/player/Gun.png" id="2_fen4n"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/firearm_config.gd" id="2_o01ml"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_xg6ii"]
+[ext_resource type="PackedScene" uid="uid://bgmn8uw8b63xs" path="res://Scenes/Basic/trap_mark.tscn" id="3_7pl4t"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="3_jg85l"]
+[ext_resource type="PackedScene" uid="uid://ci40agtk66ut8" path="res://Scenes/UI/bullets_ui.tscn" id="5_853mr"]
+
+[sub_resource type="Resource" id="Resource_01qvi"]
+script = ExtResource("2_xg6ii")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
+
+[sub_resource type="Resource" id="Resource_s2kt7"]
+script = ExtResource("3_jg85l")
+direction = Vector2(0, 0)
+speed = 600.0
+drag = 0.0
+range = 400.0
+acceleration = 0.0
+duration = 10.0
+health = 0.0
+frendly = true
+spriteName = "bullet"
+size = Vector2(1, 1)
+radius = 8.0
+addons = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_gkdg3"]
+script = ExtResource("2_o01ml")
+fireSpeed = 0.1
+bullets = 5
+reloadTime = 2.0
+projectileConfig = SubResource("Resource_s2kt7")
+amount = 1
+attackSpeed = 1.0
+damageData = SubResource("Resource_01qvi")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1pk2j"]
 atlas = ExtResource("2_fen4n")
@@ -21,6 +60,11 @@ animations = [{
 [node name="Pistol" type="Node2D" groups=["Weapon"]]
 scale = Vector2(0.125715, 0.125715)
 script = ExtResource("1_hcv1a")
+trap = ExtResource("2_07kvm")
+trapMark = ExtResource("3_7pl4t")
+weaponConfig = SubResource("Resource_gkdg3")
+
+[node name="ArcanaUI" parent="." instance=ExtResource("5_853mr")]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(63.6358, 0)
@@ -37,3 +81,5 @@ rotation = -3.14159
 scale = Vector2(0.519038, 0.519038)
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="SecondaryTimer" type="Timer" parent="."]
