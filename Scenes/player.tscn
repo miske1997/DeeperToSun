@@ -9,8 +9,8 @@
 [ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_gmcms"]
 [ext_resource type="Script" path="res://Scripts/Controllers/Player/ArcherController.gd" id="4_wxxyx"]
 [ext_resource type="Script" path="res://Scripts/Modules/player_health.gd" id="6_u61t3"]
-[ext_resource type="PackedScene" uid="uid://bdd0af3gev72y" path="res://Prefabs/Weapons/Bow.tscn" id="8_txwfd"]
 [ext_resource type="PackedScene" uid="uid://bnv5hfuq0rys0" path="res://Scenes/ItemScenes/dash.tscn" id="9_ncmto"]
+[ext_resource type="PackedScene" uid="uid://g84b8p3kgoiv" path="res://Prefabs/Weapons/Tomb.tscn" id="12_fccqa"]
 [ext_resource type="Script" path="res://Scripts/Systems/interact_manager.gd" id="12_t6noj"]
 [ext_resource type="PackedScene" uid="uid://co4hy02lv7bip" path="res://Scenes/UI/interact_ui.tscn" id="13_428ra"]
 [ext_resource type="PackedScene" uid="uid://ddoflxjqs6arl" path="res://Scenes/Components/trail.tscn" id="14_ew15l"]
@@ -65,9 +65,9 @@ script = ExtResource("4_wxxyx")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("6_u61t3")
 
-[node name="Bow" parent="." instance=ExtResource("8_txwfd")]
-
 [node name="Dash" parent="." instance=ExtResource("9_ncmto")]
+
+[node name="Tomb" parent="." instance=ExtResource("12_fccqa")]
 
 [node name="InteractManager" type="Node2D" parent="."]
 script = ExtResource("12_t6noj")

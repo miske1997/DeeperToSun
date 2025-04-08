@@ -8,8 +8,11 @@
 
 [sub_resource type="Resource" id="Resource_p6r2n"]
 script = ExtResource("2_7cdbt")
+damage_scale = 1.0
 damage = 1.0
 stagger = 0.1
+damageSource = 0
+fixed = false
 
 [sub_resource type="Resource" id="Resource_yi52c"]
 script = ExtResource("3_28f37")
@@ -23,6 +26,8 @@ health = 0.0
 frendly = true
 spriteName = "yellowBall"
 size = Vector2(1, 1)
+radius = 8.0
+addons = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_rc82c"]
 script = ExtResource("4_5lxhb")

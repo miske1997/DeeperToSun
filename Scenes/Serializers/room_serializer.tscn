@@ -25,8 +25,9 @@ func _ready():
 func export_spawn_room():
 	var spawnConfig := SpawnConfig.new()
 	spawnConfig.waves = []
+	spawnConfig.globalWaves = []
 	for waveSerializer in get_tree().get_nodes_in_group(\"WaveSerializer\"):
-		spawnConfig.waves.push_back(waveSerializer.get_wave_config())
+		spawnConfig.waves.push_back(waveSerializer.serialize_wave())
 		
 	ResourceSaver.save(spawnConfig, saveFolder + configName + \".tres\")
  

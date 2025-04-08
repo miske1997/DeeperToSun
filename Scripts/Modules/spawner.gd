@@ -8,15 +8,20 @@ extends Node
 
 func spawn_enemies(waveConfig: WaveConfig):
 	var i = 0
-	for enemySpawn: EnemySpawn in  waveConfig.spawns:
-		spawn_enemy(enemySpawn.spawn, enemySpawn.enemy)
+	for enemySpawn: EnemySpawn in  waveConfig.get_enemy_spawns():
+		var delay: float = randf_range(waveConfig.spawnDelayRange.x, waveConfig.spawnDelayRange.y)
+		spawn_enemy(enemySpawn.spawn, enemySpawn.enemy, enemySpawn.localPosition)
 		i += 1
+		await get_tree().create_timer(delay).timeout
 		
 		
-func spawn_enemy(location: Vector2, enemyName: String):
+func spawn_enemy(location: Vector2, enemyName: String, localSpawn: bool):
 
 	var enemy = enemyBuilder.construct_enemy(enemyName)
-	enemy.position = Vector2(location.x * roomSize.x, location.y * roomSize.y) + roomStart
+	if localSpawn:
+		enemy.position = Vector2(location.x * roomSize.x, location.y * roomSize.y) + roomStart
+	else:
+		enemy.position = location
 	#add spawn animation
 	enemyFolder.add_child(enemy)
 	

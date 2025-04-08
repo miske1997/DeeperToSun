@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://3rblihetsog6"]
+[gd_scene load_steps=28 format=3 uid="uid://3rblihetsog6"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/Rooms/room.gd" id="1_3m351"]
 [ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="2_6e61e"]
@@ -10,12 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://e5rt6atvcyku" path="res://Scenes/UI/boss_bar.tscn" id="5_ahtc2"]
 [ext_resource type="PackedScene" uid="uid://c71swurmfu3c4" path="res://Scenes/UI/gold_ui.tscn" id="5_rhec7"]
 [ext_resource type="PackedScene" uid="uid://b51ouytvbh0v2" path="res://Scenes/player.tscn" id="6_w54wr"]
-[ext_resource type="PackedScene" uid="uid://blqml5o5saasv" path="res://Scenes/wave_serializer.tscn" id="7_huvsm"]
+[ext_resource type="PackedScene" uid="uid://blqml5o5saasv" path="res://Scenes/Serializers/wave_serializer.tscn" id="7_huvsm"]
 [ext_resource type="PackedScene" uid="uid://cef53hh3a5q1q" path="res://Scenes/UI/active_slot.tscn" id="8_eckfo"]
-[ext_resource type="PackedScene" uid="uid://7uefqtjc5fu3" path="res://Scenes/room_serializer.tscn" id="9_ltcgh"]
+[ext_resource type="PackedScene" uid="uid://7uefqtjc5fu3" path="res://Scenes/Serializers/room_serializer.tscn" id="9_ltcgh"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="10_4qi8o"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item/active_item.gd" id="12_af50x"]
 [ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="15_038gf"]
+[ext_resource type="PackedScene" uid="uid://ikwxnuphlqcu" path="res://Scenes/Serializers/area_wave_serializer.tscn" id="16_27esw"]
 [ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="17_ya66c"]
 [ext_resource type="Resource" uid="uid://sqfmja62rseq" path="res://Data/Items/item_functions.tres" id="18_t17o6"]
 
@@ -70,6 +71,9 @@ cost = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
 size = Vector2(27.5331, 437)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q0y8"]
+size = Vector2(267, 166)
 
 [sub_resource type="Shader" id="Shader_nukw7"]
 code = "/*
@@ -412,10 +416,16 @@ position = Vector2(1388, 958)
 
 [node name="RoomSerializer" parent="." instance=ExtResource("9_ltcgh")]
 process_mode = 4
-configName = "Test1"
+configName = "Area1"
+
+[node name="AreaWaveSerializer" parent="RoomSerializer" instance=ExtResource("16_27esw")]
+enemyName = "warrior_gnome"
+
+[node name="SpawnArea" type="CollisionShape2D" parent="RoomSerializer/AreaWaveSerializer"]
+position = Vector2(769, 296)
+shape = SubResource("RectangleShape2D_5q0y8")
 
 [node name="WaveSerializer" parent="RoomSerializer" instance=ExtResource("7_huvsm")]
-visible = false
 waveTimeout = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="."]

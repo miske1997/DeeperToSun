@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3g1ffr68sjhg"]
+[gd_scene load_steps=10 format=3 uid="uid://d3g1ffr68sjhg"]
 
 [ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_1t1vp"]
 [ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="2_8jlnx"]
 [ext_resource type="Texture2D" uid="uid://dhargfur1rlwm" path="res://Assets/Projectiles/ArrowProjectile.png" id="3_1duy2"]
+[ext_resource type="PackedScene" uid="uid://ddoflxjqs6arl" path="res://Scenes/Components/trail.tscn" id="3_e22hq"]
 [ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="3_ortb1"]
 [ext_resource type="PackedScene" uid="uid://ccxm81vcu6ypp" path="res://Scenes/ProjectileComponents/damage_on_hit.tscn" id="5_0n4fg"]
 [ext_resource type="PackedScene" uid="uid://be2ojvblv0xlu" path="res://Scenes/ProjectileComponents/wall_detect.tscn" id="6_wb4yq"]
@@ -29,6 +30,11 @@ radius = 8.0
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_1t1vp")
 projectileConfig = SubResource("Resource_5qq4v")
+
+[node name="Trail" parent="." instance=ExtResource("3_e22hq")]
+width = 1.0
+limitLength = true
+maxLength = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 3.14159

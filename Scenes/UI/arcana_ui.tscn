@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://brv5ibir55xoh"]
+
+[ext_resource type="Texture2D" uid="uid://d06mwe4vrt65k" path="res://Assets/Projectiles/PurpleMagicProjectile.png" id="1_mksph"]
+
+[sub_resource type="GDScript" id="GDScript_2h3uk"]
+resource_name = "ArcanaUI"
+script/source = "extends Control
+
+func _process(delta: float) -> void:
+	$HBoxContainer/ProgressBar.value = get_parent().arcana
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k85w"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxjqq"]
+bg_color = Color(0.175303, 0.646807, 0.87014, 1)
+
+[sub_resource type="Theme" id="Theme_mpum5"]
+ProgressBar/constants/outline_size = 1
+ProgressBar/styles/background = SubResource("StyleBoxFlat_1k85w")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_uxjqq")
+
+[node name="ArcanaUI" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_2h3uk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -410.0
+offset_top = -275.0
+offset_right = -134.0
+offset_bottom = -203.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_mksph")
+expand_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = SubResource("Theme_mpum5")
+value = 50.0

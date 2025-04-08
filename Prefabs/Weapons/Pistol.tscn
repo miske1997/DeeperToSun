@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://8ey6p6okukoe"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/Weapons/pistol.gd" id="1_hcv1a"]
+[ext_resource type="Texture2D" uid="uid://bqpnugdqsst36" path="res://Assets/Weapons/player/Gun.png" id="2_fen4n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pk2j"]
+atlas = ExtResource("2_fen4n")
+region = Rect2(0, 0, 35, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bh5ya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pk2j")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Pistol" type="Node2D" groups=["Weapon"]]
+scale = Vector2(0.125715, 0.125715)
+script = ExtResource("1_hcv1a")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(63.6358, 0)
+rotation = 3.14159
+scale = Vector2(1.92664, 1.92664)
+sprite_frames = SubResource("SpriteFrames_bh5ya")
+animation = &"shoot"
+frame_progress = 1.0
+flip_v = true
+
+[node name="SpawnPos" type="Node2D" parent="Sprite2D"]
+position = Vector2(-24.7723, 4.12863)
+rotation = -3.14159
+scale = Vector2(0.519038, 0.519038)
+
+[node name="Timer" type="Timer" parent="."]

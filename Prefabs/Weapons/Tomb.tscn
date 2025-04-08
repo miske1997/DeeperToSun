@@ -1,57 +1,92 @@
-[gd_scene load_steps=9 format=3 uid="uid://g84b8p3kgoiv"]
+[gd_scene load_steps=16 format=3 uid="uid://g84b8p3kgoiv"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/Weapons/tomb.gd" id="1_nsayn"]
-[ext_resource type="Texture2D" uid="uid://db2dsv1aqth2m" path="res://Assets/Weapons/player/BowShoot-Sheet.png" id="5_yib4b"]
+[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_3anur"]
+[ext_resource type="Texture2D" uid="uid://644xmhjnl5hn" path="res://Assets/Weapons/player/Wand.png" id="2_tekvh"]
+[ext_resource type="Texture2D" uid="uid://d06mwe4vrt65k" path="res://Assets/Projectiles/PurpleMagicProjectile.png" id="3_ll4jy"]
+[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="3_mqq4y"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="4_vflr0"]
+[ext_resource type="PackedScene" uid="uid://brv5ibir55xoh" path="res://Scenes/UI/arcana_ui.tscn" id="5_ovr3y"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ko1dr"]
-atlas = ExtResource("5_yib4b")
-region = Rect2(320, 0, 80, 80)
+[sub_resource type="Resource" id="Resource_yx705"]
+script = ExtResource("3_mqq4y")
+direction = Vector2(0, 0)
+speed = 200.0
+drag = 0.0
+range = 800.0
+acceleration = 350.0
+duration = 10.0
+health = 1.0
+frendly = true
+spriteName = "purpleMagicProjectile"
+size = Vector2(2, 2)
+radius = 12.0
+addons = Array[String](["damage_on_area_hit"])
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_axdxm"]
-atlas = ExtResource("5_yib4b")
-region = Rect2(240, 0, 80, 80)
+[sub_resource type="Resource" id="Resource_ncusf"]
+script = ExtResource("2_3anur")
+damage_scale = 1.0
+damage = 1.0
+stagger = 0.0
+damageSource = 0
+fixed = false
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_itddu"]
-atlas = ExtResource("5_yib4b")
-region = Rect2(80, 0, 80, 80)
+[sub_resource type="Resource" id="Resource_1rbdd"]
+script = ExtResource("3_mqq4y")
+direction = Vector2(0, 0)
+speed = 300.0
+drag = 0.0
+range = 300.0
+acceleration = 0.0
+duration = 10.0
+health = 1.0
+frendly = true
+spriteName = "purpleProjectile"
+size = Vector2(0.5, 0.5)
+radius = 8.0
+addons = Array[String]([])
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_khdsn"]
-atlas = ExtResource("5_yib4b")
-region = Rect2(160, 0, 80, 80)
+[sub_resource type="Resource" id="Resource_3l1e5"]
+script = ExtResource("4_vflr0")
+projectileConfig = SubResource("Resource_1rbdd")
+amount = 1
+attackSpeed = 0.1
+damageData = SubResource("Resource_ncusf")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qhd8s"]
-atlas = ExtResource("5_yib4b")
-region = Rect2(0, 0, 80, 80)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qknyp"]
+atlas = ExtResource("2_tekvh")
+region = Rect2(0, 0, 30, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh5ya"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ko1dr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_axdxm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_itddu")
-}, {
-"duration": 0.8,
-"texture": SubResource("AtlasTexture_khdsn")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_qhd8s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ko1dr")
+"texture": SubResource("AtlasTexture_qknyp")
 }],
 "loop": false,
 "name": &"shoot",
 "speed": 5.0
 }]
 
+[sub_resource type="Curve2D" id="Curve2D_4kuov"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -95.454, 87.4995, 0, 0, 0, 0, -63.636, -71.5905)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_n4byi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95.454, 87.4995, 0, 0, 0, 0, 63.636, -71.5905)
+}
+point_count = 3
+
 [node name="Tomb" type="Node2D" groups=["Weapon"]]
 scale = Vector2(0.125715, 0.125715)
 script = ExtResource("1_nsayn")
+secondaryProjectile = SubResource("Resource_yx705")
+weaponConfig = SubResource("Resource_3l1e5")
+
+[node name="ArcanaUI" parent="." instance=ExtResource("5_ovr3y")]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(63.6358, 0)
@@ -59,7 +94,36 @@ rotation = 3.14159
 scale = Vector2(1.92664, 1.92664)
 sprite_frames = SubResource("SpriteFrames_bh5ya")
 animation = &"shoot"
-frame = 5
 frame_progress = 1.0
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="LeftTrajectory" type="Path2D" parent="."]
+rotation = 1.5708
+curve = SubResource("Curve2D_4kuov")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="LeftTrajectory"]
+rotation = 2.39965
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftTrajectory/PathFollow2D"]
+visible = false
+z_index = 10
+texture = ExtResource("3_ll4jy")
+
+[node name="RightTrajectory" type="Path2D" parent="."]
+rotation = 1.5708
+curve = SubResource("Curve2D_n4byi")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="RightTrajectory"]
+rotation = 2.39965
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="RightTrajectory/PathFollow2D"]
+visible = false
+z_index = 10
+texture = ExtResource("3_ll4jy")

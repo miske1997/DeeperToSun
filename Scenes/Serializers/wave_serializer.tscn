@@ -2,10 +2,13 @@
 
 [sub_resource type="GDScript" id="GDScript_i44vd"]
 resource_name = "SpawnSerializer"
-script/source = "extends Node2D
+script/source = "extends WaveSerializer
 
+@export_category(\"local\")
 @export var randomSpawns := false
 @export var waveTimeout: float = 10.0
+@export_category(\"global\")
+@export var continues: bool = false
 
 func get_wave_config():
 	
@@ -23,6 +26,9 @@ func get_wave_config():
 		
 	return waveConfig
 
+func serialize_wave():
+	return get_wave_config()
+	
 func convert_position(enemyPosition):
 	var roomStart: Vector2 = get_tree().get_first_node_in_group(\"Room\").get_node(\"RoomStart\").position
 	var roomEnd: Vector2 = get_tree().get_first_node_in_group(\"Room\").get_node(\"RoomEnd\").position

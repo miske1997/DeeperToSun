@@ -16,6 +16,8 @@ func _ready() -> void:
 	projectileSprites.glass = load("res://Assets/Projectiles/BlueMagicProjectile.png")
 	projectileSprites.boulder = load("res://Assets/Projectiles/Boulder.png")
 	projectileSprites.knife = load("res://Assets/Weapons/Dager.png")
+	projectileSprites.purpleProjectile = load("res://Assets/Projectiles/PurpleProjectile.png")
+	projectileSprites.purpleMagicProjectile = load("res://Assets/Projectiles/PurpleMagicProjectile.png")
 
 func spawn_projectile(projectileConfig: ProjectileConfig, damageData: DamageData, origin: Vector2, rotation: float, direction: Vector2):
 	var projectile:Projectile = projectileTemplate.instantiate()

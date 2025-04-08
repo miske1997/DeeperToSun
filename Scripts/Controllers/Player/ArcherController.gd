@@ -34,6 +34,8 @@ func set_weapon_look_target():
 func activate_weapon():
 	if not player.dashing and Input.is_action_pressed("Click"):
 		weapon.activate.emit()
+	if not player.dashing and Input.is_action_pressed("RightClick"):
+		weapon.secondary.emit()
 
 func get_input():
 	player_direction = Vector2.ZERO

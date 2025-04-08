@@ -5,3 +5,4 @@ var lookAtTaret: Vector2
 var attacking = false
 
 signal activate
+signal secondary
