@@ -1,18 +1,30 @@
-[gd_resource type="Resource" script_class="SpawnConfig" load_steps=12 format=3 uid="uid://dmpcor80jlfen"]
+[gd_resource type="Resource" script_class="SpawnConfig" load_steps=16 format=3 uid="uid://dmpcor80jlfen"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Wave/wave_config.gd" id="1_5c6oe"]
 [ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_config.gd" id="2_wk64i"]
 [ext_resource type="Script" path="res://Scripts/Resources/Wave/area_wave_config.gd" id="3_f32b4"]
+[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/EndConditions/room_clear.gd" id="3_gw1vw"]
 [ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="4_8djiy"]
-[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/delay_condition.gd" id="5_mu4kc"]
+[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/SpawnConditions/player_proxy.gd" id="5_p01vi"]
+[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/StartConditions/delay_condition.gd" id="7_cuetp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q0y8"]
 size = Vector2(267, 166)
 
+[sub_resource type="Resource" id="Resource_e4f2w"]
+script = ExtResource("3_gw1vw")
+oneTime = false
+
+[sub_resource type="Resource" id="Resource_mj04d"]
+script = ExtResource("5_p01vi")
+distanceToPlayer = 500.0
+invertad = true
+oneTime = false
+
 [sub_resource type="Resource" id="Resource_nn0de"]
-script = ExtResource("5_mu4kc")
+script = ExtResource("7_cuetp")
 delayTime = 5.0
-oneTime = true
+oneTime = false
 
 [sub_resource type="Resource" id="Resource_waigq"]
 script = ExtResource("3_f32b4")
@@ -25,6 +37,8 @@ spawns = Array[ExtResource("4_8djiy")]([])
 waveTimeout = 10.0
 spawnDelayRange = Vector2(0, 0)
 startCondition = SubResource("Resource_nn0de")
+endCondition = SubResource("Resource_e4f2w")
+spawnCondition = SubResource("Resource_mj04d")
 
 [sub_resource type="Resource" id="Resource_25a2g"]
 script = ExtResource("4_8djiy")

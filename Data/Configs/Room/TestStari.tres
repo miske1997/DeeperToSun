@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SpawnRoom" load_steps=3 format=3 uid="uid://bh0n1m0wcw4pl"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_room.gd" id="1_kpblu"]
-[ext_resource type="Resource" path="res://Data/Configs/Room/ConditionTest.tres" id="2_w1xb2"]
+[ext_resource type="Resource" uid="uid://c1wq1e4swm8kk" path="res://Data/Configs/Room/test1_spawn.tres" id="2_5mtwq"]
 
 [resource]
 script = ExtResource("1_kpblu")
-spawnConfig = ExtResource("2_w1xb2")
+spawnConfig = ExtResource("2_5mtwq")
 roomType = 0

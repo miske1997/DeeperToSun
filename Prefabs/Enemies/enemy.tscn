@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bprrlmiynmmg6"]
+[gd_scene load_steps=16 format=3 uid="uid://bprrlmiynmmg6"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/enemy.gd" id="1_lewwx"]
 [ext_resource type="Script" path="res://Scripts/Resources/DropTable/drop.gd" id="2_1h6ce"]
@@ -10,6 +10,8 @@
 [ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_r2sqt"]
 [ext_resource type="Script" path="res://Scripts/Resources/DropTable/drop_entry.gd" id="4_xdywh"]
 [ext_resource type="PackedScene" uid="uid://bnv5hfuq0rys0" path="res://Scenes/ItemScenes/dash.tscn" id="6_0o8sl"]
+[ext_resource type="Texture2D" uid="uid://ctib6o47rq4yd" path="res://Assets/Dekoracije/ZbunManji.png" id="11_6xgjk"]
+[ext_resource type="Script" path="res://Prefabs/Enemies/SpawnEffect.gd" id="12_qp1yp"]
 
 [sub_resource type="Resource" id="Resource_dyfnv"]
 script = ExtResource("4_xdywh")
@@ -53,3 +55,9 @@ texture = ExtResource("4_qflg0")
 dashDistance = 150.0
 disableMaskNumbers = Array[int]([1, 2])
 disableMask = true
+
+[node name="SpawnBush" type="Sprite2D" parent="."]
+scale = Vector2(0.0394231, 0.0394231)
+texture = ExtResource("11_6xgjk")
+offset = Vector2(0, -46.875)
+script = ExtResource("12_qp1yp")

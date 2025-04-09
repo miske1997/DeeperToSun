@@ -8,8 +8,9 @@ class_name WaveConfig extends Resource
 @export var startCondition: WaveCondition
 @export var endCondition: WaveCondition
 @export var spawnCondition: WaveCondition
-
+var spawnCount = 0
 
 
 func get_enemy_spawns():
+	spawnCount += 1
 	return spawns

@@ -36,7 +36,7 @@ func add_shader(object: CanvasItem, shaderName: String):
 	if not shader.has_meta("Animated"):
 		return
 	get_tree().create_tween().tween_property(object, 'material:shader_parameter/' + shader.get_meta("Param"), shader.get_meta("Goal"), shader.get_meta("Time"))
-
+	return shader.get_meta("Time")
 	
 func remove_shader(object: CanvasItem, shaderName: String):
 	if object.material and object.material.resource_name == shaderName:

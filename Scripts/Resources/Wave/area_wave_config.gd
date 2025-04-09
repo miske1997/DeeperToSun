@@ -6,6 +6,7 @@ class_name AreaWaveConfig extends WaveConfig
 @export var enemySpawnRange: Vector2
 
 func get_enemy_spawns():
+	spawnCount += 1
 	var spawns = []
 	var enemyCount = randi_range(enemySpawnRange.x, enemySpawnRange.y)
 	for i in enemyCount:

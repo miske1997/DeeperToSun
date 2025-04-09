@@ -46,12 +46,16 @@ func process_global_waves(delta: float):
 	for wave: WaveConfig in globalWaves:
 		if wave.startCondition.check_condition({delta = delta, room = self}):
 			spawner.spawn_enemies(wave)
-			
+	globalWaves = globalWaves.filter(func(wave): return wave.startCondition.enabled)
+	globalWaves = globalWaves.filter(func(wave: WaveConfig): return not wave.endCondition.check_condition({waveConfig = wave, room = self}))
+	
 
 func wave_compleated():
 	waveCount += 1
-	if not roomConfig.spawnConfig.waves.size() > waveCount:
+	if not roomConfig.spawnConfig.waves.size() > waveCount and globalWaves.size() == 0:
 		room_compleated()
+		return
+	if not roomConfig.spawnConfig.waves.size() > waveCount:
 		return
 	if roomConfig.spawnConfig.waves[waveCount].startCondition and not roomConfig.spawnConfig.waves[waveCount].startCondition.check_condition({delta = 0.0, room = self}):
 		globalWaves.push_back(roomConfig.spawnConfig.waves[waveCount])

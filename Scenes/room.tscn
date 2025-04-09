@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://3rblihetsog6"]
+[gd_scene load_steps=36 format=3 uid="uid://3rblihetsog6"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/Rooms/room.gd" id="1_3m351"]
 [ext_resource type="Resource" uid="uid://bh0n1m0wcw4pl" path="res://Data/Configs/Room/TestStari.tres" id="2_6e61e"]
@@ -17,9 +17,12 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Item/active_item.gd" id="12_af50x"]
 [ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="15_038gf"]
 [ext_resource type="PackedScene" uid="uid://ikwxnuphlqcu" path="res://Scenes/Serializers/area_wave_serializer.tscn" id="16_27esw"]
-[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/delay_condition.gd" id="17_hn3ba"]
+[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/wave_condition.gd" id="17_8qrti"]
+[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/StartConditions/delay_condition.gd" id="17_hn3ba"]
 [ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="17_ya66c"]
+[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/and_condition.gd" id="18_1hyhj"]
 [ext_resource type="Resource" uid="uid://sqfmja62rseq" path="res://Data/Items/item_functions.tres" id="18_t17o6"]
+[ext_resource type="Script" path="res://Scripts/Resources/Wave/WaveConditions/SpawnConditions/player_proxy.gd" id="19_bhlvj"]
 [ext_resource type="PackedScene" uid="uid://7kt263aosrai" path="res://Prefabs/Enemies/runner_gnome.tscn" id="19_nbumx"]
 
 [sub_resource type="GDScript" id="GDScript_hogp7"]
@@ -74,9 +77,20 @@ cost = 20
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eogpp"]
 size = Vector2(27.5331, 437)
 
-[sub_resource type="Resource" id="Resource_nn0de"]
+[sub_resource type="Resource" id="Resource_cabgp"]
 script = ExtResource("17_hn3ba")
 delayTime = 5.0
+oneTime = false
+
+[sub_resource type="Resource" id="Resource_tnw5q"]
+script = ExtResource("19_bhlvj")
+distanceToPlayer = 0.0
+invertad = false
+oneTime = false
+
+[sub_resource type="Resource" id="Resource_fgvhd"]
+script = ExtResource("18_1hyhj")
+conditions = Array[ExtResource("17_8qrti")]([SubResource("Resource_cabgp"), SubResource("Resource_tnw5q")])
 oneTime = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q0y8"]
@@ -428,10 +442,10 @@ configName = "ConditionTest"
 [node name="AreaWaveSerializer" parent="RoomSerializer" instance=ExtResource("16_27esw")]
 enemyName = "warrior_gnome"
 enemySpawnRange = Vector2(5, 5)
-startCondition = SubResource("Resource_nn0de")
+startCondition = SubResource("Resource_fgvhd")
 
 [node name="SpawnArea" type="CollisionShape2D" parent="RoomSerializer/AreaWaveSerializer"]
-position = Vector2(769, 296)
+position = Vector2(800, 300)
 shape = SubResource("RectangleShape2D_5q0y8")
 
 [node name="WaveSerializer" parent="RoomSerializer" instance=ExtResource("7_huvsm")]

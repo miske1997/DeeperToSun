@@ -14,7 +14,6 @@ localPosition = true
 script = ExtResource("2_ppfvs")
 waveType = ""
 spawns = Array[ExtResource("3_y63fg")]([SubResource("Resource_3hrnf")])
-randomSpawn = false
 waveTimeout = 0.5
 spawnDelayRange = Vector2(0, 0)
 
