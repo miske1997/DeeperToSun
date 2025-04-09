@@ -25,3 +25,5 @@ func spawn_enemy(location: Vector2, enemyName: String, localSpawn: bool):
 	#add spawn animation
 	enemyFolder.add_child(enemy)
 	
+func spawn_global_wave(wave: WaveConfig):
+	pass

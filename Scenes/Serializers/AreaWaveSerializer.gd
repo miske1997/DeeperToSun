@@ -1,20 +1,24 @@
 extends WaveSerializer
 
-@export_category("local")
 @export var waveTimeout: float = 10.0
 @export var enemyName: String = "Gnome"
 @export var enemySpawnRange: Vector2 = Vector2.ONE
 @export var spawnDelayRange: Vector2 = Vector2.ZERO
-@export_category("global")
-@export var continues: bool = false
+@export var startCondition: WaveCondition
+@export var endCondition: WaveCondition
+@export var spawnCondition: WaveCondition
+
 func get_wave_config():
 	
 	var waveConfig := AreaWaveConfig.new()
-	waveConfig.randomSpawn = false
 	waveConfig.waveTimeout = waveTimeout
 	waveConfig.enemyName = enemyName
 	waveConfig.enemySpawnRange = enemySpawnRange
 	waveConfig.spawnDelayRange = spawnDelayRange
+	waveConfig.startCondition = startCondition
+	waveConfig.endCondition = endCondition
+	waveConfig.spawnCondition = spawnCondition
+	
 	waveConfig.area = get_node("SpawnArea").shape
 	waveConfig.areaPosition = get_node("SpawnArea").position
 	return waveConfig

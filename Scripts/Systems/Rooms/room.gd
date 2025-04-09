@@ -11,8 +11,9 @@ var mapNode: MapNode
 @onready var roomStart: Vector2 = get_tree().get_first_node_in_group("Room").get_node("RoomStart").position
 @onready var roomEnd: Vector2 = get_tree().get_first_node_in_group("Room").get_node("RoomEnd").position
 
-var waveCount = 0
+var waveCount = -1
 var roomStarted = false
+var globalWaves: Array[WaveConfig] = []
 
 func _ready() -> void:
 	if has_node("RoomSerializer") and get_node("RoomSerializer").process_mode != PROCESS_MODE_DISABLED:
@@ -23,7 +24,7 @@ func _ready() -> void:
 	
 	if roomConfig.roomType == Enums.RoomType.SPAWN or roomConfig.roomType == Enums.RoomType.BOSS:
 		roomStarted = true
-		spawn_enemies(roomConfig.spawnConfig.waves[waveCount])
+		wave_compleated()
 	if roomConfig.roomType == Enums.RoomType.ITEM:
 		spawn_item()
 		Events.itemCollected.connect(func(itemOnGround): room_compleated(), CONNECT_ONE_SHOT)
@@ -31,7 +32,7 @@ func _ready() -> void:
 		spawn_item()
 	if roomConfig.roomType == Enums.RoomType.TRAP:
 		spawn_item()
-		Events.itemCollected.connect(func(itemOnGround): roomStarted = true; spawn_enemies(roomConfig.spawnConfig.waves[waveCount]), CONNECT_ONE_SHOT)
+		Events.itemCollected.connect(func(itemOnGround): roomStarted = true; wave_compleated(), CONNECT_ONE_SHOT)
 	#room_compleated()
 
 func _process(delta: float) -> void:
@@ -39,14 +40,25 @@ func _process(delta: float) -> void:
 		return
 	if enemyFolder.get_children().size() == 0 and roomStarted:
 		wave_compleated()
-
+	process_global_waves(delta)
+	
+func process_global_waves(delta: float):
+	for wave: WaveConfig in globalWaves:
+		if wave.startCondition.check_condition({delta = delta, room = self}):
+			spawner.spawn_enemies(wave)
+			
 
 func wave_compleated():
 	waveCount += 1
-	if roomConfig.spawnConfig.waves.size() > waveCount:
-		spawn_enemies(roomConfig.spawnConfig.waves[waveCount])
-	else:
+	if not roomConfig.spawnConfig.waves.size() > waveCount:
 		room_compleated()
+		return
+	if roomConfig.spawnConfig.waves[waveCount].startCondition and not roomConfig.spawnConfig.waves[waveCount].startCondition.check_condition({delta = 0.0, room = self}):
+		globalWaves.push_back(roomConfig.spawnConfig.waves[waveCount])
+		wave_compleated()
+		return
+	spawn_enemies(roomConfig.spawnConfig.waves[waveCount])
+	
 
 func on_wave_timeout():
 	if roomConfig.spawnConfig.waves.size() > waveCount + 1:

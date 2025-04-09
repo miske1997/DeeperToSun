@@ -4,17 +4,19 @@
 resource_name = "SpawnSerializer"
 script/source = "extends WaveSerializer
 
-@export_category(\"local\")
-@export var randomSpawns := false
 @export var waveTimeout: float = 10.0
-@export_category(\"global\")
-@export var continues: bool = false
+@export var startCondition: WaveCondition
+@export var endCondition: WaveCondition
+@export var spawnCondition: WaveCondition
 
 func get_wave_config():
 	
 	var waveConfig := WaveConfig.new()
-	waveConfig.randomSpawn = randomSpawns
 	waveConfig.waveTimeout = waveTimeout
+	waveConfig.startCondition = startCondition
+	waveConfig.endCondition = endCondition
+	waveConfig.spawnCondition = spawnCondition
+	
 	waveConfig.spawns = []
 	for enemy: EnemyBase in get_children():
 		if not enemy.is_in_group(\"Enemy\"):

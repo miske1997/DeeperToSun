@@ -1,6 +1,8 @@
 class_name MapNode extends Node2D
 
+##The RoomNode configuration the game will use when the game is runing
 @export var roomNode: RoomNode
+##The data the node uses to roll the actual neighbours and RoomNode config
 @export var nodeConfig: NodeConfig
 
 @onready var sprite := $Sprite2D

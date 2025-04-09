@@ -33,4 +33,4 @@ func _physics_process(delta: float) -> void:
 		var collision := get_slide_collision(collisionIndex)
 		if not collision.get_collider() or not collision.get_collider() is CharacterBody2D:
 			continue
-		position += -collision.get_normal() - collision.get_collider().velocity.normalized()
+		position += collision.get_normal() # - collision.get_collider().velocity.normalized()
