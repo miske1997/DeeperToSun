@@ -148,7 +148,7 @@ func glassArmour(data):
 
 func shortFuse(data):
 	var player: Player = data.enemy
-	Players.player.stats.SetExpiraitonStat("AttackSpeed", "shortFuse", 1.5, 1, Enums.StatModifyerType.MULTIPLY, 2.0)
+	Players.player.stats.SetExpiraitonStat("AttackSpeed", "shortFuse", 0.75, 1, Enums.StatModifyerType.MULTIPLY, 2.0)
 	Players.player.stats.SetExpiraitonStat("MovementSpeed", "shortFuse", 1.5, 1, Enums.StatModifyerType.MULTIPLY, 2.0)
 	var bomb = preload("res://Scenes/ItemScenes/aoe_burn.tscn").instantiate()
 	var tempFolder = player.get_tree().get_first_node_in_group("TemporaryObjects")
@@ -167,7 +167,7 @@ func kamikaze(data):
 func tempo(data):
 	if data.dashing:
 		return
-	Players.player.stats.SetExpiraitonStat("AttackSpeed", "tempo", 5, -1, Enums.StatModifyerType.MULTIPLY, 2.0)
+	Players.player.stats.SetExpiraitonStat("AttackSpeed", "tempo", 0.1, -1, Enums.StatModifyerType.MULTIPLY, 2.0)
 	
 func smokeBomb(data):
 	var player: Player = data.player
@@ -238,7 +238,7 @@ func glassArmorReset(data):
 ###########ACTIVE
 
 func pressTheAttack(data):
-	Players.player.stats.SetExpiraitonStat("AttackSpeed", "pressTheAttack", 5, -1, Enums.StatModifyerType.MULTIPLY, 2.0)
+	Players.player.stats.SetExpiraitonStat("AttackSpeed", "pressTheAttack", 0.1, 0, Enums.StatModifyerType.MULTIPLY, 2.0)
 	
 func smite(data):
 	Players.player.stats.SetExpiraitonStat("Damage", "smite", 5, -1, Enums.StatModifyerType.MULTIPLY, 2.0)

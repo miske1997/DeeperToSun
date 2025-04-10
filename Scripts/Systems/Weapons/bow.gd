@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 func activate_weapon():
 	if onCooldown:
 		return
-	sprite.speed_scale = Players.player.stats.GetStat("AttackSpeed")
+	sprite.speed_scale = 1 / Players.player.stats.GetStat("AttackSpeed")
 	onCooldown = true
 	sprite.play("shoot")
 	timer.start()

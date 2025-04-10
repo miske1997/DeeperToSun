@@ -42,5 +42,7 @@ func remove_shader(object: CanvasItem, shaderName: String):
 	if object.material and object.material.resource_name == shaderName:
 		object.material = null
 	
+func map_range(value: float, low1: float, high1: float, low2: float, high2: float):
+	return low2 + (value - low1) * (high2 - low2) / (high1 - low1)
 	
 #func replase_shader(object, shaderName: String):

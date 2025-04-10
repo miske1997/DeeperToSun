@@ -6,15 +6,16 @@ extends WeaponBase
 @onready var timer: Timer = $Timer
 @onready var leftTrajectory := $LeftTrajectory/PathFollow2D
 @onready var rightTrajectory := $RightTrajectory/PathFollow2D
+@onready var player = get_parent()
 
 var onCooldown = false
 var prevPath : PathFollow2D
 var arcana: float = 0.0
 
+
 func _ready() -> void:
 	activate.connect(activate_weapon)
 	secondary.connect(activate_secondary)
-	timer.wait_time = weaponConfig.attackSpeed
 	weaponConfig.damageData.damageDealer = get_parent()
 
 func _physics_process(delta: float) -> void:
@@ -37,10 +38,11 @@ func activate_secondary():
 func activate_weapon():
 	if onCooldown:
 		return
-	sprite.speed_scale = Players.player.stats.GetStat("AttackSpeed")
-	#timer.wait_time = Players.player.stats.GetStat("AttackSpeed")
+	timer.wait_time = get_attack_speed()
 	onCooldown = true
-	fire()
+	for i in get_projectile_amount():
+		fire()
+		await get_tree().physics_frame
 	timer.start()
 	await timer.timeout
 	onCooldown = false
@@ -81,10 +83,18 @@ func duplicate_folow():
 	
 
 func emmit_projectile(projectileSprite: Sprite2D, path: Path2D):
-	# (sprite.global_position - global_position).normalized()
+	weaponConfig.damageData.damage_scale = weaponConfig.weaponScaling.damageScaling
 	var projectileTarget: Vector2 = global_position + Vector2.from_angle(path.global_rotation - deg_to_rad(90)) * 250
 	var projectileDir = (projectileTarget - projectileSprite.global_position).normalized()
 	ProjectileEmitter.spawn_projectile(weaponConfig.projectileConfig, weaponConfig.damageData, projectileSprite.global_position, projectileDir.angle(), projectileDir)
 
 func look_at_target():
 	look_at(lookAtTaret)
+	
+func get_attack_speed():
+	var scaling := weaponConfig.weaponScaling.attackSpeedScaling
+	var attackSpeed: float = player.playerData.stats.GetStat("AttackSpeed")
+	return attackSpeed * (1/ scaling)
+	
+func get_projectile_amount():
+	return floor(player.playerData.stats.GetStat("Amount") * weaponConfig.weaponScaling.amountScaling)

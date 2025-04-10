@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://8ey6p6okukoe"]
+[gd_scene load_steps=16 format=3 uid="uid://8ey6p6okukoe"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/Weapons/pistol.gd" id="1_hcv1a"]
 [ext_resource type="PackedScene" uid="uid://ddosx1wl0kxug" path="res://Scenes/Traps/spike_trap.tscn" id="2_07kvm"]
-[ext_resource type="Texture2D" uid="uid://bqpnugdqsst36" path="res://Assets/Weapons/player/Gun.png" id="2_fen4n"]
 [ext_resource type="Script" path="res://Scripts/Resources/Weapon/firearm_config.gd" id="2_o01ml"]
 [ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_xg6ii"]
 [ext_resource type="PackedScene" uid="uid://bgmn8uw8b63xs" path="res://Scenes/Basic/trap_mark.tscn" id="3_7pl4t"]
 [ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="3_jg85l"]
 [ext_resource type="PackedScene" uid="uid://ci40agtk66ut8" path="res://Scenes/UI/bullets_ui.tscn" id="5_853mr"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/weapon_scaling.gd" id="7_tocfg"]
+[ext_resource type="Texture2D" uid="uid://clk6ymi15j2uc" path="res://Assets/Weapons/player/Gunner-Rifal.png" id="9_mdc4e"]
 
 [sub_resource type="Resource" id="Resource_01qvi"]
 script = ExtResource("2_xg6ii")
@@ -32,6 +33,18 @@ size = Vector2(1, 1)
 radius = 8.0
 addons = Array[String]([])
 
+[sub_resource type="Resource" id="Resource_wblm5"]
+script = ExtResource("7_tocfg")
+attackSpeedScaling = 1.0
+damageScaling = 1.0
+amountScaling = 0.5
+durationScaling = 1.0
+luckScaling = 1.0
+movementSpeedScaling = 1.0
+projectileSpeedScaling = 1.0
+rangeScaling = 1.0
+sizeScaling = 1.0
+
 [sub_resource type="Resource" id="Resource_gkdg3"]
 script = ExtResource("2_o01ml")
 fireSpeed = 0.1
@@ -41,16 +54,17 @@ projectileConfig = SubResource("Resource_s2kt7")
 amount = 1
 attackSpeed = 1.0
 damageData = SubResource("Resource_01qvi")
+weaponScaling = SubResource("Resource_wblm5")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1pk2j"]
-atlas = ExtResource("2_fen4n")
-region = Rect2(0, 0, 35, 30)
+[sub_resource type="AtlasTexture" id="AtlasTexture_03gui"]
+atlas = ExtResource("9_mdc4e")
+region = Rect2(0, 0, 65, 25)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh5ya"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1pk2j")
+"texture": SubResource("AtlasTexture_03gui")
 }],
 "loop": false,
 "name": &"shoot",
@@ -64,7 +78,7 @@ trap = ExtResource("2_07kvm")
 trapMark = ExtResource("3_7pl4t")
 weaponConfig = SubResource("Resource_gkdg3")
 
-[node name="ArcanaUI" parent="." instance=ExtResource("5_853mr")]
+[node name="BulletsUI" parent="." instance=ExtResource("5_853mr")]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(63.6358, 0)

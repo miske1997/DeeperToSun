@@ -1,13 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://g84b8p3kgoiv"]
+[gd_scene load_steps=20 format=3 uid="uid://g84b8p3kgoiv"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/Weapons/tomb.gd" id="1_nsayn"]
 [ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_3anur"]
-[ext_resource type="Texture2D" uid="uid://644xmhjnl5hn" path="res://Assets/Weapons/player/Wand.png" id="2_tekvh"]
 [ext_resource type="Script" path="res://Scripts/Resources/Projectile/trail_config.gd" id="3_0b7ld"]
 [ext_resource type="Texture2D" uid="uid://d06mwe4vrt65k" path="res://Assets/Projectiles/PurpleMagicProjectile.png" id="3_ll4jy"]
 [ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="3_mqq4y"]
 [ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="4_vflr0"]
 [ext_resource type="PackedScene" uid="uid://brv5ibir55xoh" path="res://Scenes/UI/arcana_ui.tscn" id="5_ovr3y"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon/weapon_scaling.gd" id="6_jdavk"]
+[ext_resource type="Texture2D" uid="uid://jpx4hf0k80w7" path="res://Assets/Weapons/player/Mage-Staff.png" id="7_ojj8u"]
 
 [sub_resource type="Resource" id="Resource_u0fou"]
 script = ExtResource("3_0b7ld")
@@ -58,22 +59,35 @@ size = Vector2(0.5, 0.5)
 radius = 8.0
 addons = Array[String]([])
 
+[sub_resource type="Resource" id="Resource_d5aac"]
+script = ExtResource("6_jdavk")
+attackSpeedScaling = 0.5
+damageScaling = 0.5
+amountScaling = 0.5
+durationScaling = 1.0
+luckScaling = 1.0
+movementSpeedScaling = 1.0
+projectileSpeedScaling = 1.0
+rangeScaling = 1.0
+sizeScaling = 1.0
+
 [sub_resource type="Resource" id="Resource_3l1e5"]
 script = ExtResource("4_vflr0")
 projectileConfig = SubResource("Resource_1rbdd")
 amount = 1
 attackSpeed = 0.1
 damageData = SubResource("Resource_ncusf")
+weaponScaling = SubResource("Resource_d5aac")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qknyp"]
-atlas = ExtResource("2_tekvh")
-region = Rect2(0, 0, 30, 10)
+[sub_resource type="AtlasTexture" id="AtlasTexture_874q8"]
+atlas = ExtResource("7_ojj8u")
+region = Rect2(0, 0, 15, 55)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh5ya"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qknyp")
+"texture": SubResource("AtlasTexture_874q8")
 }],
 "loop": false,
 "name": &"shoot",
@@ -101,8 +115,8 @@ weaponConfig = SubResource("Resource_3l1e5")
 [node name="ArcanaUI" parent="." instance=ExtResource("5_ovr3y")]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(63.6358, 0)
-rotation = 3.14159
+position = Vector2(39.7725, -1.07923e-08)
+rotation = 1.27584
 scale = Vector2(1.92664, 1.92664)
 sprite_frames = SubResource("SpriteFrames_bh5ya")
 animation = &"shoot"

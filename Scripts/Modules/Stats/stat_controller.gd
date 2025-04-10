@@ -35,11 +35,10 @@ func GetSortedStats():
 
 func CalcBaseStat():
 	
-	var baseValue = 0
+	var baseValue = base
 	for stat: StatModification in augments.filter(func(s: StatModification): return s.priority < 0) :
 		baseValue += base * stat.modification
 	
-	baseValue += base
 	return baseValue
 
 

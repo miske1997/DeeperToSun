@@ -5,6 +5,8 @@ class_name PlayerProxy extends WaveCondition
 
 func check_condition(data: Dictionary):
 	var enemyPos: Vector2 = data.enemyPos
+	if not is_instance_valid(data.player):
+		return
 	var player: Player = data.player
 	
 	var result
