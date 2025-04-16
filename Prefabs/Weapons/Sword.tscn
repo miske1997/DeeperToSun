@@ -1,19 +1,23 @@
 [gd_scene load_steps=9 format=3 uid="uid://qk6gxbv2ugmb"]
 
-[ext_resource type="Script" path="res://Scripts/Systems/Weapons/sword.gd" id="1_i0cwb"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_4fyhk"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="3_cw2og"]
+[ext_resource type="Script" uid="uid://cuh04es86772h" path="res://Scripts/Systems/Weapons/sword.gd" id="1_i0cwb"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_4fyhk"]
+[ext_resource type="Script" uid="uid://caai3ht371t5w" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="3_cw2og"]
 [ext_resource type="PackedScene" uid="uid://cmfpr7n1yiiee" path="res://Scenes/ProjectileComponents/damage_on_area_hit.tscn" id="5_3j55c"]
 [ext_resource type="Texture2D" uid="uid://batthg3nna6pm" path="res://Assets/Weapons/player/Sword.png" id="5_3nre0"]
 
 [sub_resource type="Resource" id="Resource_6ihxe"]
 script = ExtResource("2_4fyhk")
+damage_scale = 1.0
 damage = 2.0
 stagger = 0.1
+damageSource = 0
+fixed = false
 
 [sub_resource type="Resource" id="Resource_vawo4"]
 script = ExtResource("3_cw2og")
 stagger = 1.0
+frendly = false
 attackSpeed = 1.0
 damageData = SubResource("Resource_6ihxe")
 

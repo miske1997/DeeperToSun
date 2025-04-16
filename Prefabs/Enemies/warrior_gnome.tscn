@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://b03r2cwy7msfe"]
 
 [ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_4rcfj"]
-[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_q5t8w"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="3_lh2yh"]
+[ext_resource type="Script" uid="uid://jslpfts772af" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_q5t8w"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="3_lh2yh"]
 [ext_resource type="PackedScene" uid="uid://chhqff6v6c07v" path="res://Prefabs/Weapons/Dagger.tscn" id="4_p8tr5"]
-[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/warior_gnome.gd" id="5_7tkoi"]
+[ext_resource type="Script" uid="uid://fwhl2pc74vlv" path="res://Scripts/Modules/AIControllers/warior_gnome.gd" id="5_7tkoi"]
 [ext_resource type="Texture2D" uid="uid://cly5ovjm88pqx" path="res://Assets/Enemies/GnomeWarior.png" id="6_l6sn1"]
-[ext_resource type="Shader" path="res://Materials/Shaders/Scripts/flash_shader.gdshader" id="6_ogc7y"]
+[ext_resource type="Shader" uid="uid://coxj0pnyu05ni" path="res://Materials/Shaders/Scripts/flash_shader.gdshader" id="6_ogc7y"]
 [ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="7_belq7"]
 
 [sub_resource type="Resource" id="Resource_q50c2"]

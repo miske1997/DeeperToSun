@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgmn8uw8b63xs"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_1l34p"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_1l34p"]
 [ext_resource type="Texture2D" uid="uid://by0nqp02fnlff" path="res://Assets/RoomIndicators/NormalRoom.png" id="2_onw1k"]
 
 [sub_resource type="GDScript" id="GDScript_d2a1m"]

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="PlayerData" load_steps=10 format=3 uid="uid://cj5k81jx0kkk"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Item/item_config.gd" id="1_tyqkj"]
-[ext_resource type="Script" path="res://Scripts/Resources/Entity/player_data.gd" id="2_056vv"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item/pasive_item.gd" id="2_315hg"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item/consumable_item.gd" id="3_0yxdb"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item/active_item.gd" id="3_nl5a2"]
+[ext_resource type="Script" uid="uid://c6ugsjp6241i1" path="res://Scripts/Resources/Item/item_config.gd" id="1_tyqkj"]
+[ext_resource type="Script" uid="uid://oen0kyefiya0" path="res://Scripts/Resources/Entity/player_data.gd" id="2_056vv"]
+[ext_resource type="Script" uid="uid://be1dkr44hlg1x" path="res://Scripts/Resources/Item/pasive_item.gd" id="2_315hg"]
+[ext_resource type="Script" uid="uid://1sfieogduf00" path="res://Scripts/Resources/Item/consumable_item.gd" id="3_0yxdb"]
+[ext_resource type="Script" uid="uid://bfkpm6eqfxin0" path="res://Scripts/Resources/Item/active_item.gd" id="3_nl5a2"]
 [ext_resource type="Resource" uid="uid://dylyw83ge3ave" path="res://Data/Configs/Player/InitStats.tres" id="3_xfe7w"]
 
 [sub_resource type="Resource" id="Resource_buax0"]

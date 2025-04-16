@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://ceuqcev5d0qgy"]
 
-[ext_resource type="Script" path="res://Scripts/Systems/loader.gd" id="1_qawaj"]
+[ext_resource type="Script" uid="uid://ce6eay45ue4ne" path="res://Scripts/Systems/loader.gd" id="1_qawaj"]
 [ext_resource type="Resource" uid="uid://cj5k81jx0kkk" path="res://Data/Configs/Player/player_data.tres" id="2_2lynt"]
 [ext_resource type="PackedScene" uid="uid://dw28s0hxdyawk" path="res://Scenes/Modules/dot_manager.tscn" id="3_67w8s"]
-[ext_resource type="Script" path="res://Scripts/Modules/pickup_manager.gd" id="4_ubnvl"]
+[ext_resource type="Script" uid="uid://bubyq34p4y4ed" path="res://Scripts/Modules/pickup_manager.gd" id="4_ubnvl"]
 [ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="5_agh1e"]
 [ext_resource type="PackedScene" uid="uid://dpoqqridouncs" path="res://Scenes/ItemScenes/item_on_ground.tscn" id="5_nakcb"]
 [ext_resource type="PackedScene" uid="uid://0vktkf2tfklc" path="res://Prefabs/Modules/stat_manager.tscn" id="7_g25vw"]

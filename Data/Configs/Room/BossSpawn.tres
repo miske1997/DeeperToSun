@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SpawnConfig" load_steps=6 format=3 uid="uid://bua0eg3ku6a54"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_config.gd" id="1_slp68"]
-[ext_resource type="Script" path="res://Scripts/Resources/Wave/wave_config.gd" id="2_ppfvs"]
-[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="3_y63fg"]
+[ext_resource type="Script" uid="uid://d35okl3rfg03o" path="res://Scripts/Resources/Room/spawn_config.gd" id="1_slp68"]
+[ext_resource type="Script" uid="uid://dx8no4d1ft855" path="res://Scripts/Resources/Wave/wave_config.gd" id="2_ppfvs"]
+[ext_resource type="Script" uid="uid://cgsnwp5pjhpp6" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="3_y63fg"]
 
 [sub_resource type="Resource" id="Resource_3hrnf"]
 script = ExtResource("3_y63fg")

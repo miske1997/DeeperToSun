@@ -1,15 +1,15 @@
 [gd_scene load_steps=17 format=3 uid="uid://jiwtmufujn2n"]
 
 [ext_resource type="PackedScene" uid="uid://bprrlmiynmmg6" path="res://Prefabs/Enemies/enemy.tscn" id="1_8ohry"]
-[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_byx7o"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_i33mo"]
+[ext_resource type="Script" uid="uid://jslpfts772af" path="res://Scripts/Resources/Entity/enemy_config.gd" id="2_byx7o"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_i33mo"]
 [ext_resource type="Texture2D" uid="uid://c0jx7m465co7w" path="res://Assets/Enemies/GnomeShaman.png" id="3_3kd1f"]
-[ext_resource type="Script" path="res://Scripts/Modules/AIControllers/shaman_gnome.gd" id="3_crk7b"]
-[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://Scenes/ProjectileComponents/contact_detect.tscn" id="4_e003b"]
+[ext_resource type="Script" uid="uid://b2c0a0ytl3hxl" path="res://Scripts/Modules/AIControllers/shaman_gnome.gd" id="3_crk7b"]
+[ext_resource type="PackedScene" uid="uid://btsedlcryfn2r" path="res://contact_damage.tscn" id="4_e003b"]
 [ext_resource type="PackedScene" uid="uid://c8thni28ootba" path="res://Scenes/ProjectileComponents/contact_damage.tscn" id="5_0hdk8"]
 [ext_resource type="PackedScene" uid="uid://cq73xddgmv5lh" path="res://Prefabs/Weapons/ShamanStaff.tscn" id="6_fvnnb"]
-[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="9_g1u14"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="10_p4txu"]
+[ext_resource type="Script" uid="uid://bt8nacl0cv826" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="9_g1u14"]
+[ext_resource type="Script" uid="uid://beyr6lcmac4qd" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="10_p4txu"]
 
 [sub_resource type="Resource" id="Resource_yuyay"]
 script = ExtResource("2_byx7o")
@@ -51,6 +51,8 @@ health = 0.0
 frendly = false
 spriteName = "yellowBall"
 size = Vector2(0.5, 0.5)
+radius = 8.0
+addons = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_egvd0"]
 script = ExtResource("10_p4txu")

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TrapRoom" load_steps=3 format=3 uid="uid://bet1gxq6kqxx2"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Room/trap_room.gd" id="1_4fjlk"]
+[ext_resource type="Script" uid="uid://j203bcj0boa6" path="res://Scripts/Resources/Room/trap_room.gd" id="1_4fjlk"]
 [ext_resource type="Resource" uid="uid://c1wq1e4swm8kk" path="res://Data/Configs/Room/test1_spawn.tres" id="2_8m8kp"]
 
 [resource]

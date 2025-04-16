@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://cancytfqr6bid"]
 
 [ext_resource type="Texture2D" uid="uid://e40aixjvnmxs" path="res://Assets/Weapons/OgarClub.png" id="1_2qstq"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_054b7"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_054b7"]
 [ext_resource type="PackedScene" uid="uid://cmfpr7n1yiiee" path="res://Scenes/ProjectileComponents/damage_on_area_hit.tscn" id="2_76koe"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="2_y2rll"]
+[ext_resource type="Script" uid="uid://caai3ht371t5w" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="2_y2rll"]
 
 [sub_resource type="GDScript" id="GDScript_8hr1e"]
 resource_name = "BossClub"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://drr0p1eobgged"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_a74bc"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_a74bc"]
 [ext_resource type="Texture2D" uid="uid://dxefs0gw0n76d" path="res://Assets/Items/GlassShield.png" id="2_n56cm"]
 
 [sub_resource type="GDScript" id="GDScript_63xo8"]

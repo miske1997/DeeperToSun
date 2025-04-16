@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ThroneRoom" load_steps=6 format=3 uid="uid://cbkqp3w0epf2k"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Room/throne_room.gd" id="1_ehdjf"]
-[ext_resource type="Script" path="res://Scripts/Resources/DropTable/drop.gd" id="1_gv5j4"]
+[ext_resource type="Script" uid="uid://c4yjijxp4ta7" path="res://Scripts/Resources/Room/throne_room.gd" id="1_ehdjf"]
+[ext_resource type="Script" uid="uid://uja518ssrhi6" path="res://Scripts/Resources/DropTable/drop.gd" id="1_gv5j4"]
 [ext_resource type="Resource" uid="uid://cfngvfojxbie8" path="res://Data/Items/items_data.tres" id="2_n0i4m"]
-[ext_resource type="Script" path="res://Scripts/Resources/DropTable/drop_table.gd" id="4_jivck"]
+[ext_resource type="Script" uid="uid://d0f1ybjw2fj5e" path="res://Scripts/Resources/DropTable/drop_table.gd" id="4_jivck"]
 
 [sub_resource type="Resource" id="Resource_u1c6r"]
 script = ExtResource("4_jivck")

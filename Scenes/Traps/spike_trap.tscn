@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddosx1wl0kxug"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_7plje"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="1_7plje"]
 [ext_resource type="Texture2D" uid="uid://csw3c3ukcrnqt" path="res://Assets/Traps/SpikeDown.png" id="1_bkwxt"]
 [ext_resource type="Texture2D" uid="uid://chy8my4fwvlbl" path="res://Assets/Traps/Spike.png" id="2_4dw7u"]
 

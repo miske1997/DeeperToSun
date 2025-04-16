@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://lkg7iabuaqtd"]
 
-[ext_resource type="Script" path="res://Scripts/Systems/Weapons/club.gd" id="1_h6gk2"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_hbm5i"]
+[ext_resource type="Script" uid="uid://csi6vvfkffn1k" path="res://Scripts/Systems/Weapons/club.gd" id="1_h6gk2"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_hbm5i"]
 [ext_resource type="Texture2D" uid="uid://e40aixjvnmxs" path="res://Assets/Weapons/OgarClub.png" id="2_pmqxg"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="3_20355"]
+[ext_resource type="Script" uid="uid://caai3ht371t5w" path="res://Scripts/Resources/Weapon/melee_weapon.gd" id="3_20355"]
 [ext_resource type="PackedScene" uid="uid://cmfpr7n1yiiee" path="res://Scenes/ProjectileComponents/damage_on_area_hit.tscn" id="5_4j80y"]
 
 [sub_resource type="Resource" id="Resource_uld44"]

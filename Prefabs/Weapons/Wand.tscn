@@ -1,15 +1,18 @@
 [gd_scene load_steps=8 format=3 uid="uid://drlbsp3fqunx"]
 
-[ext_resource type="Script" path="res://Scripts/Systems/Weapons/bow.gd" id="1_v51dk"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_o7d4f"]
+[ext_resource type="Script" uid="uid://o10gxpho16s7" path="res://Scripts/Systems/Weapons/bow.gd" id="1_v51dk"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_o7d4f"]
 [ext_resource type="Resource" uid="uid://b431g5v5qt13y" path="res://Data/Configs/Projectiles/Bullet.tres" id="3_ilxnt"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="4_58nmv"]
+[ext_resource type="Script" uid="uid://beyr6lcmac4qd" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="4_58nmv"]
 [ext_resource type="Texture2D" uid="uid://l3ndecruqnkb" path="res://Assets/Weapons/player/Bow.png" id="5_ayu1k"]
 
 [sub_resource type="Resource" id="Resource_jr06y"]
 script = ExtResource("2_o7d4f")
+damage_scale = 1.0
 damage = 1.0
 stagger = 0.1
+damageSource = 0
+fixed = false
 
 [sub_resource type="Resource" id="Resource_sfc8p"]
 script = ExtResource("4_58nmv")

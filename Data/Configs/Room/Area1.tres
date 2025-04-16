@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SpawnConfig" load_steps=8 format=3 uid="uid://dg77ct503figu"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Room/spawn_config.gd" id="1_8gexs"]
-[ext_resource type="Script" path="res://Scripts/Resources/Wave/wave_config.gd" id="2_kkq8y"]
-[ext_resource type="Script" path="res://Scripts/Resources/Wave/area_wave_config.gd" id="3_ldh14"]
-[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="4_fwlap"]
+[ext_resource type="Script" uid="uid://d35okl3rfg03o" path="res://Scripts/Resources/Room/spawn_config.gd" id="1_8gexs"]
+[ext_resource type="Script" uid="uid://dx8no4d1ft855" path="res://Scripts/Resources/Wave/wave_config.gd" id="2_kkq8y"]
+[ext_resource type="Script" uid="uid://bvj0y0aq76yeg" path="res://Scripts/Resources/Wave/area_wave_config.gd" id="3_ldh14"]
+[ext_resource type="Script" uid="uid://cgsnwp5pjhpp6" path="res://Scripts/Resources/Entity/enemy_spawn_pos.gd" id="4_fwlap"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q0y8"]
 size = Vector2(267, 166)
@@ -16,7 +16,6 @@ enemyName = "warrior_gnome"
 enemySpawnRange = Vector2(1, 10)
 waveType = ""
 spawns = Array[ExtResource("4_fwlap")]([])
-randomSpawn = false
 waveTimeout = 10.0
 spawnDelayRange = Vector2(0, 0.2)
 
@@ -24,7 +23,6 @@ spawnDelayRange = Vector2(0, 0.2)
 script = ExtResource("2_kkq8y")
 waveType = ""
 spawns = Array[ExtResource("4_fwlap")]([])
-randomSpawn = false
 waveTimeout = 0.5
 spawnDelayRange = Vector2(0, 0)
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b03r2cwy7msfe"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Entity/enemy_config.gd" id="1_k2cgn"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_e8svg"]
+[ext_resource type="Script" uid="uid://jslpfts772af" path="res://Scripts/Resources/Entity/enemy_config.gd" id="1_k2cgn"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_e8svg"]
 [ext_resource type="Material" uid="uid://h0tgds112fpj" path="res://Materials/Shaders/flash_shader.tres" id="4_aej22"]
 [ext_resource type="PackedScene" uid="uid://chhqff6v6c07v" path="res://Prefabs/Weapons/Dagger.tscn" id="4_yxba2"]
 [ext_resource type="Texture2D" uid="uid://cly5ovjm88pqx" path="res://Assets/Enemies/GnomeWarior.png" id="6_ep6nc"]

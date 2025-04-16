@@ -1,3 +1,4 @@
+@tool
 extends WaveSerializer
 
 @export var waveTimeout: float = 10.0

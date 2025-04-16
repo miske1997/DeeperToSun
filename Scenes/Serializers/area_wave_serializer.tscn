@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ikwxnuphlqcu"]
 
-[ext_resource type="Script" path="res://Scenes/Serializers/AreaWaveSerializer.gd" id="1_e0mtl"]
+[ext_resource type="Script" uid="uid://bh7fli4ps1bwq" path="res://Scenes/Serializers/AreaWaveSerializer.gd" id="1_e0mtl"]
 
 [node name="AreaWaveSerializer" type="Node2D" groups=["WaveSerializer"]]
 script = ExtResource("1_e0mtl")

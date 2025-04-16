@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dw28s0hxdyawk"]
 
-[ext_resource type="Script" path="res://Scripts/Modules/dot_manager.gd" id="1_r3niq"]
+[ext_resource type="Script" uid="uid://dvnijc5gbd8hx" path="res://Scripts/Modules/dot_manager.gd" id="1_r3niq"]
 [ext_resource type="Resource" uid="uid://du5244j8uaf6k" path="res://Data/Configs/Damage/burning.tres" id="2_bs80j"]
 [ext_resource type="Resource" uid="uid://cx3kjbkxiis6d" path="res://Data/Configs/Damage/poisoned.tres" id="3_nhuww"]
 

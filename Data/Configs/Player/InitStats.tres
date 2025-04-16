@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="StatManager" load_steps=14 format=3 uid="uid://dylyw83ge3ave"]
 
-[ext_resource type="Script" path="res://Scripts/Modules/Stats/stat_modification.gd" id="1_gjmtu"]
-[ext_resource type="Script" path="res://Scripts/Modules/Stats/stat_controller.gd" id="2_gh3v1"]
-[ext_resource type="Script" path="res://Scripts/Modules/Stats/stat_manager.gd" id="3_4yqc8"]
+[ext_resource type="Script" uid="uid://dmaxgiwnp2snd" path="res://Scripts/Modules/Stats/stat_modification.gd" id="1_gjmtu"]
+[ext_resource type="Script" uid="uid://d4lmptqtu8n1v" path="res://Scripts/Modules/Stats/stat_controller.gd" id="2_gh3v1"]
+[ext_resource type="Script" uid="uid://c4irc7ewpx0ag" path="res://Scripts/Modules/Stats/stat_manager.gd" id="3_4yqc8"]
 
 [sub_resource type="Resource" id="Resource_ndlvu"]
 script = ExtResource("1_gjmtu")

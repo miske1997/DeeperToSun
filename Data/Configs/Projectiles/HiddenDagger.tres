@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BasicProjectile" load_steps=2 format=3 uid="uid://dmm72es7hk4aq"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="1_53u2m"]
+[ext_resource type="Script" uid="uid://bt8nacl0cv826" path="res://Scripts/Resources/Projectile/basic_projectile.gd" id="1_53u2m"]
 
 [resource]
 script = ExtResource("1_53u2m")
@@ -14,3 +14,5 @@ health = 0.0
 frendly = true
 spriteName = "knife"
 size = Vector2(0.1, 0.1)
+radius = 8.0
+addons = Array[String]([])

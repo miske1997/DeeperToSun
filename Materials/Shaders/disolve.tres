@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dahlyvlveeycu"]
 
-[ext_resource type="Shader" path="res://Materials/Shaders/Scripts/disolve.gdshader" id="1_52336"]
+[ext_resource type="Shader" uid="uid://b0e4x310513pj" path="res://Materials/Shaders/Scripts/disolve.gdshader" id="1_52336"]
 [ext_resource type="Texture2D" uid="uid://6a1dneri0nve" path="res://Materials/pixelnoiseSmall.png" id="2_yi5xb"]
 
 [resource]
@@ -11,8 +11,8 @@ shader_parameter/position = Vector2(0.57, 0.465)
 shader_parameter/radius = -0.42
 shader_parameter/borderWidth = 0.02
 shader_parameter/burnMult = -0.345
-shader_parameter/burnColor = Color(0, 0, 0, 1)
 shader_parameter/noiseTexture = ExtResource("2_yi5xb")
+shader_parameter/burnColor = Color(0, 0, 0, 1)
 metadata/Animated = true
 metadata/Param = "radius"
 metadata/Time = 1.5

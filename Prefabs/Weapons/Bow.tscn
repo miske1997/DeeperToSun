@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://bdd0af3gev72y"]
 
-[ext_resource type="Script" path="res://Scripts/Systems/Weapons/bow.gd" id="1_f8k71"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="2_60qsg"]
-[ext_resource type="Script" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_vtcu8"]
+[ext_resource type="Script" uid="uid://o10gxpho16s7" path="res://Scripts/Systems/Weapons/bow.gd" id="1_f8k71"]
+[ext_resource type="Script" uid="uid://beyr6lcmac4qd" path="res://Scripts/Resources/Weapon/ranged_weapon.gd" id="2_60qsg"]
+[ext_resource type="Script" uid="uid://brd8thpq2vkt5" path="res://Scripts/Resources/Damage/damage_data.gd" id="2_vtcu8"]
 [ext_resource type="Resource" uid="uid://b431g5v5qt13y" path="res://Data/Configs/Projectiles/Bullet.tres" id="3_0um30"]
 [ext_resource type="Texture2D" uid="uid://db2dsv1aqth2m" path="res://Assets/Weapons/player/BowShoot-Sheet.png" id="5_mw4ku"]
 
